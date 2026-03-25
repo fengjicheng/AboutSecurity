@@ -32,5 +32,23 @@
         "xss"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "cloud-iam-audit-scenario",
+      "scenario": "目标 AWS 环境中发现了一个 IAM 用户有 iam:PassRole 权限。请搜索 IAM 提权相关的方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "iam|cloud|权限提升|privilege"
+        },
+        {
+          "tool": "read_skill",
+          "id": "cloud-iam-audit"
+        }
+      ]
+    }
   ]
 }

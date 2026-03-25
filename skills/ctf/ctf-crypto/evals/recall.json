@@ -31,5 +31,23 @@
         "file upload"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "ctf-crypto-scenario",
+      "scenario": "CTF 密码学题目给出了 RSA 公钥 (n, e=3) 和密文 c，明文较短。请搜索相关解题方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "crypto|rsa|密码|ctf"
+        },
+        {
+          "tool": "read_skill",
+          "id": "ctf-crypto"
+        }
+      ]
+    }
   ]
 }

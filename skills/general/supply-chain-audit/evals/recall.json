@@ -31,5 +31,23 @@
         "并发"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "supply-chain-audit-scenario",
+      "scenario": "需要审计目标应用的第三方依赖安全性。请搜索供应链审计方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "supply chain|供应链|dependency|依赖"
+        },
+        {
+          "tool": "read_skill",
+          "id": "supply-chain-audit"
+        }
+      ]
+    }
   ]
 }

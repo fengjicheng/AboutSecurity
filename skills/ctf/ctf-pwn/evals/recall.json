@@ -32,5 +32,23 @@
         "xss"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "ctf-pwn-scenario",
+      "scenario": "CTF PWN 题给了一个有 gets() 栈溢出的 64 位 ELF 程序和 libc。请搜索 PWN 方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "pwn|溢出|exploit|rop"
+        },
+        {
+          "tool": "read_skill",
+          "id": "ctf-pwn"
+        }
+      ]
+    }
   ]
 }

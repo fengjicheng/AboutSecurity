@@ -31,5 +31,23 @@
         "metadata"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "mobile-backend-scenario",
+      "scenario": "目标是一个移动 App 的后端 API，需要分析其安全性。请搜索移动后端测试方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "mobile|移动|app|backend"
+        },
+        {
+          "tool": "read_skill",
+          "id": "mobile-backend"
+        }
+      ]
+    }
   ]
 }

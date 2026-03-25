@@ -31,5 +31,23 @@
         "pcap"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "ctf-flag-hunting-scenario",
+      "scenario": "已获得命令执行权限，但不知道 flag 在容器的哪个位置。请搜索 flag 查找方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "flag|hunting|查找|搜索flag"
+        },
+        {
+          "tool": "read_skill",
+          "id": "ctf-flag-hunting"
+        }
+      ]
+    }
   ]
 }

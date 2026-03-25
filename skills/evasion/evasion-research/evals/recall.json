@@ -30,5 +30,23 @@
         "port scan"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "evasion-research-scenario",
+      "scenario": "需要研究目标 EDR 的检测机制以制定绕过策略。请搜索规避检测研究方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "evasion|research|绕过|检测"
+        },
+        {
+          "tool": "read_skill",
+          "id": "evasion-research"
+        }
+      ]
+    }
   ]
 }

@@ -30,5 +30,23 @@
         "overflow"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "ctf-osint-scenario",
+      "scenario": "CTF OSINT 题要求根据一张照片定位拍摄地点。请搜索 OSINT 方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "osint|开源情报|信息收集"
+        },
+        {
+          "tool": "read_skill",
+          "id": "ctf-osint"
+        }
+      ]
+    }
   ]
 }

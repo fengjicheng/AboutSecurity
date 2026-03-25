@@ -29,5 +29,23 @@
         "修复建议"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "ctf-solve-scenario",
+      "scenario": "CTF Web 题目已获取源码（Flask app），发现有明显漏洞但不确定利用方式。请搜索 CTF 解题方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "ctf|solve|解题|web"
+        },
+        {
+          "tool": "read_skill",
+          "id": "ctf-solve"
+        }
+      ]
+    }
   ]
 }

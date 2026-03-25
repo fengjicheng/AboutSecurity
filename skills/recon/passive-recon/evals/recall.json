@@ -33,5 +33,23 @@
         "port brute"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "passive-recon-scenario",
+      "scenario": "需要对目标域名进行被动信息收集，不触发任何主动请求。请搜索被动侦察方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "passive|recon|被动|信息收集"
+        },
+        {
+          "tool": "read_skill",
+          "id": "passive-recon"
+        }
+      ]
+    }
   ]
 }

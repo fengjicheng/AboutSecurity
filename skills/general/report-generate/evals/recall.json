@@ -30,5 +30,23 @@
         "heap overflow"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "report-generate-scenario",
+      "scenario": "渗透测试完成，需要生成专业的测试报告。请搜索报告生成方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "report|报告|generate|生成"
+        },
+        {
+          "tool": "read_skill",
+          "id": "report-generate"
+        }
+      ]
+    }
   ]
 }

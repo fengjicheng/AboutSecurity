@@ -30,5 +30,23 @@
         "rop"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "ctf-web-scenario",
+      "scenario": "CTF Web 题目，初始只有一个 URL，不知道从哪里入手。请搜索 CTF Web 攻击方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "ctf|web|methodology|方法论"
+        },
+        {
+          "tool": "read_skill",
+          "id": "ctf-web-methodology"
+        }
+      ]
+    }
   ]
 }

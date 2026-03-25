@@ -32,5 +32,23 @@
         "heap exploit"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "ctf-forensics-scenario",
+      "scenario": "CTF 取证题给了一个 pcap 文件和一个磁盘镜像。请搜索取证分析方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "forensic|取证|pcap|磁盘"
+        },
+        {
+          "tool": "read_skill",
+          "id": "ctf-forensics"
+        }
+      ]
+    }
   ]
 }

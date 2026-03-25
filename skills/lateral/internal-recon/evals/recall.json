@@ -31,5 +31,23 @@
         "fofa"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "internal-recon-scenario",
+      "scenario": "已获取内网主机权限，需要进行内网信息收集。请搜索内网侦察方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "internal|recon|内网|侦察|横向"
+        },
+        {
+          "tool": "read_skill",
+          "id": "internal-recon"
+        }
+      ]
+    }
   ]
 }

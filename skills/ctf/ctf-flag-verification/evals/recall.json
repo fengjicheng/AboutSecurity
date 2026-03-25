@@ -30,5 +30,23 @@
         "ida"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "ctf-flag-verification-scenario",
+      "scenario": "从 SQL 注入用 EXTRACTVALUE 提取了部分 flag，但长度只有 31 字符，实际应该是 64 字符。请搜索 flag 验证方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "flag|verification|验证|截断"
+        },
+        {
+          "tool": "read_skill",
+          "id": "ctf-flag-verification"
+        }
+      ]
+    }
   ]
 }

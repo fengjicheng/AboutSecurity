@@ -31,5 +31,23 @@
         "metadata"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "evasion-technique-integrate-scenario",
+      "scenario": "需要将多种规避技术集成到一个攻击载荷中。请搜索规避技术整合方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "evasion|integrate|整合|技术"
+        },
+        {
+          "tool": "read_skill",
+          "id": "evasion-technique-integrate"
+        }
+      ]
+    }
   ]
 }

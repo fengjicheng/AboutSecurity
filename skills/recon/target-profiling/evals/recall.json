@@ -31,5 +31,23 @@
         "suid"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "target-profiling-scenario",
+      "scenario": "需要对目标组织进行全面画像分析。请搜索目标画像方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "target|profiling|画像|profile|分析"
+        },
+        {
+          "tool": "read_skill",
+          "id": "target-profiling"
+        }
+      ]
+    }
   ]
 }

@@ -31,5 +31,23 @@
         "aes"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "ctf-misc-scenario",
+      "scenario": "CTF 杂项题给了一个包含隐写信息的 PNG 图片。请搜索杂项题解题方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "misc|杂项|隐写|steg"
+        },
+        {
+          "tool": "read_skill",
+          "id": "ctf-misc"
+        }
+      ]
+    }
   ]
 }

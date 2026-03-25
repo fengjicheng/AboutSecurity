@@ -33,5 +33,23 @@
         "lateral movement"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "recon-full-scenario",
+      "scenario": "需要对目标进行完整的全面侦察。请搜索完整侦察方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "recon|full|侦察|全面|信息收集"
+        },
+        {
+          "tool": "read_skill",
+          "id": "recon-full"
+        }
+      ]
+    }
   ]
 }

@@ -42,5 +42,23 @@
         "imds"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "ad-domain-attack-scenario",
+      "scenario": "已获取域内低权限用户凭据，目标是域控。发现有 SPN 注册的服务账户。请搜索 AD 域攻击方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "ad|domain|域|kerberos|active directory"
+        },
+        {
+          "tool": "read_skill",
+          "id": "ad-domain-attack"
+        }
+      ]
+    }
   ]
 }

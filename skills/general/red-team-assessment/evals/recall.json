@@ -31,5 +31,23 @@
         "ctf pwn"
       ]
     }
+  ],
+  "llm_tests": [
+    {
+      "id": 1,
+      "name": "red-team-assessment-scenario",
+      "scenario": "需要规划一次完整的红队评估行动。请搜索红队评估方法论。",
+      "max_rounds": 2,
+      "expect_tool_calls": [
+        {
+          "tool": "list_skills",
+          "keyword_contains": "red team|红队|assessment|评估"
+        },
+        {
+          "tool": "read_skill",
+          "id": "red-team-assessment"
+        }
+      ]
+    }
   ]
 }
