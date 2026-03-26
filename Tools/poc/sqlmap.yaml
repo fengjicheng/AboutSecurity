@@ -92,5 +92,7 @@ findings_mapping:
 
 constraints:
   timeout: 600s
+  timeout_probe: 120s
+  timeout_exploit: 600s
   proxy_flag: "--proxy"
   max_concurrent: 1

@@ -19,8 +19,8 @@ parameters:
     required: true
   - name: ports
     type: string
-    description: "端口范围（如 80,443,1-1000）或 top-ports 值（100/1000/full）"
-    default: "100"
+    description: "端口范围。填纯数字如 100、1000、full 表示 top-ports；填逗号/范围如 80,443 或 1-65535 表示精确端口"
+    default: "1000"
   - name: scan_type
     type: string
     description: "扫描类型：s(SYN 半开) / c(CONNECT 全连接)"
@@ -33,7 +33,7 @@ parameters:
 
 command_template: |
   -host {{.target}}
-  {{if eq .ports "100" "1000" "full"}}-top-ports {{.ports}}{{else}}-p {{.ports}}{{end}}
+  {{if or (eq .ports "100") (eq .ports "1000") (eq .ports "full")}}-top-ports {{.ports}}{{else if hasPrefix .ports "top-"}}-top-ports {{trimPrefix .ports "top-"}}{{else}}-p {{.ports}}{{end}}
   -s {{.scan_type}}
   -rate {{.rate}}
   -o {{.OutputFile}}
