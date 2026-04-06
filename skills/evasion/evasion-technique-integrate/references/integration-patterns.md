@@ -1,6 +1,6 @@
 # 免杀技术整合模式参考
 
-> 提取自 Evasion-SubAgents/evasion_integrate.md，供 `read_skill(path="references/integration-patterns.md")` 引用。
+> 提取自 Evasion-SubAgents/evasion_integrate.md，供 [references/integration-patterns.md](references/integration-patterns.md) 引用。
 
 ## 整合模式代码示例
 

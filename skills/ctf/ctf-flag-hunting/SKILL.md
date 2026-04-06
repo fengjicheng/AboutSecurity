@@ -10,7 +10,7 @@ metadata:
 
 ## ⛔ 深入参考（补充读物）
 
-- 完整搜索路径和命令 → `read_skill(id="ctf-flag-hunting", path="references/flag-search-paths.md")`
+- 完整搜索路径和命令 → [references/flag-search-paths.md](references/flag-search-paths.md)
 - 本 skill 已包含核心搜索路径，references 用于补充极端情况
 
 ---

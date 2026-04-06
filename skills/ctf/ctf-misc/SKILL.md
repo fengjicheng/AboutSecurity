@@ -12,15 +12,15 @@ metadata:
 
 以下参考资料**按需加载**，根据识别出的具体方向选择对应文件：
 
-- Python 沙箱逃逸（受限字符/func_globals链/类属性持久化） → `read_skill(id="ctf-misc", path="references/pyjails.md")`
-- Bash 沙箱/受限Shell逃逸 → `read_skill(id="ctf-misc", path="references/bashjails.md")`
-- 编码与解码（QR/esolang/Verilog/BCD/Gray码/SMS PDU） → `read_skill(id="ctf-misc", path="references/encodings.md")`
-- RF/SDR 信号处理（QAM-16/载波恢复/定时同步） → `read_skill(id="ctf-misc", path="references/rf-sdr.md")`
-- DNS 利用（ECS欺骗/NSEC遍历/IXFR/重绑定/隧道） → `read_skill(id="ctf-misc", path="references/dns.md")`
-- 游戏与VM Part1（WASM/Roblox/PyInstaller/K8s/Z3/浮点） → `read_skill(id="ctf-misc", path="references/games-and-vms.md")`
-- 游戏与VM Part2（ML权重/WebSocket/Flask/LoRA/De Bruijn） → `read_skill(id="ctf-misc", path="references/games-and-vms-2.md")`
-- 游戏与VM Part3（memfd/博弈/ROM切换/Benford/BuildKit） → `read_skill(id="ctf-misc", path="references/games-and-vms-3.md")`
-- Linux 提权（sudo通配符/NFS/SSH隧道/PostgreSQL RCE） → `read_skill(id="ctf-misc", path="references/linux-privesc.md")`
+- Python 沙箱逃逸（受限字符/func_globals链/类属性持久化） → [references/pyjails.md](references/pyjails.md)
+- Bash 沙箱/受限Shell逃逸 → [references/bashjails.md](references/bashjails.md)
+- 编码与解码（QR/esolang/Verilog/BCD/Gray码/SMS PDU） → [references/encodings.md](references/encodings.md)
+- RF/SDR 信号处理（QAM-16/载波恢复/定时同步） → [references/rf-sdr.md](references/rf-sdr.md)
+- DNS 利用（ECS欺骗/NSEC遍历/IXFR/重绑定/隧道） → [references/dns.md](references/dns.md)
+- 游戏与VM Part1（WASM/Roblox/PyInstaller/K8s/Z3/浮点） → [references/games-and-vms.md](references/games-and-vms.md)
+- 游戏与VM Part2（ML权重/WebSocket/Flask/LoRA/De Bruijn） → [references/games-and-vms-2.md](references/games-and-vms-2.md)
+- 游戏与VM Part3（memfd/博弈/ROM切换/Benford/BuildKit） → [references/games-and-vms-3.md](references/games-and-vms-3.md)
+- Linux 提权（sudo通配符/NFS/SSH隧道/PostgreSQL RCE） → [references/linux-privesc.md](references/linux-privesc.md)
 
 ---
 
@@ -31,22 +31,22 @@ Misc 题目？
 ├─ 编码/解码谜题
 │  ├─ Base64/Hex/ROT13 → CyberChef 自动检测
 │  ├─ QR 码 → zbarimg / 碎片重组
-│  ├─ 二进制/莫尔斯/BCD → `read_skill(id="ctf-misc", path="references/encodings.md")`
+│  ├─ 二进制/莫尔斯/BCD → [references/encodings.md](references/encodings.md)
 │  └─ 多层嵌套 → 循环解码直到明文
 ├─ 沙箱逃逸
-│  ├─ Python jail → `read_skill(id="ctf-misc", path="references/pyjails.md")`
+│  ├─ Python jail → [references/pyjails.md](references/pyjails.md)
 │  │  ├─ 受限字符 → repunit分解 / chr()构造
 │  │  ├─ 禁import → __builtins__.__import__
 │  │  └─ 受限exec → func_globals链 / MRO遍历
-│  └─ Bash jail → `read_skill(id="ctf-misc", path="references/bashjails.md")`
+│  └─ Bash jail → [references/bashjails.md](references/bashjails.md)
 ├─ 游戏/交互
 │  ├─ WASM → 内存patch / wasm2wat 修改
 │  ├─ WebSocket → 拦截修改消息
-│  ├─ 博弈论 → Nim/承诺方案 → `read_skill(id="ctf-misc", path="references/games-and-vms-3.md")`
-│  └─ ML/AI → 权重扰动 / 碰撞 → `read_skill(id="ctf-misc", path="references/games-and-vms-2.md")`
-├─ DNS → `read_skill(id="ctf-misc", path="references/dns.md")`
-├─ RF/SDR → `read_skill(id="ctf-misc", path="references/rf-sdr.md")`
-└─ Linux 提权 → `read_skill(id="ctf-misc", path="references/linux-privesc.md")`
+│  ├─ 博弈论 → Nim/承诺方案 → [references/games-and-vms-3.md](references/games-and-vms-3.md)
+│  └─ ML/AI → 权重扰动 / 碰撞 → [references/games-and-vms-2.md](references/games-and-vms-2.md)
+├─ DNS → [references/dns.md](references/dns.md)
+├─ RF/SDR → [references/rf-sdr.md](references/rf-sdr.md)
+└─ Linux 提权 → [references/linux-privesc.md](references/linux-privesc.md)
 ```
 
 ## 通用技巧

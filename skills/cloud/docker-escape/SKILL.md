@@ -12,7 +12,7 @@ metadata:
 
 ## ⛔ 深入参考（必读）
 
-- ⛔**必读** 各种逃逸方法的完整 payload 和利用条件 → `read_skill(id="docker-escape", path="references/escape-methods.md")`
+- 各种逃逸方法的完整 payload 和利用条件 → [references/escape-methods.md](references/escape-methods.md)
 
 ---
 
@@ -71,7 +71,7 @@ ip addr
 ├─ CAP_SYS_PTRACE + hostPID → 注入宿主机进程
 ├─ hostNetwork → 访问宿主机服务/Metadata API
 └─ 以上都没有 → 内核漏洞（CVE-2022-0847 等）
-详细命令 → `read_skill(id="docker-escape", path="references/escape-methods.md")`
+详细命令 → [references/escape-methods.md](references/escape-methods.md)
 ```
 
 ## Phase 4: 快速逃逸命令

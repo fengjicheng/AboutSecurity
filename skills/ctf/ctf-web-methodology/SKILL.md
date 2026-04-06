@@ -12,19 +12,19 @@ metadata:
 
 以下参考资料**按需加载**，根据 Phase 2 识别出的挑战类型选择对应文件：
 
-- 服务端注入（SQLi/SSTI/LFI/XXE/SSRF） → `read_skill(id="ctf-web-methodology", path="references/server-side.md")`
-- 服务端执行（命令注入/RCE/文件上传/CRLF） → `read_skill(id="ctf-web-methodology", path="references/server-side-exec.md")`
-- 服务端高级（Race Condition/HTTP走私/缓存投毒） → `read_skill(id="ctf-web-methodology", path="references/server-side-advanced.md")`
-- 反序列化（PHP/Java/Python/Node/.NET） → `read_skill(id="ctf-web-methodology", path="references/server-side-deser.md")`
-- 认证与访问（密码/MFA/OAuth/IDOR/逻辑漏洞） → `read_skill(id="ctf-web-methodology", path="references/auth-and-access.md")`
-- JWT 攻击（none/弱密钥/JWK注入/算法混淆） → `read_skill(id="ctf-web-methodology", path="references/auth-jwt.md")`
-- 认证基础设施（LDAP/Kerberos/SAML/证书） → `read_skill(id="ctf-web-methodology", path="references/auth-infra.md")`
-- 客户端（XSS/CSP绕过/DOM/CSS注入） → `read_skill(id="ctf-web-methodology", path="references/client-side.md")`
-- Node.js 与原型链污染 → `read_skill(id="ctf-web-methodology", path="references/node-and-prototype.md")`
-- CVE 利用集（Log4Shell/Gitea/Grafana等） → `read_skill(id="ctf-web-methodology", path="references/cves.md")`
-- Web3/区块链（Solidity/重入/闪电贷） → `read_skill(id="ctf-web-methodology", path="references/web3.md")`
-- ⛔**必读** HTTP 响应分析技巧 → `read_skill(id="ctf-web-methodology", path="references/response-analysis.md")`
-- ⛔**必读** Flag 提取方法论 → `read_skill(id="ctf-web-methodology", path="references/flag-extraction.md")`
+- 服务端注入（SQLi/SSTI/LFI/XXE/SSRF） → [references/server-side.md](references/server-side.md)
+- 服务端执行（命令注入/RCE/文件上传/CRLF） → [references/server-side-exec.md](references/server-side-exec.md)
+- 服务端高级（Race Condition/HTTP走私/缓存投毒） → [references/server-side-advanced.md](references/server-side-advanced.md)
+- 反序列化（PHP/Java/Python/Node/.NET） → [references/server-side-deser.md](references/server-side-deser.md)
+- 认证与访问（密码/MFA/OAuth/IDOR/逻辑漏洞） → [references/auth-and-access.md](references/auth-and-access.md)
+- JWT 攻击（none/弱密钥/JWK注入/算法混淆） → [references/auth-jwt.md](references/auth-jwt.md)
+- 认证基础设施（LDAP/Kerberos/SAML/证书） → [references/auth-infra.md](references/auth-infra.md)
+- 客户端（XSS/CSP绕过/DOM/CSS注入） → [references/client-side.md](references/client-side.md)
+- Node.js 与原型链污染 → [references/node-and-prototype.md](references/node-and-prototype.md)
+- CVE 利用集（Log4Shell/Gitea/Grafana等） → [references/cves.md](references/cves.md)
+- Web3/区块链（Solidity/重入/闪电贷） → [references/web3.md](references/web3.md)
+- HTTP 响应分析技巧 → [references/response-analysis.md](references/response-analysis.md)
+- Flag 提取方法论 → [references/flag-extraction.md](references/flag-extraction.md)
 
 ---
 

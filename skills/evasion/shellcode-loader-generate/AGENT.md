@@ -8,13 +8,13 @@
 - NEVER 在 Loader 代码中包含明文字符串（如 "shellcode", "payload"）
 
 ## ✅ ALWAYS
-- ALWAYS 先读组件库再选组件：`read_skill(path="references/loader-components-db.json")`
+- 先读取组件库 [references/loader-components-db.json](references/loader-components-db.json) 再选组件
 - ALWAYS 4 组件都必须明确选择（storage + allocator + copier + executor）
 - ALWAYS 使用 mingw 或对应交叉编译工具链验证编译
 - ALWAYS 新场景记录到 loader-scenarios.json
 - ALWAYS 代码中添加错误检查（分配失败、句柄无效）
 
 ## 🔧 工具偏好
-1. `read_skill(path="references/...")` — 查组件库和场景
+1. 读取 [references/...](references/) — 查组件库和场景
 2. `bash` — 交叉编译验证
 3. 直接创建文件 — 生成 Loader 源码

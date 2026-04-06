@@ -10,8 +10,8 @@ metadata:
 
 ## ⛔ 深入参考
 
-- ⛔**必读** 172 条免杀技术库 → `read_skill(id="evasion-technique-integrate", path="references/evasion-techniques-db.json")`
-- 整合模式与代码示例 → `read_skill(id="evasion-technique-integrate", path="references/integration-patterns.md")`
+- 172 条免杀技术库 → [references/evasion-techniques-db.json](references/evasion-techniques-db.json)
+- 整合模式与代码示例 → [references/integration-patterns.md](references/integration-patterns.md)
 
 ---
 

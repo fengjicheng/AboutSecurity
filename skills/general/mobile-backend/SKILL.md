@@ -12,7 +12,7 @@ metadata:
 
 ## ⛔ 深入参考（必读）
 
-- ⛔**必读** 支付篡改、验证码绕过、竞态、数据安全、移动端特有问题 → `read_skill(id="mobile-backend", path="references/mobile-logic-bugs.md")`
+- 支付篡改、验证码绕过、竞态、数据安全、移动端特有问题 → [references/mobile-logic-bugs.md](references/mobile-logic-bugs.md)
 
 ## Phase 1: API 端点发现
 
@@ -48,7 +48,7 @@ GET /api/v1/users/1002/profile → 别人？→ IDOR！
 → 参考 `idor-methodology`
 
 ### 支付/验证码/竞态
-→ 详细方法和 payload → `read_skill(id="mobile-backend", path="references/mobile-logic-bugs.md")`
+→ 详细方法和 payload → [references/mobile-logic-bugs.md](references/mobile-logic-bugs.md)
 
 ## 注意事项
 - 移动 API 通常比 Web 更信任客户端——后端校验更少

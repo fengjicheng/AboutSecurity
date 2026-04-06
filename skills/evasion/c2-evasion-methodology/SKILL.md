@@ -14,12 +14,12 @@ metadata:
 
 | Phase | 参考文档 | 用途 |
 |-------|----------|------|
-| 2 | `read_skill(id="c2-evasion-methodology", path="references/detection-search.md")` | YARA/Sigma/网络规则搜索命令 |
-| 3 | `read_skill(id="c2-evasion-methodology", path="references/rule-analysis.md")` | 逐规则分析与免杀策略制定 |
-| 3.5 | `read_skill(id="c2-evasion-methodology", path="references/hex-analysis.md")` | Hex 模式深度分析 |
-| 3.6 | `read_skill(id="c2-evasion-methodology", path="references/binary-analysis.md")` | 二进制资产（shellcode/资源/配置）分析 |
-| 3.7 | `read_skill(id="c2-evasion-methodology", path="references/string-search.md")` | 敏感字符串主动搜索 |
-| 4 | `read_skill(id="c2-evasion-methodology", path="references/source-modify.md")` | 源码修改模式与编译器标志 |
+| 2 | [references/detection-search.md](references/detection-search.md) | YARA/Sigma/网络规则搜索命令 |
+| 3 | [references/rule-analysis.md](references/rule-analysis.md) | 逐规则分析与免杀策略制定 |
+| 3.5 | [references/hex-analysis.md](references/hex-analysis.md) | Hex 模式深度分析 |
+| 3.6 | [references/binary-analysis.md](references/binary-analysis.md) | 二进制资产（shellcode/资源/配置）分析 |
+| 3.7 | [references/string-search.md](references/string-search.md) | 敏感字符串主动搜索 |
+| 4 | [references/source-modify.md](references/source-modify.md) | 源码修改模式与编译器标志 |
 
 ---
 

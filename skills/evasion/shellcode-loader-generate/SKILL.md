@@ -10,9 +10,9 @@ metadata:
 
 ## ⛔ 深入参考
 
-- ⛔**必读** 组件库完整列表（85 组件） → `read_skill(id="shellcode-loader-generate", path="references/loader-components-db.json")`
-- ⛔**必读** 已有场景（避免重复） → `read_skill(id="shellcode-loader-generate", path="references/loader-scenarios.json")`
-- 架构说明与模板 → `read_skill(id="shellcode-loader-generate", path="references/loader-architecture.md")`
+- 组件库完整列表（85 组件） → [references/loader-components-db.json](references/loader-components-db.json)
+- 已有场景（避免重复） → [references/loader-scenarios.json](references/loader-scenarios.json)
+- 架构说明与模板 → [references/loader-architecture.md](references/loader-architecture.md)
 
 ---
 

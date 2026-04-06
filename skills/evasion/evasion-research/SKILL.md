@@ -10,7 +10,7 @@ metadata:
 
 ## ⛔ 深入参考
 
-- 完整研究流程与命令 → `read_skill(id="evasion-research", path="references/research-workflow.md")`
+- 完整研究流程与命令 → [references/research-workflow.md](references/research-workflow.md)
 
 ---
 

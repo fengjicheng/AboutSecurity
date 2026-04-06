@@ -12,9 +12,9 @@ metadata:
 
 以下参考资料**按需加载**，根据识别出的具体方向选择对应文件：
 
-- 社交媒体调查（Twitter/Tumblr/BlueSky/Discord/用户名枚举） → `read_skill(id="ctf-osint", path="references/social-media.md")`
-- 地理定位与媒体分析（反向图搜/街景匹配/MGRS/EXIF） → `read_skill(id="ctf-osint", path="references/geolocation-and-media.md")`
-- Web 与 DNS 侦察（Dorking/Wayback/Zone Transfer/WHOIS） → `read_skill(id="ctf-osint", path="references/web-and-dns.md")`
+- 社交媒体调查（Twitter/Tumblr/BlueSky/Discord/用户名枚举） → [references/social-media.md](references/social-media.md)
+- 地理定位与媒体分析（反向图搜/街景匹配/MGRS/EXIF） → [references/geolocation-and-media.md](references/geolocation-and-media.md)
+- Web 与 DNS 侦察（Dorking/Wayback/Zone Transfer/WHOIS） → [references/web-and-dns.md](references/web-and-dns.md)
 
 ---
 

@@ -12,17 +12,17 @@ metadata:
 
 以下参考资料**按需加载**，根据识别出的具体方向选择对应文件：
 
-- 磁盘/内存取证（Volatility/VM/VMDK/分区恢复/勒索软件） → `read_skill(id="ctf-forensics", path="references/disk-and-memory.md")`
-- 磁盘恢复（LUKS/BTRFS/XFS/RAID5/反雕刻） → `read_skill(id="ctf-forensics", path="references/disk-recovery.md")`
-- Windows 取证（注册表/SAM/事件日志/WMI/Amcache） → `read_skill(id="ctf-forensics", path="references/windows.md")`
-- Linux/应用取证（Docker/Git/浏览器/KeePass） → `read_skill(id="ctf-forensics", path="references/linux-forensics.md")`
-- 网络取证基础（tcpdump/TLS解密/SMB3/USB音频） → `read_skill(id="ctf-forensics", path="references/network.md")`
-- 高级网络取证（时序编码/NTLMv2/TCP隐蔽通道/DNS隐写） → `read_skill(id="ctf-forensics", path="references/network-advanced.md")`
-- 通用隐写术（PDF/SVG/PNG/文件叠加/终端图形） → `read_skill(id="ctf-forensics", path="references/steganography.md")`
-- 图像隐写术（JPEG DQT/BMP位平面/F5检测/调色板） → `read_skill(id="ctf-forensics", path="references/stego-image.md")`
-- 高级隐写术（FFT/DTMF/音频/视频帧/JPEG XL） → `read_skill(id="ctf-forensics", path="references/stego-advanced.md")`
-- 硬件信号（VGA/HDMI/DisplayPort/功率侧信道/键盘声学） → `read_skill(id="ctf-forensics", path="references/signals-and-hardware.md")`
-- 3D 打印取证（PrusaSlicer/G-code/QOIF） → `read_skill(id="ctf-forensics", path="references/3d-printing.md")`
+- 磁盘/内存取证（Volatility/VM/VMDK/分区恢复/勒索软件） → [references/disk-and-memory.md](references/disk-and-memory.md)
+- 磁盘恢复（LUKS/BTRFS/XFS/RAID5/反雕刻） → [references/disk-recovery.md](references/disk-recovery.md)
+- Windows 取证（注册表/SAM/事件日志/WMI/Amcache） → [references/windows.md](references/windows.md)
+- Linux/应用取证（Docker/Git/浏览器/KeePass） → [references/linux-forensics.md](references/linux-forensics.md)
+- 网络取证基础（tcpdump/TLS解密/SMB3/USB音频） → [references/network.md](references/network.md)
+- 高级网络取证（时序编码/NTLMv2/TCP隐蔽通道/DNS隐写） → [references/network-advanced.md](references/network-advanced.md)
+- 通用隐写术（PDF/SVG/PNG/文件叠加/终端图形） → [references/steganography.md](references/steganography.md)
+- 图像隐写术（JPEG DQT/BMP位平面/F5检测/调色板） → [references/stego-image.md](references/stego-image.md)
+- 高级隐写术（FFT/DTMF/音频/视频帧/JPEG XL） → [references/stego-advanced.md](references/stego-advanced.md)
+- 硬件信号（VGA/HDMI/DisplayPort/功率侧信道/键盘声学） → [references/signals-and-hardware.md](references/signals-and-hardware.md)
+- 3D 打印取证（PrusaSlicer/G-code/QOIF） → [references/3d-printing.md](references/3d-printing.md)
 
 ---
 
@@ -32,21 +32,21 @@ metadata:
 拿到取证题？
 ├─ 文件分析
 │  ├─ file/exiftool/binwalk → 识别格式与嵌入文件
-│  ├─ 图片 → steghide/zsteg/stegsolve → `read_skill(id="ctf-forensics", path="references/stego-image.md")`
-│  ├─ 音频 → 频谱图/DTMF/SSTV → `read_skill(id="ctf-forensics", path="references/stego-advanced.md")`
-│  └─ PDF → 元数据/隐藏文本/多层 → `read_skill(id="ctf-forensics", path="references/steganography.md")`
+│  ├─ 图片 → steghide/zsteg/stegsolve → [references/stego-image.md](references/stego-image.md)
+│  ├─ 音频 → 频谱图/DTMF/SSTV → [references/stego-advanced.md](references/stego-advanced.md)
+│  └─ PDF → 元数据/隐藏文本/多层 → [references/steganography.md](references/steganography.md)
 ├─ 磁盘/内存镜像
 │  ├─ .dd/.img → mount -o loop,ro → fls/photorec
 │  ├─ .ova/.vmdk → tar xf → 7z 提取
 │  ├─ 内存 → Volatility3 (pslist/filescan/dumpfiles)
-│  └─ RAID/ZFS/BTRFS → `read_skill(id="ctf-forensics", path="references/disk-recovery.md")`
+│  └─ RAID/ZFS/BTRFS → [references/disk-recovery.md](references/disk-recovery.md)
 ├─ 网络流量 (.pcap)
 │  ├─ HTTP → tshark --export-objects
 │  ├─ TLS → SSLKEYLOGFILE / 弱RSA密钥
 │  ├─ SMB → 密钥解密 / NTLMv2 提取
 │  └─ DNS → 隐蔽通道 / 尾字节编码
-├─ Windows 事件日志 → `read_skill(id="ctf-forensics", path="references/windows.md")`
-├─ 硬件信号 → `read_skill(id="ctf-forensics", path="references/signals-and-hardware.md")`
+├─ Windows 事件日志 → [references/windows.md](references/windows.md)
+├─ 硬件信号 → [references/signals-and-hardware.md](references/signals-and-hardware.md)
 └─ 区块链 → mempool.space API / 剥离链追踪
 ```
 

@@ -12,8 +12,8 @@ metadata:
 
 ## ⛔ 深入参考（必读）
 
-- ⛔**必读** 需要密码喷洒、AS-REP Roasting、Kerberoasting 详细命令 → `read_skill(id="ad-domain-attack", path="references/credential-attacks.md")`
-- ⛔**必读** 需要委派攻击(RBCD)、ACL 滥用、DCSync、持久化 → `read_skill(id="ad-domain-attack", path="references/domain-escalation.md")`
+- 需要密码喷洒、AS-REP Roasting、Kerberoasting 详细命令 → [references/credential-attacks.md](references/credential-attacks.md)
+- 需要委派攻击(RBCD)、ACL 滥用、DCSync、持久化 → [references/domain-escalation.md](references/domain-escalation.md)
 
 ---
 
@@ -46,13 +46,13 @@ BloodHound 能自动发现攻击路径，是域渗透最强大的工具。
 
 ```
 拥有的凭据？
-├─ 无凭据 → AS-REP Roasting（无需预认证的用户）→ `read_skill(id="ad-domain-attack", path="references/credential-attacks.md")`
-├─ 任意域用户 → Kerberoasting（SPN 服务账户）→ `read_skill(id="ad-domain-attack", path="references/credential-attacks.md")`
-│             → 密码喷洒（先查锁定策略！）→ `read_skill(id="ad-domain-attack", path="references/credential-attacks.md")`
+├─ 无凭据 → AS-REP Roasting（无需预认证的用户）→ [references/credential-attacks.md](references/credential-attacks.md)
+├─ 任意域用户 → Kerberoasting（SPN 服务账户）→ [references/credential-attacks.md](references/credential-attacks.md)
+│             → 密码喷洒（先查锁定策略！）→ [references/credential-attacks.md](references/credential-attacks.md)
 │             → BloodHound 找攻击路径
 ├─ 本地管理员 → SAM dump → PTH 横向 → 凭据复用
-├─ 域管权限 → DCSync 提取所有哈希 → `read_skill(id="ad-domain-attack", path="references/domain-escalation.md")`
-└─ 发现委派/ACL 路径 → 委派攻击/ACL 滥用 → `read_skill(id="ad-domain-attack", path="references/domain-escalation.md")`
+├─ 域管权限 → DCSync 提取所有哈希 → [references/domain-escalation.md](references/domain-escalation.md)
+└─ 发现委派/ACL 路径 → 委派攻击/ACL 滥用 → [references/domain-escalation.md](references/domain-escalation.md)
 ```
 
 ### 凭据复用速查
@@ -73,9 +73,9 @@ netexec smb 10.0.0.0/24 -u admin -H NTLM_HASH   # PTH
 
 ## 关联技能
 
-- **ADCS 证书攻击**（ESC1-ESC11 完整利用链）→ `read_skill(id="adcs-certipy-attack")`
-- **NTLM 中继攻击**（Responder/PetitPotam/Relay）→ `read_skill(id="ntlm-relay-attack")`
-- **横向移动**（WinRM/PSExec/PTH/PTT）→ `read_skill(id="lateral-movement")`
+- **ADCS 证书攻击**（ESC1-ESC11 完整利用链）→ `/skill:adcs-certipy-attack`
+- **NTLM 中继攻击**（Responder/PetitPotam/Relay）→ `/skill:ntlm-relay-attack`
+- **横向移动**（WinRM/PSExec/PTH/PTT）→ `/skill:lateral-movement`
 
 ## Password Spray 安全策略
 - 检查域密码策略：Lockout duration（锁定时长/冷却时间）

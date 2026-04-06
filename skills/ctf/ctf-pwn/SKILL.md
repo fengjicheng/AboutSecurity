@@ -10,18 +10,18 @@ metadata:
 
 ## 深入参考
 
-以下参考资料**按漏洞类型组织**，通过 `read_skill()` 按需加载：
+以下参考资料**按漏洞类型组织**，按需加载：
 
-| 漏洞类型 | read_skill 调用 |
+| 漏洞类型 | skill 引用 |
 |---------|----------------|
-| 栈溢出 / ret2win / Canary绕过 | `read_skill(id="ctf-pwn", path="references/stack-overflow.md")` |
-| 格式化字符串 / 泄漏 / GOT覆写 / Blind Pwn | `read_skill(id="ctf-pwn", path="references/format-string.md")` |
-| 堆(UAF/double free/tcache/House of X) | `read_skill(id="ctf-pwn", path="references/heap-exploitation.md")` |
-| ROP(ret2csu/ret2libc/SROP/seccomp绕过/RETF) | `read_skill(id="ctf-pwn", path="references/rop-techniques.md")` |
-| 内核堆喷 / tty_struct / userfaultfd / modprobe_path | `read_skill(id="ctf-pwn", path="references/kernel-exploitation.md")` |
-| KASLR / KPTI / SMEP / SMAP / FGKASLR 绕过 | `read_skill(id="ctf-pwn", path="references/kernel-bypass.md")` |
-| 自定义VM / JIT / 类型混淆 / FSOP / Windows / ARM | `read_skill(id="ctf-pwn", path="references/advanced-pwn.md")` |
-| Python沙箱 / FUSE / Busybox / 受限Shell | `read_skill(id="ctf-pwn", path="references/sandbox-escape.md")` |
+| 栈溢出 / ret2win / Canary绕过 | [references/stack-overflow.md](references/stack-overflow.md) |
+| 格式化字符串 / 泄漏 / GOT覆写 / Blind Pwn | [references/format-string.md](references/format-string.md) |
+| 堆(UAF/double free/tcache/House of X) | [references/heap-exploitation.md](references/heap-exploitation.md) |
+| ROP(ret2csu/ret2libc/SROP/seccomp绕过/RETF) | [references/rop-techniques.md](references/rop-techniques.md) |
+| 内核堆喷 / tty_struct / userfaultfd / modprobe_path | [references/kernel-exploitation.md](references/kernel-exploitation.md) |
+| KASLR / KPTI / SMEP / SMAP / FGKASLR 绕过 | [references/kernel-bypass.md](references/kernel-bypass.md) |
+| 自定义VM / JIT / 类型混淆 / FSOP / Windows / ARM | [references/advanced-pwn.md](references/advanced-pwn.md) |
+| Python沙箱 / FUSE / Busybox / 受限Shell | [references/sandbox-escape.md](references/sandbox-escape.md) |
 
 ### 大文件目录索引 (>300行，建议先看目录定位)
 

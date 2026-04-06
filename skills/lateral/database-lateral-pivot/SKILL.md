@@ -12,7 +12,7 @@ metadata:
 
 ## ⛔ 深入参考（必读）
 
-- ⛔**必读** dblink 连接、Linked Server 利用、SSRF 探测的完整命令和场景 → `read_skill(id="database-lateral-pivot", path="references/dblink-lateral.md")`
+- dblink 连接、Linked Server 利用、SSRF 探测的完整命令和场景 → [references/dblink-lateral.md](references/dblink-lateral.md)
 
 ---
 
@@ -77,7 +77,7 @@ SELECT * FROM config WHERE key LIKE '%host%' OR key LIKE '%db%' OR value LIKE '%
     └─ 利用数据库中存储的凭据连接其他服务
 ```
 
-→ 各数据库横向的完整命令 → `read_skill(id="database-lateral-pivot", path="references/dblink-lateral.md")`
+→ 各数据库横向的完整命令 → [references/dblink-lateral.md](references/dblink-lateral.md)
 
 ## Phase 4: 横向后利用
 

@@ -12,17 +12,17 @@ metadata:
 
 以下参考资料**按需加载**，根据识别出的具体方向选择对应文件：
 
-- 静态分析工具（GDB/Ghidra/radare2/IDA/WASM/APK/.NET） → `read_skill(id="ctf-reverse", path="references/tools.md")`
-- 动态分析工具（Frida/angr/lldb/Qiling/Triton） → `read_skill(id="ctf-reverse", path="references/tools-dynamic.md")`
-- 高级工具（VMProtect/BinDiff/反混淆/Rizin/补丁） → `read_skill(id="ctf-reverse", path="references/tools-advanced.md")`
-- 反分析对抗（Linux/Windows反调试/反VM/反DBI/代码完整性） → `read_skill(id="ctf-reverse", path="references/anti-analysis.md")`
-- 语言特征（Python字节码/Lua/WASM/.NET IL/Solidity） → `read_skill(id="ctf-reverse", path="references/languages.md")`
-- 编译语言（Go/Rust/Swift/Kotlin/C++/D/Nim） → `read_skill(id="ctf-reverse", path="references/languages-compiled.md")`
-- 平台特定（嵌入式固件/macOS Mach-O/Android/Flutter/HarmonyOS） → `read_skill(id="ctf-reverse", path="references/platforms.md")`
-- 语言与平台综合 → `read_skill(id="ctf-reverse", path="references/languages-platforms.md")`
-- 逆向模式（校验/编码/迷宫/虚拟机/游戏引擎） → `read_skill(id="ctf-reverse", path="references/patterns.md")`
-- CTF 逆向模式 Part1（自定义加密/矩阵/Brainfuck JIT） → `read_skill(id="ctf-reverse", path="references/patterns-ctf.md")`
-- CTF 逆向模式 Part2（约束求解/侧信道/混淆变换） → `read_skill(id="ctf-reverse", path="references/patterns-ctf-2.md")`
+- 静态分析工具（GDB/Ghidra/radare2/IDA/WASM/APK/.NET） → [references/tools.md](references/tools.md)
+- 动态分析工具（Frida/angr/lldb/Qiling/Triton） → [references/tools-dynamic.md](references/tools-dynamic.md)
+- 高级工具（VMProtect/BinDiff/反混淆/Rizin/补丁） → [references/tools-advanced.md](references/tools-advanced.md)
+- 反分析对抗（Linux/Windows反调试/反VM/反DBI/代码完整性） → [references/anti-analysis.md](references/anti-analysis.md)
+- 语言特征（Python字节码/Lua/WASM/.NET IL/Solidity） → [references/languages.md](references/languages.md)
+- 编译语言（Go/Rust/Swift/Kotlin/C++/D/Nim） → [references/languages-compiled.md](references/languages-compiled.md)
+- 平台特定（嵌入式固件/macOS Mach-O/Android/Flutter/HarmonyOS） → [references/platforms.md](references/platforms.md)
+- 语言与平台综合 → [references/languages-platforms.md](references/languages-platforms.md)
+- 逆向模式（校验/编码/迷宫/虚拟机/游戏引擎） → [references/patterns.md](references/patterns.md)
+- CTF 逆向模式 Part1（自定义加密/矩阵/Brainfuck JIT） → [references/patterns-ctf.md](references/patterns-ctf.md)
+- CTF 逆向模式 Part2（约束求解/侧信道/混淆变换） → [references/patterns-ctf-2.md](references/patterns-ctf-2.md)
 
 ---
 
@@ -44,7 +44,7 @@ metadata:
 │  ├─ 动态辅助 → GDB断点 / Frida hook
 │  ├─ 符号执行 → angr（自动探路）
 │  └─ 反混淆 → D-810 / GOOMBA / Miasm
-├─ 有反调试？ → `read_skill(id="ctf-reverse", path="references/anti-analysis.md")`
+├─ 有反调试？ → [references/anti-analysis.md](references/anti-analysis.md)
 │  ├─ ptrace → LD_PRELOAD hook
 │  ├─ /proc/self/status → 修改返回值
 │  └─ 时间检测 → 跳过或 patch

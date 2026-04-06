@@ -12,7 +12,7 @@ metadata:
 
 ## ⛔ 深入参考（必读）
 
-- ⛔**必读** 子域名接管、CDN/SRI 安全、第三方脚本风险、退役组件、风险评估矩阵 → `read_skill(id="supply-chain-audit", path="references/supply-chain-deep.md")`
+- 子域名接管、CDN/SRI 安全、第三方脚本风险、退役组件、风险评估矩阵 → [references/supply-chain-deep.md](references/supply-chain-deep.md)
 
 ## Phase 1: 组件发现
 
@@ -48,11 +48,11 @@ nuclei -u http://target -severity critical,high
 
 ## Phase 3: 子域名接管
 CNAME 指向已注销服务 → 攻击者注册 → 控制子域名内容
-→ 检测方法和可接管服务列表 → `read_skill(id="supply-chain-audit", path="references/supply-chain-deep.md")`
+→ 检测方法和可接管服务列表 → [references/supply-chain-deep.md](references/supply-chain-deep.md)
 
 ## Phase 4: CDN 和外部资源
 无 SRI 的 CDN 引用 = CDN 被入侵即中招
-→ 详细评估方法 → `read_skill(id="supply-chain-audit", path="references/supply-chain-deep.md")`
+→ 详细评估方法 → [references/supply-chain-deep.md](references/supply-chain-deep.md)
 
 ## 注意事项
 - 核心是**完整性**——漏掉一个组件就可能漏掉关键风险

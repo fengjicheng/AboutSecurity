@@ -16,7 +16,7 @@ CTF 源码审计 ≠ 真实代码审计。区别：
 
 ## ⛔ 深入参考（必读）
 
-- ⛔**必读** PHP/Python/Node.js 完整危险函数清单、漏洞模式（弱比较/变量覆盖/条件竞争） → `read_skill(id="ctf-source-audit", path="references/dangerous-functions.md")`
+- PHP/Python/Node.js 完整危险函数清单、漏洞模式（弱比较/变量覆盖/条件竞争） → [references/dangerous-functions.md](references/dangerous-functions.md)
 
 ## Phase 1: 审计流程
 
@@ -28,7 +28,7 @@ CTF 源码审计 ≠ 真实代码审计。区别：
 | Python | `os.system()` `eval()` `exec()` | `pickle.loads()` `yaml.load()` | `render_template_string()` |
 | Node.js | `child_process.exec()` `eval()` | N/A | `__proto__` 原型链污染 |
 
-→ 完整危险函数清单 → `read_skill(id="ctf-source-audit", path="references/dangerous-functions.md")`
+→ 完整危险函数清单 → [references/dangerous-functions.md](references/dangerous-functions.md)
 
 ### 1.2 追踪数据流（sink → source）
 
@@ -42,7 +42,7 @@ CTF 源码审计 ≠ 真实代码审计。区别：
 - **变量覆盖**：`extract($_GET)` / `parse_str()`
 - **逻辑漏洞**：`admin ` (trailing space) | 金额负数
 
-→ 完整模式和代码示例 → `read_skill(id="ctf-source-audit", path="references/dangerous-functions.md")`
+→ 完整模式和代码示例 → [references/dangerous-functions.md](references/dangerous-functions.md)
 
 ### 1.4 审计产出
 1. 漏洞类型和位置（文件名+行号）

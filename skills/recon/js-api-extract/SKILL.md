@@ -12,7 +12,7 @@ metadata:
 
 ## ⛔ 深入参考（必读）
 
-- ⛔**必读** JS 分析正则库 + 提取脚本 → `read_skill(id="js-api-extract", path="references/js-extract-patterns.md")`
+- JS 分析正则库 + 提取脚本 → [references/js-extract-patterns.md](references/js-extract-patterns.md)
 
 ---
 
@@ -124,4 +124,4 @@ done | grep -v "^404 " | sort
 1. **JS 文件清单** — 分析了哪些 JS
 2. **发现的 API 端点列表** — 按优先级排序
 3. **暴露的敏感信息** — API Key、内部域名、Token
-4. **推荐的下一步测试** — 哪些端点应该优先 fuzz → `read_skill(id="api-semantic-fuzz")`
+4. **推荐的下一步测试** — 哪些端点应该优先 fuzz → `/skill:api-semantic-fuzz`

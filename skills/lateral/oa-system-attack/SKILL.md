@@ -12,8 +12,8 @@ metadata:
 
 ## ⛔ 深入参考（必读）
 
-- ⛔**必读** 致远/泛微/用友详细漏洞利用 → `read_skill(id="oa-system-attack", path="references/oa-exploits.md")`
-- ⛔**必读** 通达/蓝凌/其他系统漏洞利用 → `read_skill(id="oa-system-attack", path="references/oa-exploits-more.md")`
+- 致远/泛微/用友详细漏洞利用 → [references/oa-exploits.md](references/oa-exploits.md)
+- 通达/蓝凌/其他系统漏洞利用 → [references/oa-exploits-more.md](references/oa-exploits-more.md)
 
 ---
 

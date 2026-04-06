@@ -12,7 +12,7 @@ metadata:
 
 ## ⛔ 深入参考（必读）
 
-- ⛔**必读** 存活探测命令、端口→服务→价值映射表、域控/数据库定位 → `read_skill(id="internal-recon", path="references/network-mapping.md")`
+- 存活探测命令、端口→服务→价值映射表、域控/数据库定位 → [references/network-mapping.md](references/network-mapping.md)
 
 ## Phase 1: 当前位置分析
 
@@ -39,7 +39,7 @@ nmap -sT -p 22,80,135,139,443,445,1433,3306,3389,5432,5985,6379,8080,9200 TARGET
 
 **高价值端口**：88(域控) | 445(SMB) | 3389(RDP) | 1433(MSSQL) | 6379(Redis)
 
-→ 完整端口→服务→价值映射表 → `read_skill(id="internal-recon", path="references/network-mapping.md")`
+→ 完整端口→服务→价值映射表 → [references/network-mapping.md](references/network-mapping.md)
 
 ## Phase 4: 关键基础设施定位
 
