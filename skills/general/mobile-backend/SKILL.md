@@ -18,9 +18,9 @@ metadata:
 
 ```bash
 # spray 目录爆破（推荐）
-spray -u http://target -d /pentest/aboutsecurity/Dic/Web/Directory/Fuzz_common.txt
+spray -u http://target -d /pentest/AboutSecurity/Dic/Web/Directory/Fuzz_common.txt
 # 或 ffuf
-ffuf -u http://target/FUZZ -w /pentest/aboutsecurity/Dic/Web/Directory/Fuzz_common.txt -mc 200,301,302,403
+ffuf -u http://target/FUZZ -w /pentest/AboutSecurity/Dic/Web/Directory/Fuzz_common.txt -mc 200,301,302,403
 # /api/v1/, /api/v2/, /mobile/api/, /graphql
 ```
 检查文档：`/docs`, `/swagger`, `/openapi.json`, `/redoc`

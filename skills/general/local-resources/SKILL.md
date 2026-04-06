@@ -15,12 +15,12 @@ metadata:
 ### 工具链
 ```bash
 # 查看字典库分类
-ls /pentest/aboutsecurity/Dic/
+ls /pentest/AboutSecurity/Dic/
 # 查看 Web 字典子分类
-ls /pentest/aboutsecurity/Dic/Web/
+ls /pentest/AboutSecurity/Dic/Web/
 # 使用字典（示例）
-spray -u http://target -d /pentest/aboutsecurity/Dic/Web/Directory/Fuzz_common.txt
-ffuf -u http://target/FUZZ -w /pentest/aboutsecurity/Dic/Web/Directory/Fuzz_common.txt
+spray -u http://target -d /pentest/AboutSecurity/Dic/Web/Directory/Fuzz_common.txt
+ffuf -u http://target/FUZZ -w /pentest/AboutSecurity/Dic/Web/Directory/Fuzz_common.txt
 ```
 
 ### 常用字典速查表
@@ -61,11 +61,11 @@ ffuf -u http://target/FUZZ -w /pentest/aboutsecurity/Dic/Web/Directory/Fuzz_comm
 ### 工具链
 ```bash
 # 查看 aboutsecurity 字典库分类
-ls /pentest/aboutsecurity/Dic/
+ls /pentest/AboutSecurity/Dic/
 # 查看 nuclei 模板库
 ls ~/nuclei-templates/
 # 读取具体 payload 文件
-cat /pentest/aboutsecurity/Dic/SQL-Inj/bypass-waf.txt
+cat /pentest/AboutSecurity/Dic/SQL-Inj/bypass-waf.txt
 ```
 
 ### 可用分类
@@ -79,12 +79,12 @@ SQL-Inj | XSS | LFI | SSRF | XXE | RCE | 403 绕过 | upload | CORS | HPP | SSI
                                         猜测路径，大概率不存在
 
 ✅ 正确：
-1. ls /pentest/aboutsecurity/Dic/Web/Directory/  → 确认字典存在
-2. ffuf -u http://target/FUZZ -w /pentest/aboutsecurity/Dic/Web/Directory/Fuzz_common.txt
+1. ls /pentest/AboutSecurity/Dic/Web/Directory/  → 确认字典存在
+2. ffuf -u http://target/FUZZ -w /pentest/AboutSecurity/Dic/Web/Directory/Fuzz_common.txt
 ```
 
 ## 💡 高效使用提示
 
 1. **spray / ffuf 已封装字典** — 如果只是简单目录爆破，直接用 `spray -u target -d wordlist.txt` 或 `ffuf -u target/FUZZ -w wordlist.txt`
-2. **自定义参数用 ffuf** — 需要自定义参数（如 -e .bak -mc 200）时用 `ffuf -u target/FUZZ -w /pentest/aboutsecurity/Dic/...`
+2. **自定义参数用 ffuf** — 需要自定义参数（如 -e .bak -mc 200）时用 `ffuf -u target/FUZZ -w /pentest/AboutSecurity/Dic/...`
 3. **CTF 场景优先用小字典** — Web/CTF/ 下的字典精简且针对性强，避免大字典浪费时间

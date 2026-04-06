@@ -32,9 +32,9 @@ spray -l urls.txt -d wordlist.txt
 
 ```bash
 # aboutsecurity 字典库
-/pentest/aboutsecurity/Dic/Web/Directory/Fuzz_common.txt
-/pentest/aboutsecurity/Dic/Web/Directory/Fuzz_php.txt
-/pentest/aboutsecurity/Dic/Web/CTF/Fuzz_param.txt
+/pentest/AboutSecurity/Dic/Web/Directory/Fuzz_common.txt
+/pentest/AboutSecurity/Dic/Web/Directory/Fuzz_php.txt
+/pentest/AboutSecurity/Dic/Web/CTF/Fuzz_param.txt
 
 # spray 自带字典会自动加载
 ```
