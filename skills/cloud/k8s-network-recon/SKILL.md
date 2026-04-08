@@ -35,6 +35,7 @@ nslookup -type=srv <service>.<namespace>.svc.cluster.local
 
 扫描前需要知道 Service CIDR 的大致范围，否则盲扫效率极低。按可靠度从高到低尝试：
 
+**先获取入口点信息**
 ```bash
 # 1. 环境变量（最快，几乎必有）
 echo $KUBERNETES_SERVICE_HOST
@@ -52,19 +53,19 @@ cat /etc/hosts && ip route && arp -a 2>/dev/null
 # 5. 避免用 ip addr — sidecar 注入的虚拟网卡会干扰判断
 ```
 
-从获取到的 IP 推断 Service CIDR（通常 /16 或 /12）。
+从获取到的 IP 推断 Service CIDR（通常 /24 或 /16）。
 
 ---
 
 ## Phase 2: DNS 批量扫描
 
-### 使用 dnscan
+### 根据扫描范围使用 dnscan
 
 ```bash
-# 扫描 /16 范围（覆盖大部分 Service IP）
-dnscan -subnet 10.100.0.0/16
+# 扫描 /24 范围（覆盖大部分 Service IP）
+dnscan -subnet 10.100.0.0/24
 
-# 更精确的范围
+# 更大的范围
 dnscan -subnet 10.96.0.0/12    # 默认 Service CIDR
 dnscan -subnet 10.244.0.0/16   # Pod CIDR (Flannel 默认)
 dnscan -subnet 10.42.0.0/16    # Pod CIDR (K3s 默认)
