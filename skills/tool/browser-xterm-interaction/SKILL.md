@@ -211,3 +211,78 @@ xterm.js 有 scrollback buffer 限制（默认 1000 行）。
 ```
 
 **⚠️ 禁止**: 在 JS 读取方法之间反复来回切换超过 3 次。确定一种方法后坚持使用。
+
+---
+
+## CTF / Cloud Shell 专区
+
+### 多行脚本写入最佳实践
+
+Web 终端的输入框通常是**单行**的，直接粘贴多行 Python/Bash 脚本会导致格式错误。
+
+**方法 A: heredoc 写文件（推荐）**
+```javascript
+// 逐行写入脚本文件
+browser_type(ref, "cat > /tmp/exploit.py << 'PYEOF'", submit=True)
+browser_wait_for(time=1)
+browser_type(ref, "import boto3, json", submit=True)
+browser_type(ref, "s3 = boto3.client('s3')", submit=True)
+browser_type(ref, "print(s3.list_buckets())", submit=True)
+browser_type(ref, "PYEOF", submit=True)
+browser_wait_for(time=1)
+browser_type(ref, "python3 /tmp/exploit.py", submit=True)
+```
+
+**方法 B: base64 编码（最可靠）**
+```javascript
+// 先在本地构造脚本，base64 编码后一行写入
+// 本地 bash:
+echo 'import boto3; print(boto3.client("s3").list_buckets())' | base64
+// → aW1wb3J0IGJvdG8z...
+
+// 在 Web 终端:
+browser_type(ref, "echo 'aW1wb3J0IGJvdG8z...' | base64 -d > /tmp/s.py && python3 /tmp/s.py", submit=True)
+```
+
+**方法 C: echo 追加（简单脚本）**
+```javascript
+browser_type(ref, "echo 'import boto3' > /tmp/s.py", submit=True)
+browser_type(ref, "echo 's3=boto3.client(\"s3\")' >> /tmp/s.py", submit=True)
+browser_type(ref, "echo 'print(s3.list_buckets())' >> /tmp/s.py", submit=True)
+browser_type(ref, "python3 /tmp/s.py", submit=True)
+```
+
+**⚠️ 禁止**: 在 `browser_type` 的 text 参数中包含 `\n` 换行符 — Web 终端输入框不支持多行输入。
+
+### 环境变量设置
+
+Web 终端可能限制写入 `~/.aws/credentials`（Permission denied）：
+
+```javascript
+// 方法 A: export 在同一行（仅当前命令有效）
+browser_type(ref, "AWS_ACCESS_KEY_ID=AKIAXXXX AWS_SECRET_ACCESS_KEY=YYYY aws s3 ls", submit=True)
+
+// 方法 B: 在 Python 脚本内设置
+browser_type(ref, "cat > /tmp/s.py << 'EOF'", submit=True)
+browser_type(ref, "import os, boto3", submit=True)
+browser_type(ref, "os.environ['AWS_ACCESS_KEY_ID']='AKIAXXXX'", submit=True)
+browser_type(ref, "os.environ['AWS_SECRET_ACCESS_KEY']='YYYY'", submit=True)
+browser_type(ref, "s3=boto3.client('s3',region_name='us-east-1')", submit=True)
+browser_type(ref, "print(s3.list_buckets())", submit=True)
+browser_type(ref, "EOF", submit=True)
+browser_type(ref, "python3 /tmp/s.py", submit=True)
+```
+
+### 长输出截取
+
+Web 终端输出缓冲区有限，长输出会丢失开头部分：
+
+```javascript
+// 使用 marker 包裹 + tail 截取
+browser_type(ref, "echo '===START==='; aws s3 ls 2>&1 | tail -50; echo '===END==='", submit=True)
+
+// 输出写文件再分段读取
+browser_type(ref, "python3 /tmp/exploit.py > /tmp/out.txt 2>&1", submit=True)
+browser_type(ref, "head -20 /tmp/out.txt", submit=True)
+browser_type(ref, "tail -20 /tmp/out.txt", submit=True)
+```

