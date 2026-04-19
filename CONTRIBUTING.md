@@ -38,15 +38,500 @@ AboutSecurity/
 
 ---
 
-# 一、Tools 外部工具编写规范
+# Skills 技能方法论编写规范
 
-## 1.1 概述
+## 1 概述
+
+每个 Skill 是一个独立目录，包含一个 `SKILL.md` 文件。SKILL.md 使用 **YAML 前言 + Markdown 正文** 的格式，正文是方法论驱动的渗透指南，而非工具调用列表。
+
+AI Agent 通过 `description` 字段匹配用户意图，读取正文作为上下文指导执行。
+
+**核心原则**：
+- **description 是触发器** — Agent 通过 description 决定是否加载此 Skill，务必写清楚触发场景
+- **正文是方法论** — 教 Agent "怎么思考"，而非机械地列出工具调用步骤
+- **解释 why** — 说明为什么用某种方法，而非写死 MUST/NEVER 规则
+- **不使用模板变量** — `{{target}}` 等占位符不会被替换，不要使用
+
+## 2 目录结构
+
+```
+skills/                           # 三级路径（维护者视角）
+├── recon/                        # 侦察类
+│   └── recon-full/
+│       └── SKILL.md
+├── exploit/                      # 漏洞利用类
+│   ├── web-method/               # Web 通用方法论（注入/XSS/SSRF...）
+│   ├── product-vuln/             # 特定产品漏洞利用
+│   ├── advanced/                 # 高级利用技术
+│   └── auth/                     # 认证相关攻击
+├── ctf/                          # CTF 竞赛类
+├── postexploit/                  # 后渗透类
+├── lateral/                      # 内网渗透/横向移动类
+├── cloud/                        # 云环境类
+├── evasion/                      # 免杀/检测对抗类
+├── malware/                      # 恶意软件分析与开发
+├── dfir/                         # 取证对抗（红队视角）
+├── threat-intel/                 # 威胁情报与 APT 模拟
+├── tool/                         # 工具使用方法论
+├── general/                      # 综合类
+├── ai-security/                  # AI 安全（模型攻击）
+└── code-audit/                   # 源码审计类（白盒）
+    ├── php/                      # PHP 代码审计
+    ├── java/                     # Java 代码审计（预留）
+    └── dotnet/                   # .NET 代码审计（预留）
+```
+
+每个技能一个目录。内容较多的技能使用 `references/` 子目录存放深度参考材料（见 2.3 节）。
+
+### 三级路径 vs 二级路径
+
+本仓库维护时使用三级路径 `skills/<category>/<name>/SKILL.md`，便于按攻击阶段分类管理。
+
+AI Agent 实际使用时通过 `sync-claude-skills.sh` 扁平化为二级路径 `.claude/skills/<name>/SKILL.md`，所有 skill 在同一层级，Agent 通过 `description` 字段匹配触发，**不存在跨分类跳转**。
+
+```
+维护者视角:  skills/exploit/web-method/sql-injection-methodology/SKILL.md
+Agent 视角:  .claude/skills/sql-injection-methodology/SKILL.md  (软链接)
+```
+
+### 为什么 `tool/` 是独立分类
+
+工具类 skill 不按攻击阶段划分，而是独立存放，原因：
+
+1. **多用途工具避免重复**：如 nuclei 可用于指纹扫描、漏洞扫描、DAST、本地文件扫描。若在每个引用 nuclei 的 skill 中重复写使用方法，维护成本极高
+2. **模型知识截止**：AI 模型对新版本工具的参数不了解，需要专门的 skill 文档补充最新用法
+3. **运行时透明**：sync-skills.sh 将 tool/ 和其他分类一起扁平化，Agent 不感知分类层级
+
+### exploit/ 子分类说明
+
+exploit/ 下按攻击性质进一步分组（仅影响维护者视角，Agent 不感知）：
+
+| 子目录 | 说明 | 典型 skill |
+|--------|------|-----------|
+| `web-method/` | Web 通用攻击方法论 | sql-injection, xss, ssrf, ssti, file-upload |
+| `product-vuln/` | 特定产品/中间件漏洞 | nacos-exploit, jenkins-exploit, grafana-exploit |
+| `advanced/` | 高级利用技术 | http-smuggling, race-condition, prototype-pollution, supply-chain |
+| `auth/` | 认证/授权类攻击 | jwt-attack, oauth-sso, idor, cors-misconfiguration |
+
+## 3 Progressive Disclosure 三级加载机制
+
+加载 Skill 时采用**渐进式披露**策略，避免一次性加载过多内容消耗 token：
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  L1: Metadata（始终加载）                                │
+│  ← name + description + tags                            │
+│  ← Agent 据此决定是否需要此 Skill                        │
+├─────────────────────────────────────────────────────────┤
+│  L2: SKILL.md 正文（触发后加载，<100 行）                 │
+│  ← 精简索引：决策树 + Phase 概要 + 速查表                │
+│  ← 包含 → 读 references/xxx.md 指针                     │
+├─────────────────────────────────────────────────────────┤
+│  L3: references/ 子文件（按需加载）                       │
+│  ← Agent 仅在需要深入某个方向时读取对应文件               │
+│  ← 完整 payload、详细命令、绕过清单、脚本模板             │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 为什么需要三级加载
+
+| 问题 | 旧模式（单文件 200+ 行） | 三级加载 |
+|------|--------------------------|----------|
+| Token 消耗 | Agent 每次加载全部内容 | L2 仅加载索引，L3 按需读取 |
+| 信噪比 | 大量不相关细节干扰 Agent 决策 | 索引帮助 Agent 快速定位方向 |
+| 可维护性 | 单文件膨胀难以维护 | 模块化，各文件职责清晰 |
+
+### SKILL.md 编写规则（L2 层）
+
+**行数限制：< 100 行**（超过 110 行必须拆分到 references/）
+
+SKILL.md 应该是一个**精简索引**，包含：
+
+1. **深入参考链接**（紧跟标题后）
+   ```markdown
+   ## 深入参考
+   - 详细 payload 和绕过技术 → 读 [references/xxx.md](references/xxx.md)
+   ```
+
+2. **Phase 概要**（保留决策树和关键命令，移除冗长列表）
+   ```markdown
+   ## Phase 2: 提权决策树
+   ​```
+   当前权限？
+   ├─ 已是 root → 跳到 Phase 3
+   ├─ 普通用户 → 按优先级：
+   │   1. sudo -l → GTFOBins 提权
+   │   2. find / -perm -4000 → SUID 提权
+   详细命令 → 读 references/linux-privesc-cred.md
+   ​```
+   ```
+
+3. **速查表**（保留在 SKILL.md 中，Agent 高频使用）
+4. **→ 读 references/ 指针**（替代冗长内容块）
+
+### references/ 编写规则（L3 层）
+
+| 规则 | 说明 |
+|------|------|
+| 文件命名 | 语义化英文短横线，如 `injection-bypass.md`、`crypto-techniques.md` |
+| 文件数量 | 1-3 个为宜，不宜过多（Agent 需要决定读哪个） |
+| 内容类型 | 完整 payload 清单、详细命令、绕过技术、脚本模板、CVE 表格 |
+| 独立可读 | 每个文件应有标题，独立阅读时能理解上下文 |
+| 无需前言 | references/ 文件不需要 YAML frontmatter |
+
+### ⛔必读 标记使用规范
+
+`⛔必读` 标记表示 Agent **加载此 Skill 后必须立即读取**的 reference 文件。滥用此标记会导致 Agent 一次性加载大量内容，消耗 token 且降低信噪比。
+
+**标记原则**：
+
+| 情况 | 标记方式 | 说明 |
+|------|----------|------|
+| 每次使用此 Skill 都需要的通用知识 | ⛔**必读** | 如 `response-analysis.md`（54行）、`flag-extraction.md`（59行） |
+| 确认具体漏洞类型后才需要的深入内容 | **按需**（不标 ⛔） | 如 "发现 SQL 注入 → 读 server-side.md" |
+| 特定技术栈才需要的参考 | **按需**（不标 ⛔） | 如 "遇到 JWT → 读 auth-jwt.md" |
+
+**反模式**：
+- ❌ 所有 reference 都标 ⛔必读 — 等于回到单文件模式，Progressive Disclosure 失效
+- ❌ 索引型 Skill（如总方法论）的所有子领域文件标必读 — Agent 无法判断轻重缓急
+
+**正确做法**：
+- 按需 reference 在 SKILL.md 中按场景分组，注明触发条件（如"识别到注入类漏洞时读取"）
+- ⛔必读 仅用于体量小（<100行）且普遍适用的文件
+- 索引型 Skill 的 Phase 决策表应引导 Agent 去读**对应的专门 Skill**（如 `sql-injection-methodology`），而非自己的 reference
+
+### 拆分判断标准
+
+```
+SKILL.md 行数？
+├─ < 100 行 → ✅ 不需要拆分
+├─ 100-110 行 → ⚠️ 建议拆分
+├─ > 110 行 → ❌ 必须拆分到 references/
+```
+
+**哪些内容应该留在 SKILL.md**：
+- YAML 前言（name/description/metadata）
+- 深入参考链接
+- Phase 概述和决策树
+- 最常用的 3-5 条速查命令
+- 注意事项
+
+**哪些内容应该移到 references/**：
+- 完整的 payload/字段/绕过清单（超过 10 条）
+- 详细的利用脚本（超过 5 行的代码块）
+- 特定技术的深度解释（如 Padding Oracle 原理）
+- CVE 利用要点表格
+- Windows/Linux 命令大全
+
+### 示例对比
+
+**❌ 拆分前**（SKILL.md 150+ 行）：
+```markdown
+## Phase 3: sudo 提权
+sudo vim → :!/bin/bash
+sudo find → sudo find / -exec /bin/bash \;
+sudo python3 → sudo python3 -c 'import os; os.system("/bin/bash")'
+sudo awk → sudo awk 'BEGIN {system("/bin/bash")}'
+sudo env → sudo env /bin/bash
+sudo less → !/bin/bash
+sudo nmap → sudo nmap --interactive → !sh
+... （还有 20 条）
+```
+
+**✅ 拆分后**（SKILL.md 65 行 + references/linux-privesc-cred.md）：
+```markdown
+## Phase 2: 提权决策树
+sudo 速查：`vim → :!bash` | `find → -exec bash` | `NOPASSWD: ALL → sudo su`
+→ 完整 sudo/SUID/cron/capabilities 命令 → 读 references/linux-privesc-cred.md
+```
+
+## 4 SKILL.md 格式
+
+```markdown
+---
+name: skill-name
+description: "一段详细的、带触发场景的描述。当遇到 X 情况、发现 Y 特征、需要做 Z 测试时使用。覆盖 A、B、C 方面"
+metadata:
+  tags: "tag1,tag2,tag3,关键词"
+  category: "分类名"
+---
+
+# 技能标题
+
+简要说明这个技能解决什么问题、为什么需要它。
+
+## Phase 1: 第一阶段
+
+### 1.1 子步骤
+具体方法论内容...
+决策表、判断条件、攻击向量...
+
+## Phase 2: 第二阶段
+...
+
+## 注意事项
+- 关键提醒和常见陷阱
+```
+
+## 5 字段说明
+
+### 前言字段
+
+| 字段 | 必填 | 说明 |
+|------|------|------|
+| `name` | ✅ | 技能唯一标识，英文短横线命名，与目录名一致 |
+| `description` | ✅ | **最重要的字段**。详细描述触发场景和覆盖范围（见 2.5） |
+| `metadata.tags` | ✅ | 逗号分隔的标签，包含中英文关键词便于搜索 |
+| `metadata.category` | ✅ | 分类名（见 2.6） |
+
+### 正文要求
+
+- **< 100 行**（超过需拆分到 `references/`，见 2.3 Progressive Disclosure）
+- **方法论驱动**：写决策树、判断条件、攻击策略，而非工具调用清单
+- **渐进式披露**：先概述，再分阶段深入
+- **包含实际命令示例**：用代码块展示，但作为方法论的一部分而非机械步骤
+- **交叉引用**：用反引号引用其他技能名，如 `参考 \`jwt-attack-methodology\` 技能`
+
+## 6 description 写法
+
+Description 是 Agent 选择技能的**唯一依据**，必须"主动推销"：
+
+❌ **差的 description**：
+```
+"SQL 注入测试"
+```
+
+✅ **好的 description**：
+```
+"SQL 注入漏洞检测与利用全流程。当发现用户输入被拼接到数据库查询、
+搜索/登录/排序功能可能存在注入点、或需要从注入获取数据库内容时使用。
+覆盖联合注入、报错注入、布尔盲注、时间盲注、堆叠注入，以及 WAF 绕过策略"
+```
+
+要点：
+1. **一句话说明是什么**
+2. **列出触发场景**（"当...时使用"）
+3. **列出覆盖范围**（"覆盖 X、Y、Z"）
+
+## 7 category 枚举
+
+| 目录 | category 值 | 说明 |
+|------|-------------|------|
+| `recon/` | recon | 资产发现、信息收集、OSINT、社工 |
+| `exploit/` | exploit | Web 漏洞方法论、注入、文件操作、认证绕过、高级利用 |
+| `ctf/` | ctf | CTF 竞赛专用方法论、Flag 搜索 |
+| `postexploit/` | postexploit | 提权、持久化、凭据收集 |
+| `lateral/` | lateral | AD 攻击、内网侦察、多层网络穿透 |
+| `cloud/` | cloud | 云元数据利用、IAM 审计、云提权、容器逃逸 |
+| `evasion/` | evasion | C2 免杀、Shellcode 加载器、检测对抗 |
+| `malware/` | malware | 恶意软件分析、C2 Beacon 提取、沙箱逃逸 |
+| `dfir/` | dfir | 取证对抗（内存/磁盘/日志）— 红队视角 |
+| `threat-intel/` | threat-intel | IOC 对抗、APT 模拟、威胁猎杀规避 |
+| `tool/` | tool | 独立工具使用方法论（nuclei/sqlmap/hashcat 等） |
+| `general/` | general | 红队评估、报告生成、供应链审计 |
+| `ai-security/` | ai-security | 模型安全、Prompt 注入、AI 基础设施攻击 |
+| `code-audit/` | code-audit | 白盒源码审计（PHP/Java/.NET 等语言） |
+
+## 8 正文写作要点
+
+### 方法论 vs 工具列表
+
+❌ **工具调用列表**（不要这样写）：
+```markdown
+1. 使用 scan_dns 扫描子域名
+2. 使用 scan_port 扫描端口
+3. 使用 poc_web 扫描漏洞
+4. 使用 memory_save 保存结果
+```
+
+✅ **方法论驱动**（应该这样写）：
+```markdown
+## Phase 1: 攻击面发现
+先确定注入点类型——URL 参数、POST 表单、HTTP Header、Cookie 都可能是入口。
+判断方法：在参数值后加单引号 `'`，观察响应变化：
+- 报错（含 SQL 语法错误） → 报错注入
+- 页面内容变化但无报错 → 布尔盲注
+- 无任何变化 → 尝试时间盲注 `sleep(5)`
+```
+
+### 使用决策表
+
+当有多个分支时，用表格让 Agent 快速判断：
+
+```markdown
+| 发现 | 技术 | 下一步 |
+|------|------|--------|
+| 报错含 MySQL 语法 | MySQL | UNION SELECT + information_schema |
+| 报错含 ORA- | Oracle | UNION SELECT FROM dual |
+| 响应时间差异 | 通用 | 时间盲注 benchmark/sleep |
+```
+
+### 交叉引用其他技能
+
+```markdown
+如果发现 JWT Token，参考 `jwt-attack-methodology` 进行 Token 攻击。
+获取 shell 后，参考 `post-exploit-linux` 或 `post-exploit-windows` 进行后渗透。
+```
+
+## 9 完整示例
+
+<details>
+<summary>XSS 方法论（简化示例）</summary>
+
+```markdown
+---
+name: xss-methodology
+description: "XSS 跨站脚本漏洞检测与利用。当发现用户输入被回显到页面、
+需要测试反射型/存储型/DOM 型 XSS、或需要绕过 WAF/CSP 时使用"
+metadata:
+  tags: "xss,cross-site-scripting,反射型,存储型,dom,csp绕过"
+  category: "漏洞利用"
+---
+
+# XSS 检测与利用方法论
+
+## Phase 1: 注入点定位
+找到用户输入回显的位置，判断上下文：
+| 回显位置 | Payload 方向 |
+|----------|-------------|
+| HTML 标签之间 | `<script>alert(1)</script>` |
+| HTML 属性值内 | `" onmouseover="alert(1)` |
+| JS 代码内 | `';alert(1)//` |
+| URL 参数回显 | 反射型 XSS |
+
+## Phase 2: 类型确认
+- 输入立即回显 → 反射型
+- 输入后在其他页面出现 → 存储型
+- 仅在前端 JS 处理 → DOM 型（查看 document.location 等 source）
+
+## Phase 3: 绕过策略
+...（WAF 绕过、CSP 绕过、编码绕过）
+
+## 注意事项
+- 存储型 XSS 风险最高（影响所有访问者）
+- DOM XSS 服务端看不到 payload，需要分析前端 JS
+```
+</details>
+
+## 10 检查清单
+
+提交 Skill 前，请确认：
+
+- [ ] 目录名与 `name` 字段一致
+- [ ] `description` 包含触发场景和覆盖范围（不只是功能名称）
+- [ ] `tags` 包含关键词
+- [ ] `category` 是规范的枚举值
+- [ ] 正文 < 100 行（超过 110 行必须拆分，见 2.3 节）
+- [ ] 正文是方法论（有决策树/判断条件），不是工具调用清单
+- [ ] **SKILL.md < 100 行**（超过 110 行必须拆分到 `references/`，见 2.3 节）
+- [ ] 超过 100 行的内容已拆分到 `references/` 子目录，SKILL.md 中有 `→ 读 references/xxx.md` 指针
+- [ ] `references/` 文件命名语义化（如 `injection-bypass.md`），独立可读
+- [ ] ⛔必读 标记仅用于体量小且普遍适用的 reference，非所有文件都标必读（见 2.3 ⛔必读标记规范）
+- [ ] 没有使用 `{{target}}` 等模板变量
+- [ ] 有交叉引用到相关技能（如适用）
+
+---
+
+# 提交流程
+
+1. Fork 本仓库
+2. 在对应目录下创建文件，遵循上述规范
+3. 按对应的检查清单（8 或 10）自查
+4. 若新增分类，需同步更新 `CONTRIBUTING.md` 中的目录结构和 category 枚举
+5. 提交 PR，标题格式：`[Tool] 添加 xxx` 或 `[Skill] 添加 xxx`
+
+---
+
+# Skill 质量基准测试
+
+## 1 概述
+
+每个 Skill 可以包含 `evals/evals.json` 定义测试场景，用于衡量 Skill 对 AI Agent 的实际帮助程度。
+
+基准测试通过 A/B 对比实现：
+- **with_skill**: Agent 加载 Skill 内容后回答
+- **without_skill**: Agent 不加载 Skill（baseline）回答
+- 对比两组的断言通过率、耗时、token 用量
+
+## 2 evals.json 格式
+
+```json
+{
+  "skill_name": "sql-injection-methodology",
+  "evals": [
+    {
+      "id": 1,
+      "name": "sqli-detection-basic",
+      "prompt": "你在测试一个 Web 应用...",
+      "expected_output": "系统化的 SQL 注入检测流程",
+      "expectations": [
+        "UNION SELECT|UNION 注入|联合查询",
+        "时间盲注|SLEEP|BENCHMARK|time-based",
+        "布尔盲注|Boolean|1=1"
+      ]
+    }
+  ]
+}
+```
+
+**expectations 格式**：
+- 用 `|` 分隔关键词替代项（满足任一即通过）
+- 示例：`"UNION SELECT|联合查询"` → 输出包含 "UNION SELECT" 或 "联合查询" 即通过
+
+## 3 运行基准测试
+
+```bash
+# 测试单个 Skill
+python scripts/bench-skill.py --skill skills/exploit/sql-injection-methodology
+
+# 多次运行（方差分析）
+python scripts/bench-skill.py --skill skills/exploit/sql-injection-methodology --runs 3
+
+# 测试所有有 evals 的 Skills
+python scripts/bench-skill.py --all
+
+# 使用 LLM 评分（更准确，但消耗 token）
+python scripts/grade_eval.py --workspace benchmarks/sql-injection-methodology/iteration-xxx
+```
+
+需要安装 Claude CLI (`claude -p`)。输出保存到 `benchmarks/<skill-name>/` 目录。
+
+## 4 输出格式
+
+兼容 skill-creator 的 benchmark.json schema：
+- `benchmark.json` — 结构化数据（pass_rate, timing, tokens, delta）
+- `benchmark.md` — 人类可读的对比报告
+- 每个 run 的 `grading.json` — 逐条断言评估结果
+
+可直接使用 skill-creator 的 `generate_review.py` 在浏览器中查看结果。
+
+---
+
+# 常见问题
+
+**Q: 工具输出没有固定格式怎么办？**
+A: 使用 `parser: regex` 用正则提取关键信息，或使用 `mode: stdout` + `parser: line` 逐行处理。
+
+**Q: 工具需要 root 权限怎么标注？**
+A: 在 `constraints.requires_root: true` 标注，同时在 `description` 中说明。
+
+**Q: 一个工具有多种使用场景，写几个 YAML？**
+A: 建议拆成多个，如 `nmap-scan.yaml`（端口扫描）、`nmap-vuln.yaml`（漏洞脚本扫描），各有不同的 parameters 和 command_template。
+
+**Q: Skill 的 prompt 可以引用外部工具吗？**
+A: 可以。在正文中写 `ext_xxx` 工具名，当消费端程序实现工具自动调用后，Agent 即可自动匹配并执行对应工具。（此功能依赖消费入口程序实现，当前阶段仅作为 Skill 编写约定。）
+
+---
+
+# 备份 Tools 外部工具编写规范
+
+## 1 概述
 
 每个 YAML 文件声明一个外部命令行工具。AI Agent 读取这些定义后，可自动调用对应工具并解析输出。
 
 **核心原则**：定义好输入（parameters），AI Agent 才能正确调用；定义好输出（output + findings_mapping），AI Agent 才能正确入库。
 
-## 1.2 文件命名
+## 2 文件命名
 
 ```
 {工具名}.yaml
@@ -54,7 +539,7 @@ AboutSecurity/
 
 示例：`nmap-scan.yaml`、`subfinder.yaml`、`nuclei-custom.yaml`
 
-## 1.3 完整字段说明
+## 3 完整字段说明
 
 ```yaml
 # ============================================================
@@ -152,7 +637,7 @@ constraints:
   proxy_flag: "--proxy"         # 代理参数名（AI Agent 自动注入代理地址）
 ```
 
-## 1.4 四种输出解析器
+## 4 四种输出解析器
 
 ### line — 按行分割（最常用）
 
@@ -210,7 +695,7 @@ output:
     port_regex: '(\d+)/open'
 ```
 
-## 1.5 category 枚举
+## 5 category 枚举
 
 | 值 | 说明 | 示例工具 |
 |---|---|---|
@@ -221,7 +706,7 @@ output:
 | `fuzz` | Web Fuzz | ffuf, wfuzz |
 | `postexploit` | 后渗透 | linpeas, winpeas |
 
-## 1.6 command_template 模板语法
+## 6 command_template 模板语法
 
 使用 Go `text/template`，支持条件判断：
 
@@ -238,7 +723,7 @@ command_template: |
 - `{{.OutputFile}}` — AI Agent 自动创建的临时输出文件路径
 - `{{.WorkDir}}` — AI Agent 自动创建的临时工作目录
 
-## 1.7 完整示例
+## 7 完整示例
 
 <details>
 <summary>subfinder — 子域名发现</summary>
@@ -404,7 +889,7 @@ constraints:
 ```
 </details>
 
-## 1.8 检查清单
+## 8 检查清单
 
 提交 Tool YAML 前，请确认：
 
@@ -418,491 +903,3 @@ constraints:
 - [ ] `findings_mapping.detail_template` 引用的字段在解析器中存在
 - [ ] `binary` 是工具的实际可执行文件名
 - [ ] 在本机安装该工具后实际测试通过
-
----
-
-# 二、Skills 技能方法论编写规范
-
-## 2.1 概述
-
-每个 Skill 是一个独立目录，包含一个 `SKILL.md` 文件。SKILL.md 使用 **YAML 前言 + Markdown 正文** 的格式，正文是方法论驱动的渗透指南，而非工具调用列表。
-
-AI Agent 通过 `description` 字段匹配用户意图，读取正文作为上下文指导执行。
-
-**核心原则**：
-- **description 是触发器** — Agent 通过 description 决定是否加载此 Skill，务必写清楚触发场景
-- **正文是方法论** — 教 Agent "怎么思考"，而非机械地列出工具调用步骤
-- **解释 why** — 说明为什么用某种方法，而非写死 MUST/NEVER 规则
-- **不使用模板变量** — `{{target}}` 等占位符不会被替换，不要使用
-
-## 2.2 目录结构
-
-```
-skills/                           # 三级路径（维护者视角）
-├── recon/                        # 侦察类
-│   └── recon-full/
-│       └── SKILL.md
-├── exploit/                      # 漏洞利用类
-│   ├── web-method/               # Web 通用方法论（注入/XSS/SSRF...）
-│   ├── product-vuln/             # 特定产品漏洞利用
-│   ├── advanced/                 # 高级利用技术
-│   └── auth/                     # 认证相关攻击
-├── ctf/                          # CTF 竞赛类
-├── postexploit/                  # 后渗透类
-├── lateral/                      # 内网渗透/横向移动类
-├── cloud/                        # 云环境类
-├── evasion/                      # 免杀/检测对抗类
-├── malware/                      # 恶意软件分析与开发
-├── dfir/                         # 取证对抗（红队视角）
-├── threat-intel/                 # 威胁情报与 APT 模拟
-├── tool/                         # 工具使用方法论
-├── general/                      # 综合类
-├── ai-security/                  # AI 安全（模型攻击）
-└── code-audit/                   # 源码审计类（白盒）
-    ├── php/                      # PHP 代码审计
-    ├── java/                     # Java 代码审计（预留）
-    └── dotnet/                   # .NET 代码审计（预留）
-```
-
-每个技能一个目录。内容较多的技能使用 `references/` 子目录存放深度参考材料（见 2.3 节）。
-
-### 三级路径 vs 二级路径
-
-本仓库维护时使用三级路径 `skills/<category>/<name>/SKILL.md`，便于按攻击阶段分类管理。
-
-AI Agent 实际使用时通过 `sync-claude-skills.sh` 扁平化为二级路径 `.claude/skills/<name>/SKILL.md`，所有 skill 在同一层级，Agent 通过 `description` 字段匹配触发，**不存在跨分类跳转**。
-
-```
-维护者视角:  skills/exploit/web-method/sql-injection-methodology/SKILL.md
-Agent 视角:  .claude/skills/sql-injection-methodology/SKILL.md  (软链接)
-```
-
-### 为什么 `tool/` 是独立分类
-
-工具类 skill 不按攻击阶段划分，而是独立存放，原因：
-
-1. **多用途工具避免重复**：如 nuclei 可用于指纹扫描、漏洞扫描、DAST、本地文件扫描。若在每个引用 nuclei 的 skill 中重复写使用方法，维护成本极高
-2. **模型知识截止**：AI 模型对新版本工具的参数不了解，需要专门的 skill 文档补充最新用法
-3. **运行时透明**：sync-skills.sh 将 tool/ 和其他分类一起扁平化，Agent 不感知分类层级
-
-### exploit/ 子分类说明
-
-exploit/ 下按攻击性质进一步分组（仅影响维护者视角，Agent 不感知）：
-
-| 子目录 | 说明 | 典型 skill |
-|--------|------|-----------|
-| `web-method/` | Web 通用攻击方法论 | sql-injection, xss, ssrf, ssti, file-upload |
-| `product-vuln/` | 特定产品/中间件漏洞 | nacos-exploit, jenkins-exploit, grafana-exploit |
-| `advanced/` | 高级利用技术 | http-smuggling, race-condition, prototype-pollution, supply-chain |
-| `auth/` | 认证/授权类攻击 | jwt-attack, oauth-sso, idor, cors-misconfiguration |
-
-## 2.3 Progressive Disclosure 三级加载机制
-
-加载 Skill 时采用**渐进式披露**策略，避免一次性加载过多内容消耗 token：
-
-```
-┌─────────────────────────────────────────────────────────┐
-│  L1: Metadata（始终加载）                                │
-│  ← name + description + tags                            │
-│  ← Agent 据此决定是否需要此 Skill                        │
-├─────────────────────────────────────────────────────────┤
-│  L2: SKILL.md 正文（触发后加载，<100 行）                 │
-│  ← 精简索引：决策树 + Phase 概要 + 速查表                │
-│  ← 包含 → 读 references/xxx.md 指针                     │
-├─────────────────────────────────────────────────────────┤
-│  L3: references/ 子文件（按需加载）                       │
-│  ← Agent 仅在需要深入某个方向时读取对应文件               │
-│  ← 完整 payload、详细命令、绕过清单、脚本模板             │
-└─────────────────────────────────────────────────────────┘
-```
-
-### 为什么需要三级加载
-
-| 问题 | 旧模式（单文件 200+ 行） | 三级加载 |
-|------|--------------------------|----------|
-| Token 消耗 | Agent 每次加载全部内容 | L2 仅加载索引，L3 按需读取 |
-| 信噪比 | 大量不相关细节干扰 Agent 决策 | 索引帮助 Agent 快速定位方向 |
-| 可维护性 | 单文件膨胀难以维护 | 模块化，各文件职责清晰 |
-
-### SKILL.md 编写规则（L2 层）
-
-**行数限制：< 100 行**（超过 110 行必须拆分到 references/）
-
-SKILL.md 应该是一个**精简索引**，包含：
-
-1. **深入参考链接**（紧跟标题后）
-   ```markdown
-   ## 深入参考
-   - 详细 payload 和绕过技术 → 读 [references/xxx.md](references/xxx.md)
-   ```
-
-2. **Phase 概要**（保留决策树和关键命令，移除冗长列表）
-   ```markdown
-   ## Phase 2: 提权决策树
-   ​```
-   当前权限？
-   ├─ 已是 root → 跳到 Phase 3
-   ├─ 普通用户 → 按优先级：
-   │   1. sudo -l → GTFOBins 提权
-   │   2. find / -perm -4000 → SUID 提权
-   详细命令 → 读 references/linux-privesc-cred.md
-   ​```
-   ```
-
-3. **速查表**（保留在 SKILL.md 中，Agent 高频使用）
-4. **→ 读 references/ 指针**（替代冗长内容块）
-
-### references/ 编写规则（L3 层）
-
-| 规则 | 说明 |
-|------|------|
-| 文件命名 | 语义化英文短横线，如 `injection-bypass.md`、`crypto-techniques.md` |
-| 文件数量 | 1-3 个为宜，不宜过多（Agent 需要决定读哪个） |
-| 内容类型 | 完整 payload 清单、详细命令、绕过技术、脚本模板、CVE 表格 |
-| 独立可读 | 每个文件应有标题，独立阅读时能理解上下文 |
-| 无需前言 | references/ 文件不需要 YAML frontmatter |
-
-### ⛔必读 标记使用规范
-
-`⛔必读` 标记表示 Agent **加载此 Skill 后必须立即读取**的 reference 文件。滥用此标记会导致 Agent 一次性加载大量内容，消耗 token 且降低信噪比。
-
-**标记原则**：
-
-| 情况 | 标记方式 | 说明 |
-|------|----------|------|
-| 每次使用此 Skill 都需要的通用知识 | ⛔**必读** | 如 `response-analysis.md`（54行）、`flag-extraction.md`（59行） |
-| 确认具体漏洞类型后才需要的深入内容 | **按需**（不标 ⛔） | 如 "发现 SQL 注入 → 读 server-side.md" |
-| 特定技术栈才需要的参考 | **按需**（不标 ⛔） | 如 "遇到 JWT → 读 auth-jwt.md" |
-
-**反模式**：
-- ❌ 所有 reference 都标 ⛔必读 — 等于回到单文件模式，Progressive Disclosure 失效
-- ❌ 索引型 Skill（如总方法论）的所有子领域文件标必读 — Agent 无法判断轻重缓急
-
-**正确做法**：
-- 按需 reference 在 SKILL.md 中按场景分组，注明触发条件（如"识别到注入类漏洞时读取"）
-- ⛔必读 仅用于体量小（<100行）且普遍适用的文件
-- 索引型 Skill 的 Phase 决策表应引导 Agent 去读**对应的专门 Skill**（如 `sql-injection-methodology`），而非自己的 reference
-
-### 拆分判断标准
-
-```
-SKILL.md 行数？
-├─ < 100 行 → ✅ 不需要拆分
-├─ 100-110 行 → ⚠️ 建议拆分
-├─ > 110 行 → ❌ 必须拆分到 references/
-```
-
-**哪些内容应该留在 SKILL.md**：
-- YAML 前言（name/description/metadata）
-- 深入参考链接
-- Phase 概述和决策树
-- 最常用的 3-5 条速查命令
-- 注意事项
-
-**哪些内容应该移到 references/**：
-- 完整的 payload/字段/绕过清单（超过 10 条）
-- 详细的利用脚本（超过 5 行的代码块）
-- 特定技术的深度解释（如 Padding Oracle 原理）
-- CVE 利用要点表格
-- Windows/Linux 命令大全
-
-### 示例对比
-
-**❌ 拆分前**（SKILL.md 150+ 行）：
-```markdown
-## Phase 3: sudo 提权
-sudo vim → :!/bin/bash
-sudo find → sudo find / -exec /bin/bash \;
-sudo python3 → sudo python3 -c 'import os; os.system("/bin/bash")'
-sudo awk → sudo awk 'BEGIN {system("/bin/bash")}'
-sudo env → sudo env /bin/bash
-sudo less → !/bin/bash
-sudo nmap → sudo nmap --interactive → !sh
-... （还有 20 条）
-```
-
-**✅ 拆分后**（SKILL.md 65 行 + references/linux-privesc-cred.md）：
-```markdown
-## Phase 2: 提权决策树
-sudo 速查：`vim → :!bash` | `find → -exec bash` | `NOPASSWD: ALL → sudo su`
-→ 完整 sudo/SUID/cron/capabilities 命令 → 读 references/linux-privesc-cred.md
-```
-
-## 2.4 SKILL.md 格式
-
-```markdown
----
-name: skill-name
-description: "一段详细的、带触发场景的描述。当遇到 X 情况、发现 Y 特征、需要做 Z 测试时使用。覆盖 A、B、C 方面"
-metadata:
-  tags: "tag1,tag2,tag3,关键词"
-  icon: "🔍"
-  category: "分类名"
----
-
-# 技能标题
-
-简要说明这个技能解决什么问题、为什么需要它。
-
-## Phase 1: 第一阶段
-
-### 1.1 子步骤
-具体方法论内容...
-决策表、判断条件、攻击向量...
-
-## Phase 2: 第二阶段
-...
-
-## 注意事项
-- 关键提醒和常见陷阱
-```
-
-## 2.5 字段说明
-
-### 前言字段
-
-| 字段 | 必填 | 说明 |
-|------|------|------|
-| `name` | ✅ | 技能唯一标识，英文短横线命名，与目录名一致 |
-| `description` | ✅ | **最重要的字段**。详细描述触发场景和覆盖范围（见 2.5） |
-| `metadata.tags` | ✅ | 逗号分隔的标签，包含中英文关键词便于搜索 |
-| `metadata.icon` | 可选 | Emoji 图标 |
-| `metadata.category` | ✅ | 分类名（见 2.6） |
-
-### 正文要求
-
-- **< 100 行**（超过需拆分到 `references/`，见 2.3 Progressive Disclosure）
-- **方法论驱动**：写决策树、判断条件、攻击策略，而非工具调用清单
-- **渐进式披露**：先概述，再分阶段深入
-- **包含实际命令示例**：用代码块展示，但作为方法论的一部分而非机械步骤
-- **交叉引用**：用反引号引用其他技能名，如 `参考 \`jwt-attack-methodology\` 技能`
-
-## 2.6 description 写法
-
-Description 是 Agent 选择技能的**唯一依据**，必须"主动推销"：
-
-❌ **差的 description**：
-```
-"SQL 注入测试"
-```
-
-✅ **好的 description**：
-```
-"SQL 注入漏洞检测与利用全流程。当发现用户输入被拼接到数据库查询、
-搜索/登录/排序功能可能存在注入点、或需要从注入获取数据库内容时使用。
-覆盖联合注入、报错注入、布尔盲注、时间盲注、堆叠注入，以及 WAF 绕过策略"
-```
-
-要点：
-1. **一句话说明是什么**
-2. **列出触发场景**（"当...时使用"）
-3. **列出覆盖范围**（"覆盖 X、Y、Z"）
-
-## 2.7 category 枚举
-
-| 目录 | category 值 | 说明 |
-|------|-------------|------|
-| `recon/` | recon | 资产发现、信息收集、OSINT、社工 |
-| `exploit/` | exploit | Web 漏洞方法论、注入、文件操作、认证绕过、高级利用 |
-| `ctf/` | ctf | CTF 竞赛专用方法论、Flag 搜索 |
-| `postexploit/` | postexploit | 提权、持久化、凭据收集 |
-| `lateral/` | lateral | AD 攻击、内网侦察、多层网络穿透 |
-| `cloud/` | cloud | 云元数据利用、IAM 审计、云提权、容器逃逸 |
-| `evasion/` | evasion | C2 免杀、Shellcode 加载器、检测对抗 |
-| `malware/` | malware | 恶意软件分析、C2 Beacon 提取、沙箱逃逸 |
-| `dfir/` | dfir | 取证对抗（内存/磁盘/日志）— 红队视角 |
-| `threat-intel/` | threat-intel | IOC 对抗、APT 模拟、威胁猎杀规避 |
-| `tool/` | tool | 独立工具使用方法论（nuclei/sqlmap/hashcat 等） |
-| `general/` | general | 红队评估、报告生成、供应链审计 |
-| `ai-security/` | ai-security | 模型安全、Prompt 注入、AI 基础设施攻击 |
-| `code-audit/` | code-audit | 白盒源码审计（PHP/Java/.NET 等语言） |
-
-## 2.8 正文写作要点
-
-### 方法论 vs 工具列表
-
-❌ **工具调用列表**（不要这样写）：
-```markdown
-1. 使用 scan_dns 扫描子域名
-2. 使用 scan_port 扫描端口
-3. 使用 poc_web 扫描漏洞
-4. 使用 memory_save 保存结果
-```
-
-✅ **方法论驱动**（应该这样写）：
-```markdown
-## Phase 1: 攻击面发现
-先确定注入点类型——URL 参数、POST 表单、HTTP Header、Cookie 都可能是入口。
-判断方法：在参数值后加单引号 `'`，观察响应变化：
-- 报错（含 SQL 语法错误） → 报错注入
-- 页面内容变化但无报错 → 布尔盲注
-- 无任何变化 → 尝试时间盲注 `sleep(5)`
-```
-
-### 使用决策表
-
-当有多个分支时，用表格让 Agent 快速判断：
-
-```markdown
-| 发现 | 技术 | 下一步 |
-|------|------|--------|
-| 报错含 MySQL 语法 | MySQL | UNION SELECT + information_schema |
-| 报错含 ORA- | Oracle | UNION SELECT FROM dual |
-| 响应时间差异 | 通用 | 时间盲注 benchmark/sleep |
-```
-
-### 交叉引用其他技能
-
-```markdown
-如果发现 JWT Token，参考 `jwt-attack-methodology` 进行 Token 攻击。
-获取 shell 后，参考 `post-exploit-linux` 或 `post-exploit-windows` 进行后渗透。
-```
-
-## 2.9 完整示例
-
-<details>
-<summary>XSS 方法论（简化示例）</summary>
-
-```markdown
----
-name: xss-methodology
-description: "XSS 跨站脚本漏洞检测与利用。当发现用户输入被回显到页面、
-需要测试反射型/存储型/DOM 型 XSS、或需要绕过 WAF/CSP 时使用"
-metadata:
-  tags: "xss,cross-site-scripting,反射型,存储型,dom,csp绕过"
-  icon: "💉"
-  category: "漏洞利用"
----
-
-# XSS 检测与利用方法论
-
-## Phase 1: 注入点定位
-找到用户输入回显的位置，判断上下文：
-| 回显位置 | Payload 方向 |
-|----------|-------------|
-| HTML 标签之间 | `<script>alert(1)</script>` |
-| HTML 属性值内 | `" onmouseover="alert(1)` |
-| JS 代码内 | `';alert(1)//` |
-| URL 参数回显 | 反射型 XSS |
-
-## Phase 2: 类型确认
-- 输入立即回显 → 反射型
-- 输入后在其他页面出现 → 存储型
-- 仅在前端 JS 处理 → DOM 型（查看 document.location 等 source）
-
-## Phase 3: 绕过策略
-...（WAF 绕过、CSP 绕过、编码绕过）
-
-## 注意事项
-- 存储型 XSS 风险最高（影响所有访问者）
-- DOM XSS 服务端看不到 payload，需要分析前端 JS
-```
-</details>
-
-## 2.10 检查清单
-
-提交 Skill 前，请确认：
-
-- [ ] 目录名与 `name` 字段一致
-- [ ] `description` 包含触发场景和覆盖范围（不只是功能名称）
-- [ ] `tags` 包含中英文关键词
-- [ ] `category` 是规范的枚举值
-- [ ] 正文 < 100 行（超过 110 行必须拆分，见 2.3 节）
-- [ ] 正文是方法论（有决策树/判断条件），不是工具调用清单
-- [ ] **SKILL.md < 100 行**（超过 110 行必须拆分到 `references/`，见 2.3 节）
-- [ ] 超过 100 行的内容已拆分到 `references/` 子目录，SKILL.md 中有 `→ 读 references/xxx.md` 指针
-- [ ] `references/` 文件命名语义化（如 `injection-bypass.md`），独立可读
-- [ ] ⛔必读 标记仅用于体量小且普遍适用的 reference，非所有文件都标必读（见 2.3 ⛔必读标记规范）
-- [ ] 没有使用 `{{target}}` 等模板变量
-- [ ] 有交叉引用到相关技能（如适用）
-
----
-
-# 三、提交流程
-
-1. Fork 本仓库
-2. 在对应目录下创建文件，遵循上述规范
-3. 按对应的检查清单（1.8 或 2.10）自查
-4. 若新增分类，需同步更新 `CONTRIBUTING.md` 中的目录结构和 category 枚举
-5. 提交 PR，标题格式：`[Tool] 添加 xxx` 或 `[Skill] 添加 xxx`
-
----
-
-# 四、Skill 质量基准测试
-
-## 4.1 概述
-
-每个 Skill 可以包含 `evals/evals.json` 定义测试场景，用于衡量 Skill 对 AI Agent 的实际帮助程度。
-
-基准测试通过 A/B 对比实现：
-- **with_skill**: Agent 加载 Skill 内容后回答
-- **without_skill**: Agent 不加载 Skill（baseline）回答
-- 对比两组的断言通过率、耗时、token 用量
-
-## 4.2 evals.json 格式
-
-```json
-{
-  "skill_name": "sql-injection-methodology",
-  "evals": [
-    {
-      "id": 1,
-      "name": "sqli-detection-basic",
-      "prompt": "你在测试一个 Web 应用...",
-      "expected_output": "系统化的 SQL 注入检测流程",
-      "expectations": [
-        "UNION SELECT|UNION 注入|联合查询",
-        "时间盲注|SLEEP|BENCHMARK|time-based",
-        "布尔盲注|Boolean|1=1"
-      ]
-    }
-  ]
-}
-```
-
-**expectations 格式**：
-- 用 `|` 分隔关键词替代项（满足任一即通过）
-- 示例：`"UNION SELECT|联合查询"` → 输出包含 "UNION SELECT" 或 "联合查询" 即通过
-
-## 4.3 运行基准测试
-
-```bash
-# 测试单个 Skill
-python scripts/bench-skill.py --skill skills/exploit/sql-injection-methodology
-
-# 多次运行（方差分析）
-python scripts/bench-skill.py --skill skills/exploit/sql-injection-methodology --runs 3
-
-# 测试所有有 evals 的 Skills
-python scripts/bench-skill.py --all
-
-# 使用 LLM 评分（更准确，但消耗 token）
-python scripts/grade_eval.py --workspace benchmarks/sql-injection-methodology/iteration-xxx
-```
-
-需要安装 Claude CLI (`claude -p`)。输出保存到 `benchmarks/<skill-name>/` 目录。
-
-## 4.4 输出格式
-
-兼容 skill-creator 的 benchmark.json schema：
-- `benchmark.json` — 结构化数据（pass_rate, timing, tokens, delta）
-- `benchmark.md` — 人类可读的对比报告
-- 每个 run 的 `grading.json` — 逐条断言评估结果
-
-可直接使用 skill-creator 的 `generate_review.py` 在浏览器中查看结果。
-
----
-
-# 五、常见问题
-
-**Q: 工具输出没有固定格式怎么办？**
-A: 使用 `parser: regex` 用正则提取关键信息，或使用 `mode: stdout` + `parser: line` 逐行处理。
-
-**Q: 工具需要 root 权限怎么标注？**
-A: 在 `constraints.requires_root: true` 标注，同时在 `description` 中说明。
-
-**Q: 一个工具有多种使用场景，写几个 YAML？**
-A: 建议拆成多个，如 `nmap-scan.yaml`（端口扫描）、`nmap-vuln.yaml`（漏洞脚本扫描），各有不同的 parameters 和 command_template。
-
-**Q: Skill 的 prompt 可以引用外部工具吗？**
-A: 可以。在正文中写 `ext_xxx` 工具名，当消费端程序实现工具自动调用后，Agent 即可自动匹配并执行对应工具。（此功能依赖消费入口程序实现，当前阶段仅作为 Skill 编写约定。）
