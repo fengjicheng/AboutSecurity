@@ -1,7 +1,5 @@
 # Kerberos 票据哈希破解参考
 
-Kerberoasting 和 AS-REP Roasting 获取的哈希需要离线破解。本文档覆盖 hashcat/john 的最优配置、字典策略和掩码攻击模式。
-
 ---
 
 ## 1. Hashcat 模式速查

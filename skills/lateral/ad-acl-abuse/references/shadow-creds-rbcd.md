@@ -420,6 +420,3 @@ dacledit.py -dc-ip 10.10.10.1 corp.local/attacker:'P@ss' \
 ## 关联参考
 
 - **ACE 权限位详解与完整滥用链** → `ace-abuse-chains.md`
-- **AD ACL 滥用攻击方法论** → `../SKILL.md`
-- **Kerberoasting** → `/skills/lateral/kerberoast-attack/SKILL.md`
-- **ADCS 证书攻击** → `/skills/lateral/adcs-certipy-attack/SKILL.md`

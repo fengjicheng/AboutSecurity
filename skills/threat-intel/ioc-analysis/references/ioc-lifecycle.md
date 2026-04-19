@@ -382,5 +382,3 @@ Privacy Protection:
 ## 关联参考
 
 - **C2 基础设施 OPSEC 清单** → `c2-infra-opsec.md`
-- **IOC 分析与对抗** → `../SKILL.md`
-- **威胁猎杀规避** → `/skills/threat-intel/threat-hunting-evasion/SKILL.md`

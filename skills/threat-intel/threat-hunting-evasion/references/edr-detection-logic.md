@@ -1,7 +1,5 @@
 # EDR 检测机制与规避逻辑分析
 
-> ⛔ 本文档内容仅用于授权红队评估和安全研究。理解 EDR 检测逻辑是红队的核心能力——你必须比防守方更了解他们的工具。
-
 ---
 
 ## 1. EDR 架构与检测层
@@ -546,7 +544,3 @@ Anomaly Detection (异常检测):
 ## 关联参考
 
 - **Sigma/YARA 规则分析与绕过** → `detection-rules-bypass.md`
-- **威胁猎杀原理与规避** → `../SKILL.md`
-- **C2 免杀方法论** → `/skills/evasion/c2-evasion-methodology/SKILL.md`
-- **免杀技术整合** → `/skills/evasion/evasion-technique-integrate/SKILL.md`
-- **Shellcode Loader 生成** → `/skills/evasion/shellcode-loader-generate/SKILL.md`

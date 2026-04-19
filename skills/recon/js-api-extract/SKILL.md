@@ -1,6 +1,6 @@
 ---
 name: js-api-extract
-description: "JavaScript 静态分析提取隐藏 API 端点。当目标是 SPA/前后端分离架构、页面使用 Vue/React/Angular、或常规目录扫描收效甚微时使用。通过分析 JS bundle 提取 API 路径、密钥、内部域名、WebSocket 端点。是 API 渗透的信息收集阶段。发现端点后 → api-semantic-fuzz 进行语义化 fuzz"
+description: "JavaScript 静态分析提取隐藏 API 端点。当目标是 SPA/前后端分离架构、页面使用 Vue/React/Angular、或常规目录扫描收效甚微时使用。通过分析 JS bundle 提取 API 路径、密钥、内部域名、WebSocket 端点。是 API 渗透的信息收集阶段。发现端点后 → api-fuzz 进行语义化 fuzz"
 metadata:
   tags: "js,javascript,api,extract,spa,vue,react,angular,webpack,bundle,endpoint,前端分析"
   category: "recon"
@@ -124,4 +124,4 @@ done | grep -v "^404 " | sort
 1. **JS 文件清单** — 分析了哪些 JS
 2. **发现的 API 端点列表** — 按优先级排序
 3. **暴露的敏感信息** — API Key、内部域名、Token
-4. **推荐的下一步测试** — 哪些端点应该优先 fuzz → `/skill:api-semantic-fuzz`
+4. **推荐的下一步测试** — 哪些端点应该优先 fuzz → `/skill:api-fuzz`

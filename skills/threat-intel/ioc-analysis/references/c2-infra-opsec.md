@@ -693,10 +693,3 @@ done
 | Mythic | Nginx 前置 | Agent 依赖 | Agent Profile | Nginx |
 | Brute Ratel | CDN 前置 | 内置匹配 | 高度定制 | CDN |
 
----
-
-## 关联参考
-
-- **IOC 分析与对抗** → `../SKILL.md`
-- **C2 免杀方法论** → `/skills/evasion/c2-evasion-methodology/SKILL.md`
-- **免杀研究** → `/skills/evasion/evasion-research/SKILL.md`

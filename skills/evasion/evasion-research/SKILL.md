@@ -71,5 +71,5 @@ gh search code "NtCreateThreadEx" --language c --limit 20
 - 变体补充: Z 条
 
 ### 参考链接
-- https://github.com/...
+- <repository-url>
 ```

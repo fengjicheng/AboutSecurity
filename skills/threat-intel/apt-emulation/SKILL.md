@@ -13,7 +13,6 @@ metadata:
 
 ## ⛔ 深入参考
 
-- 主流 APT 组织 TTP 速查表 → [references/apt-ttp-matrix.md](references/apt-ttp-matrix.md)
 - 攻击模拟框架与资源 → [references/emulation-frameworks.md](references/emulation-frameworks.md)
 
 ---

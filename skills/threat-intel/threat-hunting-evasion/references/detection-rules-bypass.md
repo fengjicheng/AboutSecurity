@@ -945,11 +945,3 @@ Credential Guard 环境的替代凭据获取:
 | SwiftOnSecurity Sysmon | github.com/SwiftOnSecurity/sysmon-config | 最流行的 Sysmon 配置 |
 | Unprotect Project | unprotect.it | 恶意软件规避技术百科 |
 
----
-
-## 关联参考
-
-- **威胁猎杀原理与规避** → `../SKILL.md`
-- **C2 免杀方法论** → `/skills/evasion/c2-evasion-methodology/SKILL.md`
-- **免杀集成** → `/skills/evasion/evasion-technique-integrate/SKILL.md`
-- **Shellcode Loader** → `/skills/evasion/shellcode-loader-generate/SKILL.md`
