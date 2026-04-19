@@ -8,7 +8,7 @@
 
 - `cloud/` — 云环境（Docker逃逸、K8s攻击链、AWS IAM、阿里云、腾讯云、Serverless）
 - `ctf/` — CTF竞赛（Web解题、逆向、PWN、密码学、取证、AI/ML）
-- `dfir/` — 取证对抗（内存取证与反取证、磁盘取证与反取证、日志逃逸）🆕
+- `dfir/` — 取证对抗（内存取证与反取证、磁盘取证与反取证、日志逃逸）
 - `evasion/` — 免杀对抗（C2框架、Shellcode生成、安全研究）
 - `exploit/` — 漏洞利用（73 skills，按子分类组织）
   - `web-method/` — Web 通用方法论（注入、XSS、SSRF、SSTI、文件上传、反序列化、WAF绕过…）
@@ -17,10 +17,10 @@
   - `auth/` — 认证授权（JWT、OAuth/SSO、IDOR、CORS、CSRF、Cookie分析）
 - `general/` — 综合（报告生成、供应链审计、移动后端API）
 - `lateral/` — 横向移动（AD域攻击、NTLM中继、数据库横向、Kerberoasting、ACL滥用）
-- `malware/` — 恶意软件（样本分析方法论、C2 Beacon配置提取、沙箱逃逸实现）🆕
+- `malware/` — 恶意软件（样本分析方法论、C2 Beacon配置提取、沙箱逃逸实现）
 - `postexploit/` — 后渗透（Linux/Windows提权、持久化、凭据窃取）
 - `recon/` — 侦察（子域名枚举、被动信息收集、JS API提取）
-- `threat-intel/` — 威胁情报（IOC对抗、APT模拟、威胁猎杀规避）🆕
+- `threat-intel/` — 威胁情报（IOC对抗、APT模拟、威胁猎杀规避）
 - `ai-security/` — AI 安全（Prompt 注入、模型越狱、Prompt 泄露、Agent 攻击链）
 - `code-audit/` — 代码审计（PHP 8-Skill 体系、Java 8-Skill 体系，覆盖注入/文件/序列化/认证/框架/利用链）
 - `tool/` — 工具使用（fscan、nuclei、sqlmap、msfconsole、ffuf、hashcat）
