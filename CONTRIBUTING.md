@@ -519,7 +519,7 @@ A: 在 `constraints.requires_root: true` 标注，同时在 `description` 中说
 A: 建议拆成多个，如 `nmap-scan.yaml`（端口扫描）、`nmap-vuln.yaml`（漏洞脚本扫描），各有不同的 parameters 和 command_template。
 
 **Q: Skill 的 prompt 可以引用外部工具吗？**
-A: 可以。在正文中写 `ext_xxx` 工具名，当消费端程序实现工具自动调用后，Agent 即可自动匹配并执行对应工具。（此功能依赖消费入口程序实现，当前阶段仅作为 Skill 编写约定。）
+A: 可以。在正文中写 `xxx` 工具名，当消费端程序实现工具自动调用后，Agent 即可自动匹配并执行对应工具。（此功能依赖消费入口程序实现，当前阶段仅作为 Skill 编写约定。）
 
 ---
 
@@ -545,7 +545,7 @@ A: 可以。在正文中写 `ext_xxx` 工具名，当消费端程序实现工具
 # ============================================================
 # 基本信息（必填）
 # ============================================================
-id: ext_工具名                  # 工具唯一标识，必须以 ext_ 开头
+id: 工具名                  # 工具唯一标识
 name: 工具显示名称               # 中文名，给用户看的
 description: "工具功能描述"       # AI 用这段文字决定是否调用此工具，写清楚能做什么
 homepage: "https://github.com/xxx/xxx"  # 工具官网或 GitHub 地址，方便用户了解和安装
@@ -729,7 +729,7 @@ command_template: |
 <summary>subfinder — 子域名发现</summary>
 
 ```yaml
-id: ext_subfinder
+id: subfinder
 name: Subfinder 子域名发现
 description: "使用 subfinder 被动发现子域名，速度快、覆盖广，适合大规模侦察"
 homepage: "https://github.com/projectdiscovery/subfinder"
@@ -771,7 +771,7 @@ constraints:
 <summary>nuclei — 漏洞扫描（JSON 输出）</summary>
 
 ```yaml
-id: ext_nuclei
+id: nuclei
 name: Nuclei 漏洞扫描
 description: "使用 nuclei 进行基于模板的漏洞扫描，支持数千个 CVE 和暴露检测模板"
 homepage: "https://github.com/projectdiscovery/nuclei"
@@ -832,7 +832,7 @@ constraints:
 <summary>ffuf — Web Fuzz</summary>
 
 ```yaml
-id: ext_ffuf
+id: ffuf
 name: ffuf Web Fuzz
 description: "使用 ffuf 进行高速 Web 路径和参数 Fuzz"
 homepage: "https://github.com/ffuf/ffuf"
@@ -893,7 +893,7 @@ constraints:
 
 提交 Tool YAML 前，请确认：
 
-- [ ] `id` 以 `ext_` 开头，全局唯一
+- [ ] `id` 以工具名称开头
 - [ ] `description` 清楚说明工具能做什么（AI 据此决定是否调用）
 - [ ] `homepage` 填写工具的 GitHub 地址或官网，方便用户了解和安装
 - [ ] `install` 至少填写一种安装方式（go/brew/pip/apt/docker/f8x/manual）
