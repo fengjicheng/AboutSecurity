@@ -1,4 +1,4 @@
-id: ext_gogo
+id: gogo
 name: gogo 端口扫描与指纹识别
 description: "使用 gogo (chainreactors) 进行端口扫描和服务指纹识别，支持主动/被动指纹、nuclei POC、启发式扫描、超强性能，最小发包原则"
 homepage: "https://github.com/chainreactors/gogo"

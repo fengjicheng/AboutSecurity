@@ -1,4 +1,4 @@
-id: ext_dalfox
+id: dalfox
 name: DalFox XSS 扫描
 description: "使用 DalFox 进行 XSS 漏洞扫描，支持反射型/存储型/DOM XSS 检测，参数分析，WAF 绕过，自动生成 PoC"
 homepage: "https://github.com/hahwul/dalfox"

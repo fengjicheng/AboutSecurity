@@ -1,4 +1,4 @@
-id: ext_sqlmap
+id: sqlmap
 name: sqlmap SQL 注入检测
 description: "使用 sqlmap 自动化检测和利用 SQL 注入漏洞，支持布尔盲注、时间盲注、报错注入、UNION 注入、堆叠查询，自动识别数据库类型"
 homepage: "https://github.com/sqlmapproject/sqlmap"

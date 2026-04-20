@@ -33,7 +33,7 @@ Tools/
 
 ```yaml
 # === 基本信息 ===
-id: ext_nmap_scan              # 唯一标识符
+id: nmap              # 唯一标识符
 name: Nmap 端口扫描             # 显示名称
 description: "..."             # 工具用途描述
 homepage: "https://..."        # 官方链接

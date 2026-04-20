@@ -1,4 +1,4 @@
-id: ext_mapcidr
+id: mapcidr
 name: mapCIDR 网段处理
 description: "使用 mapcidr 进行 CIDR 展开、切片、聚合、IP 过滤匹配等操作，支持 IPv4/IPv6 转换和 IP 格式化"
 homepage: "https://github.com/projectdiscovery/mapcidr"

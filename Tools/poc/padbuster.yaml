@@ -1,4 +1,4 @@
-id: ext_padbuster
+id: padbuster
 name: PadBuster Padding Oracle 攻击
 description: "自动化 Padding Oracle 攻击工具，支持 AES-CBC 密文解密和任意明文加密。适用于加密 Cookie/Token/URL 参数的 Padding Oracle 漏洞利用"
 homepage: "https://github.com/AonCyberLabs/PadBuster"

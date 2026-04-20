@@ -1,4 +1,4 @@
-id: ext_ffuf
+id: ffuf
 name: ffuf Web Fuzzer
 description: "使用 ffuf 进行 Web 模糊测试，支持目录发现、参数爆破、VHost 枚举，自动校准过滤，JSON 输出"
 homepage: "https://github.com/ffuf/ffuf"

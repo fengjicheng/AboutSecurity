@@ -1,4 +1,4 @@
-id: ext_ksubdomain
+id: ksubdomain
 name: KSubdomain 无状态子域名爆破
 description: "使用 ksubdomain 进行无状态子域名爆破/验证，直接操作网卡原始套接字发包，速度极快（比 dnsx 快 10 倍），支持验证和枚举两种模式"
 homepage: "https://github.com/boy-hack/ksubdomain"

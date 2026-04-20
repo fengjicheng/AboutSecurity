@@ -1,4 +1,4 @@
-id: ext_nerva
+id: nerva
 name: Nerva 服务指纹识别
 description: "使用 nerva 进行高性能服务指纹识别，支持 120+ 协议（数据库、远程访问、消息队列、工控、Web 等），TCP/UDP/SCTP 多传输层，丰富元数据提取"
 homepage: "https://github.com/praetorian-inc/nerva"

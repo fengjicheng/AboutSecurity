@@ -1,4 +1,4 @@
-id: ext_fscan
+id: fscan
 name: fscan 内网综合扫描
 description: "使用 fscan 进行内网综合扫描，集成主机存活探测、端口扫描、服务爆破、漏洞检测（MS17-010 等）、Web 指纹识别、POC 扫描"
 homepage: "https://github.com/shadow1ng/fscan"

@@ -1,4 +1,4 @@
-id: ext_nikto
+id: nikto
 name: Nikto Web 扫描
 description: "使用 Nikto 进行 Web 服务器漏洞扫描，检测过时软件版本、危险文件/CGI、服务器配置错误、已知漏洞（7000+ 检查项），支持 SSL/TLS 扫描"
 homepage: "https://github.com/sullo/nikto"

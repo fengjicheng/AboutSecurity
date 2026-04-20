@@ -1,4 +1,4 @@
-id: ext_hydra
+id: hydra
 name: Hydra 暴力破解
 description: "使用 THC-Hydra 进行在线密码暴力破解，支持 50+ 协议（SSH/FTP/HTTP/SMB/RDP/MySQL/MSSQL/POP3/SMTP 等），支持密码喷洒和凭据填充"
 homepage: "https://github.com/vanhauser-thc/thc-hydra"

@@ -1,4 +1,4 @@
-id: ext_spray
+id: spray
 name: spray 目录爆破与指纹识别
 description: "使用 spray (chainreactors) 进行高性能 Web 目录爆破，支持掩码/规则字典生成、智能过滤、全量指纹识别（gogo/wappalyzer/fingerprinthub）、备份文件探测、爬虫、断点续传"
 homepage: "https://github.com/chainreactors/spray"

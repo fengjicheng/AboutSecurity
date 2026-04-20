@@ -1,4 +1,4 @@
-id: ext_gau
+id: gau
 name: gau URL 历史收集
 description: "使用 gau (getallurls) 从 Wayback Machine、Common Crawl、OTX、URLScan 收集目标域名的已知 URL，用于攻击面发现"
 homepage: "https://github.com/lc/gau"
