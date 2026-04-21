@@ -1,0 +1,15 @@
+category: port
+subcategory: memcached
+description: ''
+tags: ''
+files:
+- name: pass.txt
+  lines: 33
+  description: ''
+  usage: ''
+  tags: ''
+- name: user.txt
+  lines: 4
+  description: ''
+  usage: ''
+  tags: ''

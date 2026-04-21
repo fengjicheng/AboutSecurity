@@ -1,0 +1,19 @@
+category: network
+description: ''
+tags: ''
+files:
+- name: dns-servers.txt
+  lines: 10
+  description: ''
+  usage: ''
+  tags: ''
+- name: exclude.txt
+  lines: 18
+  description: ''
+  usage: ''
+  tags: ''
+- name: local-ip.txt
+  lines: 55
+  description: ''
+  usage: ''
+  tags: ''

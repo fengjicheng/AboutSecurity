@@ -1,0 +1,9 @@
+category: ssrf
+description: ''
+tags: ''
+files:
+- name: payload.txt
+  lines: 94
+  description: ''
+  usage: ''
+  tags: ''

@@ -1,0 +1,25 @@
+category: auth
+subcategory: password
+description: ''
+tags: ''
+files:
+- name: top200000-wpa.txt
+  lines: 203806
+  description: ''
+  usage: ''
+  tags: ''
+- name: top447-wpa.txt
+  lines: 447
+  description: ''
+  usage: ''
+  tags: ''
+- name: top4800-wpa.txt
+  lines: 4800
+  description: ''
+  usage: ''
+  tags: ''
+- name: top62-wpa.txt
+  lines: 62
+  description: ''
+  usage: ''
+  tags: ''

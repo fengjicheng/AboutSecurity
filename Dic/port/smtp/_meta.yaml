@@ -1,0 +1,25 @@
+category: port
+subcategory: smtp
+description: ''
+tags: ''
+files:
+- name: cn-email-username.txt
+  lines: 1959
+  description: ''
+  usage: ''
+  tags: ''
+- name: pass.txt
+  lines: 27
+  description: ''
+  usage: ''
+  tags: ''
+- name: us-email-username.txt
+  lines: 2092
+  description: ''
+  usage: ''
+  tags: ''
+- name: user.txt
+  lines: 1502
+  description: ''
+  usage: ''
+  tags: ''

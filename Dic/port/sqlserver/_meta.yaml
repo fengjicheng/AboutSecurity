@@ -1,0 +1,15 @@
+category: port
+subcategory: sqlserver
+description: ''
+tags: ''
+files:
+- name: pass.txt
+  lines: 198
+  description: ''
+  usage: ''
+  tags: ''
+- name: user.txt
+  lines: 6
+  description: ''
+  usage: ''
+  tags: ''

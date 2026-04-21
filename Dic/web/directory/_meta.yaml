@@ -1,0 +1,45 @@
+category: web
+subcategory: directory
+description: ''
+tags: ''
+files:
+- name: admin-dir.txt
+  lines: 2167
+  description: ''
+  usage: ''
+  tags: ''
+- name: api.txt
+  lines: 342
+  description: ''
+  usage: ''
+  tags: ''
+- name: common.txt
+  lines: 5379
+  description: ''
+  usage: ''
+  tags: ''
+- name: login.txt
+  lines: 1443
+  description: ''
+  usage: ''
+  tags: ''
+- name: main.txt
+  lines: 35004
+  description: ''
+  usage: ''
+  tags: ''
+- name: redteam-config.txt
+  lines: 65
+  description: ''
+  usage: ''
+  tags: ''
+- name: redteam-file-suffix.txt
+  lines: 38
+  description: ''
+  usage: ''
+  tags: ''
+- name: redteam-file.txt
+  lines: 251
+  description: ''
+  usage: ''
+  tags: ''

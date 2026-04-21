@@ -1,0 +1,20 @@
+category: web
+subcategory: dns
+description: ''
+tags: ''
+files:
+- name: dns.txt
+  lines: 151548
+  description: ''
+  usage: ''
+  tags: ''
+- name: oob.txt
+  lines: 24
+  description: ''
+  usage: ''
+  tags: ''
+- name: top-dns.txt
+  lines: 177
+  description: ''
+  usage: ''
+  tags: ''

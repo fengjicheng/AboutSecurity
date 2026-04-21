@@ -1,0 +1,35 @@
+category: auth
+subcategory: username
+description: ''
+tags: ''
+files:
+- name: cn-email.txt
+  lines: 309
+  description: ''
+  usage: ''
+  tags: ''
+- name: cn-phone.txt
+  lines: 345
+  description: ''
+  usage: ''
+  tags: ''
+- name: user-10000.txt
+  lines: 10415
+  description: ''
+  usage: ''
+  tags: ''
+- name: user-mail.txt
+  lines: 59
+  description: ''
+  usage: ''
+  tags: ''
+- name: user-us.txt
+  lines: 2092
+  description: ''
+  usage: ''
+  tags: ''
+- name: user-web.txt
+  lines: 113
+  description: ''
+  usage: ''
+  tags: ''

@@ -1,0 +1,15 @@
+category: port
+subcategory: ftp
+description: ''
+tags: ''
+files:
+- name: pass.txt
+  lines: 114
+  description: ''
+  usage: ''
+  tags: ''
+- name: user.txt
+  lines: 12
+  description: ''
+  usage: ''
+  tags: ''

@@ -1,0 +1,15 @@
+category: port
+subcategory: rdp
+description: ''
+tags: ''
+files:
+- name: pass.txt
+  lines: 264
+  description: ''
+  usage: ''
+  tags: ''
+- name: user.txt
+  lines: 27
+  description: ''
+  usage: ''
+  tags: ''

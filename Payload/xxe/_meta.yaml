@@ -1,0 +1,14 @@
+category: xxe
+description: ''
+tags: ''
+files:
+- name: xml.txt
+  lines: 91
+  description: ''
+  usage: ''
+  tags: ''
+- name: xxe.md
+  lines: 116
+  description: ''
+  usage: ''
+  tags: ''

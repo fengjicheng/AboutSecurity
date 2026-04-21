@@ -1,0 +1,15 @@
+category: web
+subcategory: webshell
+description: ''
+tags: ''
+files:
+- name: dir.txt
+  lines: 52412
+  description: ''
+  usage: ''
+  tags: ''
+- name: webshell-pass.txt
+  lines: 437951
+  description: ''
+  usage: ''
+  tags: ''

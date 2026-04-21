@@ -1,0 +1,30 @@
+category: web
+subcategory: directory
+description: ''
+tags: ''
+files:
+- name: ashx.txt
+  lines: 26263
+  description: ''
+  usage: ''
+  tags: ''
+- name: aspx-directory.txt
+  lines: 46191
+  description: ''
+  usage: ''
+  tags: ''
+- name: aspx.txt
+  lines: 26334
+  description: ''
+  usage: ''
+  tags: ''
+- name: top100-ashx.txt
+  lines: 162
+  description: ''
+  usage: ''
+  tags: ''
+- name: top100-aspx.txt
+  lines: 96
+  description: ''
+  usage: ''
+  tags: ''

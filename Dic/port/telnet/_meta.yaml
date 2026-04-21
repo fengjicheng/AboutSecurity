@@ -1,0 +1,15 @@
+category: port
+subcategory: telnet
+description: ''
+tags: ''
+files:
+- name: pass.txt
+  lines: 28
+  description: ''
+  usage: ''
+  tags: ''
+- name: user.txt
+  lines: 5
+  description: ''
+  usage: ''
+  tags: ''

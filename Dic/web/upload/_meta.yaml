@@ -1,0 +1,35 @@
+category: web
+subcategory: upload
+description: ''
+tags: ''
+files:
+- name: asp.txt
+  lines: 30
+  description: ''
+  usage: ''
+  tags: ''
+- name: content-type.txt
+  lines: 253
+  description: ''
+  usage: ''
+  tags: ''
+- name: htaccess.txt
+  lines: 37
+  description: ''
+  usage: ''
+  tags: ''
+- name: jsp.txt
+  lines: 30
+  description: ''
+  usage: ''
+  tags: ''
+- name: php.txt
+  lines: 30
+  description: ''
+  usage: ''
+  tags: ''
+- name: upload-suffix.txt
+  lines: 34
+  description: ''
+  usage: ''
+  tags: ''

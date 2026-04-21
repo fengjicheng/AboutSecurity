@@ -1,0 +1,49 @@
+category: upload
+description: ''
+tags: ''
+files:
+- name: 1.doc
+  lines: 1
+  description: ''
+  usage: ''
+  tags: ''
+- name: 1.html
+  lines: 1
+  description: ''
+  usage: ''
+  tags: ''
+- name: 1.pdf
+  lines: 428
+  description: ''
+  usage: ''
+  tags: ''
+- name: 1.svg
+  lines: 6
+  description: ''
+  usage: ''
+  tags: ''
+- name: 1.txt
+  lines: 1
+  description: ''
+  usage: ''
+  tags: ''
+- name: 1.xlsx
+  lines: 49
+  description: ''
+  usage: ''
+  tags: ''
+- name: 1.zip
+  lines: 1
+  description: ''
+  usage: ''
+  tags: ''
+- name: upload.html
+  lines: 8
+  description: ''
+  usage: ''
+  tags: ''
+- name: upload2.html
+  lines: 4
+  description: ''
+  usage: ''
+  tags: ''

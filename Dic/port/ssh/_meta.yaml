@@ -1,0 +1,25 @@
+category: port
+subcategory: ssh
+description: ''
+tags: ''
+files:
+- name: pass1.txt
+  lines: 107
+  description: ''
+  usage: ''
+  tags: ''
+- name: pass2.txt
+  lines: 300
+  description: ''
+  usage: ''
+  tags: ''
+- name: user1.txt
+  lines: 6
+  description: ''
+  usage: ''
+  tags: ''
+- name: user2.txt
+  lines: 26
+  description: ''
+  usage: ''
+  tags: ''

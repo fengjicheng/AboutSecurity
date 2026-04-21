@@ -1,0 +1,44 @@
+category: lfi
+description: ''
+tags: ''
+files:
+- name: java-path.txt
+  lines: 8
+  description: ''
+  usage: ''
+  tags: ''
+- name: java-properties.txt
+  lines: 1739
+  description: ''
+  usage: ''
+  tags: ''
+- name: linux-path.txt
+  lines: 6
+  description: ''
+  usage: ''
+  tags: ''
+- name: linux.txt
+  lines: 682
+  description: ''
+  usage: ''
+  tags: ''
+- name: log.txt
+  lines: 47
+  description: ''
+  usage: ''
+  tags: ''
+- name: properties.txt
+  lines: 203
+  description: ''
+  usage: ''
+  tags: ''
+- name: traversal.txt
+  lines: 64
+  description: ''
+  usage: ''
+  tags: ''
+- name: windows.txt
+  lines: 206
+  description: ''
+  usage: ''
+  tags: ''

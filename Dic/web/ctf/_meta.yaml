@@ -1,0 +1,20 @@
+category: web
+subcategory: ctf
+description: ''
+tags: ''
+files:
+- name: param.txt
+  lines: 45
+  description: ''
+  usage: ''
+  tags: ''
+- name: sql.txt
+  lines: 95
+  description: ''
+  usage: ''
+  tags: ''
+- name: uri.txt
+  lines: 223
+  description: ''
+  usage: ''
+  tags: ''

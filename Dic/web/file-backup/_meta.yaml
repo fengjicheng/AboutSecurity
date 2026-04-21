@@ -1,0 +1,65 @@
+category: web
+subcategory: file-backup
+description: ''
+tags: ''
+files:
+- name: bak-directory.txt
+  lines: 1576
+  description: ''
+  usage: ''
+  tags: ''
+- name: bak.txt
+  lines: 1444
+  description: ''
+  usage: ''
+  tags: ''
+- name: cfm-directory.txt
+  lines: 248
+  description: ''
+  usage: ''
+  tags: ''
+- name: cfm.txt
+  lines: 56
+  description: ''
+  usage: ''
+  tags: ''
+- name: cgi-directory.txt
+  lines: 97
+  description: ''
+  usage: ''
+  tags: ''
+- name: cgi.txt
+  lines: 80
+  description: ''
+  usage: ''
+  tags: ''
+- name: db-directory.txt
+  lines: 944
+  description: ''
+  usage: ''
+  tags: ''
+- name: db.txt
+  lines: 868
+  description: ''
+  usage: ''
+  tags: ''
+- name: misc.txt
+  lines: 51505
+  description: ''
+  usage: ''
+  tags: ''
+- name: py.txt
+  lines: 131
+  description: ''
+  usage: ''
+  tags: ''
+- name: suffix.txt
+  lines: 403
+  description: ''
+  usage: ''
+  tags: ''
+- name: txt.txt
+  lines: 1321
+  description: ''
+  usage: ''
+  tags: ''

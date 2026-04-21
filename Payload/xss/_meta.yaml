@@ -1,0 +1,39 @@
+category: xss
+description: ''
+tags: ''
+files:
+- name: js-event.txt
+  lines: 210
+  description: ''
+  usage: ''
+  tags: ''
+- name: js-function.txt
+  lines: 5
+  description: ''
+  usage: ''
+  tags: ''
+- name: js-tag-full.txt
+  lines: 157
+  description: ''
+  usage: ''
+  tags: ''
+- name: js-tag-half.txt
+  lines: 157
+  description: ''
+  usage: ''
+  tags: ''
+- name: readme.md
+  lines: 620
+  description: ''
+  usage: ''
+  tags: ''
+- name: xss-payload1.txt
+  lines: 2148
+  description: ''
+  usage: ''
+  tags: ''
+- name: xss-payload2.txt
+  lines: 8493
+  description: ''
+  usage: ''
+  tags: ''

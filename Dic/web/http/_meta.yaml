@@ -1,0 +1,55 @@
+category: web
+subcategory: http
+description: ''
+tags: ''
+files:
+- name: header-auth.txt
+  lines: 8
+  description: ''
+  usage: ''
+  tags: ''
+- name: header-mimetypes.txt
+  lines: 1864
+  description: ''
+  usage: ''
+  tags: ''
+- name: header-redteam.txt
+  lines: 66
+  description: ''
+  usage: ''
+  tags: ''
+- name: header-refer-ip.txt
+  lines: 7
+  description: ''
+  usage: ''
+  tags: ''
+- name: header-refer.txt
+  lines: 114
+  description: ''
+  usage: ''
+  tags: ''
+- name: header-sessionid.txt
+  lines: 11
+  description: ''
+  usage: ''
+  tags: ''
+- name: header-spider.txt
+  lines: 25
+  description: ''
+  usage: ''
+  tags: ''
+- name: methods.txt
+  lines: 32
+  description: ''
+  usage: ''
+  tags: ''
+- name: proxifier-filter.txt
+  lines: 176
+  description: ''
+  usage: ''
+  tags: ''
+- name: top500-user-agent.txt
+  lines: 447
+  description: ''
+  usage: ''
+  tags: ''

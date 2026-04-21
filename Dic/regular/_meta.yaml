@@ -1,0 +1,14 @@
+category: regular
+description: ''
+tags: ''
+files:
+- name: eicar.txt
+  lines: 1
+  description: ''
+  usage: ''
+  tags: ''
+- name: readme.md
+  lines: 44
+  description: ''
+  usage: ''
+  tags: ''

@@ -1,0 +1,25 @@
+category: port
+subcategory: oracle
+description: ''
+tags: ''
+files:
+- name: pass.txt
+  lines: 511
+  description: ''
+  usage: ''
+  tags: ''
+- name: sid.txt
+  lines: 575
+  description: ''
+  usage: ''
+  tags: ''
+- name: user1.txt
+  lines: 10
+  description: ''
+  usage: ''
+  tags: ''
+- name: user2.txt
+  lines: 479
+  description: ''
+  usage: ''
+  tags: ''

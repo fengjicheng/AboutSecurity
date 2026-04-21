@@ -1,0 +1,50 @@
+category: regular
+subcategory: letter
+description: ''
+tags: ''
+files:
+- name: a-z.txt
+  lines: 26
+  description: ''
+  usage: ''
+  tags: ''
+- name: aa-zz.txt
+  lines: 676
+  description: ''
+  usage: ''
+  tags: ''
+- name: aaa-zzz.txt
+  lines: 17576
+  description: ''
+  usage: ''
+  tags: ''
+- name: aaaa-zzzz.txt
+  lines: 456976
+  description: ''
+  usage: ''
+  tags: ''
+- name: aaaa~zzzz.txt
+  lines: 456976
+  description: ''
+  usage: ''
+  tags: ''
+- name: aaa~zzz.txt
+  lines: 17576
+  description: ''
+  usage: ''
+  tags: ''
+- name: aa~zz.txt
+  lines: 676
+  description: ''
+  usage: ''
+  tags: ''
+- name: a~z.txt
+  lines: 26
+  description: ''
+  usage: ''
+  tags: ''
+- name: misc.txt
+  lines: 67
+  description: ''
+  usage: ''
+  tags: ''

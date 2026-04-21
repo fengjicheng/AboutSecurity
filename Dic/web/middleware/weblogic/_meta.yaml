@@ -1,0 +1,20 @@
+category: web
+subcategory: middleware
+description: ''
+tags: ''
+files:
+- name: pass.txt
+  lines: 44
+  description: ''
+  usage: ''
+  tags: ''
+- name: user.txt
+  lines: 11
+  description: ''
+  usage: ''
+  tags: ''
+- name: weblogic.txt
+  lines: 349
+  description: ''
+  usage: ''
+  tags: ''

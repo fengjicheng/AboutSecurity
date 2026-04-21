@@ -1,0 +1,54 @@
+category: sqli
+description: ''
+tags: ''
+files:
+- name: column.txt
+  lines: 1101
+  description: ''
+  usage: ''
+  tags: ''
+- name: database.txt
+  lines: 21
+  description: ''
+  usage: ''
+  tags: ''
+- name: payload-blind.txt
+  lines: 41
+  description: ''
+  usage: ''
+  tags: ''
+- name: payload-ldap.txt
+  lines: 14
+  description: ''
+  usage: ''
+  tags: ''
+- name: payload-mssql.txt
+  lines: 99
+  description: ''
+  usage: ''
+  tags: ''
+- name: payload-mysql.txt
+  lines: 109
+  description: ''
+  usage: ''
+  tags: ''
+- name: payload-oracle.txt
+  lines: 55
+  description: ''
+  usage: ''
+  tags: ''
+- name: payload.txt
+  lines: 344
+  description: ''
+  usage: ''
+  tags: ''
+- name: sql-inj.md
+  lines: 442
+  description: ''
+  usage: ''
+  tags: ''
+- name: table.txt
+  lines: 513
+  description: ''
+  usage: ''
+  tags: ''

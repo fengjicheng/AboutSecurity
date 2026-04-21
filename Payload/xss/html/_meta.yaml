@@ -1,0 +1,10 @@
+category: xss
+subcategory: html
+description: ''
+tags: ''
+files:
+- name: 1.html
+  lines: 1
+  description: ''
+  usage: ''
+  tags: ''

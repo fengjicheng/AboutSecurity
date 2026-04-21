@@ -1,0 +1,25 @@
+category: regular
+subcategory: address
+description: ''
+tags: ''
+files:
+- name: area-code.txt
+  lines: 4072
+  description: ''
+  usage: ''
+  tags: ''
+- name: cn-areas.txt
+  lines: 2995
+  description: ''
+  usage: ''
+  tags: ''
+- name: cn-cities.txt
+  lines: 342
+  description: ''
+  usage: ''
+  tags: ''
+- name: cn-pcas.json
+  lines: 1
+  description: ''
+  usage: ''
+  tags: ''

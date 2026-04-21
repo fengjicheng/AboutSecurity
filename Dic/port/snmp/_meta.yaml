@@ -1,0 +1,10 @@
+category: port
+subcategory: snmp
+description: ''
+tags: ''
+files:
+- name: pass.txt
+  lines: 119
+  description: ''
+  usage: ''
+  tags: ''

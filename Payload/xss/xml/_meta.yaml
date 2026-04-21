@@ -1,0 +1,15 @@
+category: xss
+subcategory: xml
+description: ''
+tags: ''
+files:
+- name: xml.txt
+  lines: 16
+  description: ''
+  usage: ''
+  tags: ''
+- name: xss.xml
+  lines: 4
+  description: ''
+  usage: ''
+  tags: ''

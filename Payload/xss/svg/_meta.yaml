@@ -1,0 +1,20 @@
+category: xss
+subcategory: svg
+description: ''
+tags: ''
+files:
+- name: 1.svg
+  lines: 6
+  description: ''
+  usage: ''
+  tags: ''
+- name: 2.svg
+  lines: 1
+  description: ''
+  usage: ''
+  tags: ''
+- name: sanitised.svg
+  lines: 45
+  description: ''
+  usage: ''
+  tags: ''

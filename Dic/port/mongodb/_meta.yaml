@@ -1,0 +1,15 @@
+category: port
+subcategory: mongodb
+description: ''
+tags: ''
+files:
+- name: pass.txt
+  lines: 62
+  description: ''
+  usage: ''
+  tags: ''
+- name: user.txt
+  lines: 4
+  description: ''
+  usage: ''
+  tags: ''

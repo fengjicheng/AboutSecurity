@@ -1,0 +1,40 @@
+category: auth
+subcategory: password
+description: ''
+tags: ''
+files:
+- name: pass-admin.txt
+  lines: 586
+  description: ''
+  usage: ''
+  tags: ''
+- name: pass00-10.txt
+  lines: 10
+  description: ''
+  usage: ''
+  tags: ''
+- name: pass01-100.txt
+  lines: 173
+  description: ''
+  usage: ''
+  tags: ''
+- name: pass02-1000.txt
+  lines: 1888
+  description: ''
+  usage: ''
+  tags: ''
+- name: pass03-20000.txt
+  lines: 19315
+  description: ''
+  usage: ''
+  tags: ''
+- name: pass04-100000.txt
+  lines: 94123
+  description: ''
+  usage: ''
+  tags: ''
+- name: sql.txt
+  lines: 121
+  description: ''
+  usage: ''
+  tags: ''

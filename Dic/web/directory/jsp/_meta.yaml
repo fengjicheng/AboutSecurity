@@ -1,0 +1,40 @@
+category: web
+subcategory: directory
+description: ''
+tags: ''
+files:
+- name: action.txt
+  lines: 269
+  description: ''
+  usage: ''
+  tags: ''
+- name: do-directory.txt
+  lines: 4004
+  description: ''
+  usage: ''
+  tags: ''
+- name: do.txt
+  lines: 41954
+  description: ''
+  usage: ''
+  tags: ''
+- name: jsp-directory.txt
+  lines: 4218
+  description: ''
+  usage: ''
+  tags: ''
+- name: jsp.txt
+  lines: 42015
+  description: ''
+  usage: ''
+  tags: ''
+- name: top100-do.txt
+  lines: 88
+  description: ''
+  usage: ''
+  tags: ''
+- name: top100-jsp.txt
+  lines: 88
+  description: ''
+  usage: ''
+  tags: ''

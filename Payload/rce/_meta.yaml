@@ -1,0 +1,34 @@
+category: rce
+description: ''
+tags: ''
+files:
+- name: java.txt
+  lines: 2
+  description: ''
+  usage: ''
+  tags: ''
+- name: php.txt
+  lines: 19
+  description: ''
+  usage: ''
+  tags: ''
+- name: powershell.txt
+  lines: 164
+  description: ''
+  usage: ''
+  tags: ''
+- name: rce.txt
+  lines: 39
+  description: ''
+  usage: ''
+  tags: ''
+- name: unix.txt
+  lines: 569
+  description: ''
+  usage: ''
+  tags: ''
+- name: windows.txt
+  lines: 158
+  description: ''
+  usage: ''
+  tags: ''
