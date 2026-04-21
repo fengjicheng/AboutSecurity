@@ -1,50 +1,50 @@
 category: regular
 subcategory: letter
-description: ''
-tags: ''
+description: 字母排列组合字典，含1-4位小写字母全排列
+tags: letter,字母,alphabet,排列组合,brute-force,枚举
 files:
 - name: a-z.txt
   lines: 26
-  description: ''
-  usage: ''
-  tags: ''
+  description: 单个小写字母a到z
+  usage: 单字母枚举基础数据
+  tags: single,单字母,a-z,基础
 - name: aa-zz.txt
   lines: 676
-  description: ''
-  usage: ''
-  tags: ''
+  description: 两位小写字母全排列（aa到zz）
+  usage: 两位字母组合枚举
+  tags: 2char,两位字母,排列组合
 - name: aaa-zzz.txt
   lines: 17576
-  description: ''
-  usage: ''
-  tags: ''
+  description: 三位小写字母全排列（aaa到zzz）
+  usage: 三位字母组合枚举
+  tags: 3char,三位字母,排列组合
 - name: aaaa-zzzz.txt
   lines: 456976
-  description: ''
-  usage: ''
-  tags: ''
+  description: 四位小写字母全排列（aaaa到zzzz）
+  usage: 四位字母组合枚举
+  tags: 4char,四位字母,排列组合
 - name: aaaa~zzzz.txt
   lines: 456976
-  description: ''
-  usage: ''
-  tags: ''
+  description: 四位小写字母全排列（波浪号分隔命名变体）
+  usage: 四位字母组合枚举
+  tags: 4char,四位字母,排列组合,变体
 - name: aaa~zzz.txt
   lines: 17576
-  description: ''
-  usage: ''
-  tags: ''
+  description: 三位小写字母全排列（波浪号分隔命名变体）
+  usage: 三位字母组合枚举
+  tags: 3char,三位字母,排列组合,变体
 - name: aa~zz.txt
   lines: 676
-  description: ''
-  usage: ''
-  tags: ''
+  description: 两位小写字母全排列（波浪号分隔命名变体）
+  usage: 两位字母组合枚举
+  tags: 2char,两位字母,排列组合,变体
 - name: a~z.txt
   lines: 26
-  description: ''
-  usage: ''
-  tags: ''
+  description: 单个小写字母a到z（波浪号分隔命名变体）
+  usage: 单字母枚举基础数据
+  tags: single,单字母,a-z,变体
 - name: misc.txt
   lines: 67
-  description: ''
-  usage: ''
-  tags: ''
+  description: 数字和常见短字符串混合集合
+  usage: 简单ID和短字符串枚举
+  tags: misc,混合,数字字母,短字符串

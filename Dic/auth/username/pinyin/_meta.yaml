@@ -1,55 +1,55 @@
 category: auth
 subcategory: username
-description: ''
-tags: ''
+description: 中文姓名拼音相关的用户名字典，适用于国内系统
+tags: pinyin,拼音,中文姓名,chinese-name,用户名,username,枚举
 files:
 - name: cn-firstname.txt
   lines: 128
-  description: ''
-  usage: ''
-  tags: ''
+  description: 中国常见名字（中文汉字）
+  usage: 生成中文姓名组合、社工字典基础数据
+  tags: firstname,名字,中文名,given-name
 - name: cn-surname.txt
   lines: 117
-  description: ''
-  usage: ''
-  tags: ''
+  description: 中国常见姓氏（中文汉字，含复姓）
+  usage: 生成中文姓名组合、社工字典基础数据
+  tags: surname,姓氏,百家姓,family-name
 - name: lastname.txt
   lines: 189
-  description: ''
-  usage: ''
-  tags: ''
+  description: 中国常见姓氏的拼音格式
+  usage: 拼音用户名枚举的姓氏部分
+  tags: lastname,姓氏拼音,surname-pinyin
 - name: name.txt
   lines: 1068
-  description: ''
-  usage: ''
-  tags: ''
+  description: 常见中文姓名的全拼格式
+  usage: 国内系统以全拼为用户名的枚举
+  tags: fullname,全拼姓名,pinyin-name
 - name: name2.txt
   lines: 14391
-  description: ''
-  usage: ''
-  tags: ''
+  description: 大规模中文姓名全拼集合
+  usage: 大规模拼音用户名枚举
+  tags: fullname,全拼姓名,大字典,large
 - name: py-name1.txt
   lines: 1443
-  description: ''
-  usage: ''
-  tags: ''
+  description: 姓氏全拼+名字首字母缩写格式的用户名
+  usage: 缩写格式用户名枚举（如zhangj）
+  tags: abbreviation,缩写,姓全拼+名首字母
 - name: py-name2.txt
   lines: 1402
-  description: ''
-  usage: ''
-  tags: ''
+  description: 姓氏全拼+名字首字母缩写格式的用户名（变体2）
+  usage: 缩写格式用户名枚举的补充字典
+  tags: abbreviation,缩写,变体,variant
 - name: py-name3.txt
   lines: 1133
-  description: ''
-  usage: ''
-  tags: ''
+  description: 姓氏全拼+名字首字母缩写格式的用户名（变体3）
+  usage: 缩写格式用户名枚举的补充字典
+  tags: abbreviation,缩写,变体,variant
 - name: py.txt
   lines: 991
-  description: ''
-  usage: ''
-  tags: ''
+  description: 中文姓名全拼用户名集合
+  usage: 全拼格式的中国人名用户名枚举
+  tags: pinyin,全拼,中文名,fullname
 - name: suoxie.txt
   lines: 217
-  description: ''
-  usage: ''
-  tags: ''
+  description: 中文姓名的首字母缩写格式（如cb、cf）
+  usage: 首字母缩写格式的用户名枚举
+  tags: initials,首字母,缩写,suoxie
