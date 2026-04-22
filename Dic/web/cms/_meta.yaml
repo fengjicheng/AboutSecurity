@@ -8,7 +8,7 @@ files:
   description: ThinkPHP框架控制器和类名集合
   usage: ThinkPHP RCE漏洞利用时的控制器枚举
   tags: thinkphp,controller,控制器,rce利用
-- name: worldpress.txt
+- name: wordpress.txt
   lines: 190
   description: WordPress核心文件和管理路径集合
   usage: WordPress站点指纹识别与敏感路径发现

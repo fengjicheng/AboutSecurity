@@ -13,6 +13,21 @@ files:
   description: JSONP回调函数常见参数名及测试值
   usage: JSONP劫持漏洞检测
   tags: jsonp,callback,回调劫持,跨域
+- name: param-captcha.txt
+  lines: 50
+  description: 验证码绕过用的常见测试值
+  usage: 验证码逻辑绕过测试
+  tags: captcha,验证码,bypass,绕过
+- name: param-common.txt
+  lines: 70
+  description: 常见敏感信息相关参数名（身份证、手机号、用户ID等）
+  usage: 敏感接口参数枚举、越权漏洞测试
+  tags: sensitive-param,敏感参数,idor,越权
+- name: param-extended.txt
+  lines: 50360
+  description: 大规模通用HTTP参数名字典
+  usage: 全面参数发现与隐藏参数枚举
+  tags: large,大字典,通用参数,param-discovery
 - name: param-findpassword.txt
   lines: 57
   description: 找回密码功能相关的接口路径和参数名
@@ -68,16 +83,6 @@ files:
   description: XSS常见参数名
   usage: XSS漏洞参数发现与反射测试
   tags: xss,跨站脚本,反射型,参数注入
-- name: param1.txt
-  lines: 70
-  description: 常见敏感信息相关参数名（身份证、手机号、用户ID等）
-  usage: 敏感接口参数枚举、越权漏洞测试
-  tags: sensitive-param,敏感参数,idor,越权
-- name: param2.txt
-  lines: 50360
-  description: 大规模通用HTTP参数名字典
-  usage: 全面参数发现与隐藏参数枚举
-  tags: large,大字典,通用参数,param-discovery
 - name: top100-param-cookie.txt
   lines: 100
   description: 最常见的100个Cookie参数名
@@ -93,8 +98,3 @@ files:
   description: 最常见的100个POST请求参数名
   usage: POST参数枚举与表单接口分析
   tags: post,post-param,top100,表单参数
-- name: yzm.txt
-  lines: 50
-  description: 验证码绕过用的常见测试值
-  usage: 验证码逻辑绕过测试
-  tags: captcha,验证码,bypass,绕过
