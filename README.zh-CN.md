@@ -14,7 +14,7 @@
 - `evasion/` — 免杀对抗（C2框架、Shellcode生成、安全研究）
 - `exploit/` — 漏洞利用（60+skills，按子分类组织）
   - `web-method/` — Web 通用方法论（注入、XSS、SSRF、SSTI、文件上传、反序列化、WAF绕过…）
-  - `product-vuln/` — 特定产品漏洞方法论（Nacos、Jenkins、Grafana、GeoServer、中间件…）
+  - `product-vuln/` — 特定产品漏洞后渗透方法论（Nacos、Jenkins、Grafana、GeoServer、中间件…）
   - `advanced/` — 高级利用（HTTP走私、竞态条件、供应链攻击、OT/ICS、加密攻击）
   - `auth/` — 认证授权（JWT、OAuth/SSO、IDOR、CORS、CSRF、Cookie分析）
 - `general/` — 综合（报告生成、供应链审计、移动后端API）
