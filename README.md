@@ -176,3 +176,4 @@ Read [CONTRIBUTING.md](./CONTRIBUTING.md) before submitting, which covers Skill 
 - https://github.com/0xShe/PHP-Code-Audit-Skill
 - https://github.com/RuoJi6/java-audit-skills
 - https://github.com/HackTricks-wiki/hacktricks
+- https://github.com/HackTricks-wiki/hacktricks-cloud

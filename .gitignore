@@ -8,3 +8,4 @@ zip.sh
 .claude
 # Benchmark outputs (generated, not committed)
 /benchmarks/
+/docs/
