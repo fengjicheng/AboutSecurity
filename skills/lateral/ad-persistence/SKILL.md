@@ -2,7 +2,7 @@
 name: ad-persistence
 description: "AD 域环境持久化技术。获取高权限后建立持久访问。包含主机级（计划任务/注册表/COM劫持/WMI订阅/服务）和域级（Golden Ticket/Silver Ticket/Skeleton Key/DSRM/AdminSDHolder）两层持久化。每种技术配对安装与清理命令。"
 metadata:
-  tags: "persistence,golden-ticket,silver-ticket,skeleton-key,dsrm,adminsdholder,scheduled-task,com-hijack,wmi-subscription,registry-run,sharpersist"
+  tags: "persistence,golden-ticket,silver-ticket,skeleton-key,dsrm,adminsdholder,scheduled-task,com-hijack,wmi-subscription,registry-run,sharpersist,dcshadow,goldengmsa,shadow-principals,pam-trust,delegation-to-krbtgt,kds-root-key"
   category: "lateral"
 ---
 
@@ -14,6 +14,7 @@ metadata:
 
 - 主机级持久化完整命令与清理 → [references/host-persistence.md](references/host-persistence.md)
 - 域级持久化完整命令与清理 → [references/domain-persistence.md](references/domain-persistence.md)
+- → [references/advanced-persistence.md](references/advanced-persistence.md) — DCShadow、GoldenGMSA、krbtgt 委派持久化、Shadow Principals (PAM Trust)
 
 ---
 
