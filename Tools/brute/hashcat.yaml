@@ -1,0 +1,68 @@
+id: hashcat
+name: Hashcat 离线密码破解
+description: "使用 hashcat 进行 GPU 加速的离线密码破解，支持 300+ 哈希类型（MD5/SHA/NTLM/Kerberos/WPA 等），支持字典、掩码、规则、组合等多种攻击模式"
+homepage: "https://hashcat.net/hashcat/"
+category: brute
+binary: hashcat
+version_cmd: "hashcat --version"
+
+install:
+  brew: "brew install hashcat"
+  apt: "sudo apt install -y hashcat"
+  manual: "https://hashcat.net/hashcat/"
+
+parameters:
+  - name: hash_file
+    type: string
+    description: "哈希文件路径"
+    required: true
+  - name: hash_type
+    type: string
+    description: "哈希模式编号（0=MD5, 1000=NTLM, 13100=Kerberoast, 18200=ASREPRoast, 5600=NetNTLMv2, 22000=WPA-PBKDF2）"
+    required: true
+  - name: attack_mode
+    type: string
+    description: "攻击模式（0=字典, 1=组合, 3=掩码, 6=混合字典+掩码, 7=混合掩码+字典）"
+    default: "0"
+    enum: ["0", "1", "3", "6", "7"]
+  - name: wordlist
+    type: string
+    description: "字典文件路径"
+  - name: rules
+    type: string
+    description: "规则文件路径（如 rules/best64.rule）"
+  - name: mask
+    type: string
+    description: "掩码模式（如 ?a?a?a?a?a?a），用于掩码或混合攻击"
+  - name: extra_args
+    type: string
+    description: "其他额外参数"
+
+command_template: |
+  -m {{.hash_type}}
+  -a {{.attack_mode}}
+  {{.hash_file}}
+  {{if .wordlist}}{{.wordlist}}{{end}}
+  {{if .mask}}{{.mask}}{{end}}
+  {{if .rules}}-r {{.rules}}{{end}}
+  -o {{.OutputFile}}
+  --potfile-disable
+  {{if .extra_args}}{{.extra_args}}{{end}}
+
+output:
+  mode: file
+  file_pattern: "{{.OutputFile}}"
+  parser: line
+  line:
+    skip_empty: true
+    skip_prefix: ["#"]
+
+findings_mapping:
+  type: credential
+  severity: critical
+  target_field: hash_file
+  detail_template: "Credential cracked via Hashcat offline attack"
+
+constraints:
+  timeout: 3600s
+  max_concurrent: 1

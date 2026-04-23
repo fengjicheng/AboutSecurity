@@ -1,0 +1,58 @@
+id: john
+name: John the Ripper 密码破解
+description: "使用 John the Ripper 进行离线密码破解，支持自动检测哈希类型、增量模式、字典+规则攻击，内置 *2john 系列工具可从 ZIP/RAR/PDF/SSH/KeePass/Kerberos 等格式提取哈希"
+homepage: "https://github.com/openwall/john"
+category: brute
+binary: john
+version_cmd: "john --version"
+
+install:
+  brew: "brew install john"
+  apt: "sudo apt install -y john"
+  manual: "https://github.com/openwall/john"
+
+parameters:
+  - name: hash_file
+    type: string
+    description: "哈希文件路径"
+    required: true
+  - name: format
+    type: string
+    description: "哈希格式（如 Raw-MD5, NT, krb5tgs, krb5asrep, zip, rar, pdf, ssh, keepass）"
+  - name: wordlist
+    type: string
+    description: "字典文件路径"
+  - name: rules
+    type: string
+    description: "规则集名称（如 best64, Jumbo, KoreLogic）"
+  - name: incremental
+    type: string
+    description: "增量模式字符集（如 ASCII, Digits, Alnum）"
+  - name: extra_args
+    type: string
+    description: "其他额外参数"
+
+command_template: |
+  {{if .format}}--format={{.format}}{{end}}
+  {{if .wordlist}}--wordlist={{.wordlist}}{{end}}
+  {{if .rules}}--rules={{.rules}}{{end}}
+  {{if .incremental}}--incremental={{.incremental}}{{end}}
+  {{if .extra_args}}{{.extra_args}}{{end}}
+  {{.hash_file}}
+
+output:
+  mode: stdout
+  parser: line
+  line:
+    skip_empty: true
+    skip_prefix: ["#", "Using", "Loaded", "Press", "Proceeding", "Session"]
+
+findings_mapping:
+  type: credential
+  severity: critical
+  target_field: hash_file
+  detail_template: "Credential cracked via John the Ripper"
+
+constraints:
+  timeout: 3600s
+  max_concurrent: 1
