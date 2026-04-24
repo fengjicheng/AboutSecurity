@@ -1,7 +1,7 @@
 category: web
 subcategory: cms
 description: CMS内容管理系统路径和控制器字典
-tags: cms,thinkphp,wordpress,内容管理,框架路径,漏洞利用
+tags: cms,内容管理,框架路径,漏洞利用
 files:
 - name: thinkphp-controller.txt
   lines: 58

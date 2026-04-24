@@ -1,18 +1,18 @@
 category: web
 subcategory: file-backup
 description: 网站备份文件和敏感文件扫描字典，按文件类型分类
-tags: backup,备份文件,file-scan,文件扫描,信息泄露,敏感文件
+tags: file-scan,文件扫描,信息泄露,敏感文件
 files:
 - name: bak-directory.txt
   lines: 1576
   description: 备份文件目录路径字典
   usage: 网站备份文件目录扫描
-  tags: bak,备份目录,目录扫描,backup-dir
+  tags: backup,备份文件,bak,备份目录,目录扫描,backup-dir
 - name: bak.txt
   lines: 1444
   description: 常见备份文件路径（.bak等）
   usage: 网站备份文件发现
-  tags: bak,备份文件,bak-file
+  tags: backup,bak,备份文件,bak-file
 - name: cfm-directory.txt
   lines: 248
   description: ColdFusion CFM文件目录路径
@@ -57,7 +57,7 @@ files:
   lines: 403
   description: 备份文件后缀变体集合（.bak、.swp等编辑器临时文件）
   usage: 配合文件名批量生成备份文件扫描路径
-  tags: suffix,后缀,临时文件,编辑器备份
+  tags: backup,备份文件,suffix,后缀,临时文件,编辑器备份
 - name: txt.txt
   lines: 1321
   description: TXT文本文件路径

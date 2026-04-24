@@ -1,7 +1,7 @@
 category: xss
 subcategory: xml
 description: "XSS XML相关payload集合，利用XML/XSLT/CDATA等特性绕过过滤执行跨站脚本"
-tags: "xss,xml,cross-site scripting,跨站脚本,CDATA,XPath,XML注入"
+tags: "xss,xml,cross-site scripting,跨站脚本,XML注入"
 files:
 - name: xml.txt
   lines: 16

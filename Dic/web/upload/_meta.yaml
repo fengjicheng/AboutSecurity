@@ -1,7 +1,7 @@
 category: web
 subcategory: upload
 description: 文件上传漏洞绕过字典，按Web语言分类
-tags: upload,文件上传,bypass,绕过,webshell,后缀,黑名单
+tags: upload,文件上传,bypass,绕过
 files:
 - name: asp.txt
   lines: 30
@@ -32,4 +32,4 @@ files:
   lines: 34
   description: 通用文件上传后缀名集合
   usage: 文件上传功能测试的后缀名枚举
-  tags: suffix,后缀名,通用,文件类型
+  tags: suffix,后缀,后缀名,黑名单,通用,文件类型

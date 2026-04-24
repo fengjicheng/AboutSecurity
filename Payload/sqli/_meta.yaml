@@ -1,6 +1,6 @@
 category: sqli
 description: "SQL注入payload集合，覆盖MySQL/MSSQL/Oracle/LDAP多种数据库的注入向量，以及表名列名字典"
-tags: "sqli,SQL injection,SQL注入,MySQL,MSSQL,Oracle,LDAP,blind,盲注,联合注入"
+tags: "sqli,SQL injection,SQL注入,注入"
 files:
 - name: column.txt
   lines: 1101
@@ -16,7 +16,7 @@ files:
   lines: 41
   description: "基于时间的SQL盲注payload，使用sleep()函数通过响应延迟判断条件真假"
   usage: "目标无回显时进行时间盲注测试，通过延迟差异提取数据"
-  tags: "blind,time-based,sleep,时间盲注,延迟注入,无回显"
+  tags: "blind,time-based,sleep,时间盲注,延迟注入,无回显,盲注"
 - name: payload-ldap.txt
   lines: 14
   description: "LDAP注入payload，包含逻辑运算符和通配符查询构造"
@@ -46,7 +46,7 @@ files:
   lines: 442
   description: "SQL注入技巧参考文档，包含LDAP注入、MySQL/MSSQL/Oracle语法、WAF绕过技巧等"
   usage: "作为SQL注入测试的综合速查手册，快速查阅各数据库的注入语法和绕过方法"
-  tags: "reference,cheatsheet,参考文档,速查手册,WAF绕过,注入技巧"
+  tags: "reference,cheatsheet,参考文档,速查手册,WAF绕过,注入技巧,MySQL,MSSQL,Oracle,LDAP,blind,盲注,联合注入"
 - name: table.txt
   lines: 513
   description: "常见数据库表名字典，包含users/accounts/orders等高频业务表名"

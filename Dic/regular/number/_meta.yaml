@@ -1,7 +1,7 @@
 category: regular
 subcategory: number
 description: 数字序列字典，含各范围纯数字和日期格式
-tags: number,数字,numeric,序列,日期,birthday,枚举
+tags: number,数字,numeric,序列,枚举
 files:
 - name: num-0-10.txt
   lines: 11
