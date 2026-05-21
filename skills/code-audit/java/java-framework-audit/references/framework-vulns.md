@@ -86,7 +86,7 @@ exp.getValue();
 | CVE-2022-22965 | Framework 5.3.0~5.3.17 | RCE | JDK9+ ClassLoader 参数绑定 |
 | CVE-2018-1270 | Framework < 5.0.5 | SpEL RCE | Messaging STOMP |
 | CVE-2017-8046 | Data REST < 2.6.9 | SpEL RCE | PATCH JSON Path |
-| CVE-2020-5421 | Framework < 5.2.9 | RFI | 反射文件下载 |
+| CVE-2020-5421 | Framework < 5.2.9 | RFD | 反射文件下载 |
 
 ---
 

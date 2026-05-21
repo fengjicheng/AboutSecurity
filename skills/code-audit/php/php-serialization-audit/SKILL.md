@@ -43,7 +43,7 @@ metadata:
 
 ## SSTI 审计要点
 
-- **Twig**: `{{ user_input }}` 直接渲染用户输入时可注入。检查是否启用沙箱模式 `sandbox`，沙箱策略是否过于宽松（允许危险 filter/function）
+- **Twig**: 普通 `{{ user_input }}` 变量输出通常只是渲染变量并受自动转义保护；SSTI 重点检查用户输入是否进入模板源码解析流程，如 `createTemplate($userInput)`、动态拼接模板字符串，或沙箱模式 `sandbox` 策略过于宽松（允许危险 filter/function）
 - **Smarty**: `{php}` 标签（Smarty 3.1+ 已废弃但可能未禁用）、`{if}` 表达式中注入 PHP 函数调用（`{if system('id')}{/if}`）
 - **Blade**: `{!! $var !!}` 输出未转义内容，若 `$var` 用户可控则存在 XSS 或更严重风险；`@php` 指令如果可注入则直接 RCE
 - **自定义模板引擎**: 搜索 `eval`/`preg_replace(/e)` + 字符串替换模式，自研模板引擎常见的致命组合
