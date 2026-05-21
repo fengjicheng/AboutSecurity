@@ -50,7 +50,7 @@ metadata:
 
 ## 命令注入审计要点
 
-- **Runtime.exec(String) vs exec(String[])**: 单字符串形式经 shell 解释可注入；数组形式直接 execve 不经 shell（但仍需注意 `-flag` 参数注入）
+- **Runtime.exec(String) vs exec(String[])**: 单字符串形式按空白拆分为程序和参数，不会自动经 shell 解释；数组形式更明确，但两者都需注意 `-flag` 参数注入
 - **ProcessBuilder**: 参数列表形式类似数组 exec，但通过 `sh -c "cmd"` 包装则退化为 shell 解释
 - **反射调用**: 通过反射调用 `Runtime.getRuntime()` 或 `ProcessBuilder` 可绕过静态扫描
 - **commons-exec CommandLine**: `CommandLine.parse(userInput)` 危险，`addArgument(input, false)` 安全

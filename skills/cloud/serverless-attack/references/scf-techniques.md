@@ -49,9 +49,9 @@ SCF 运行时同样有临时凭据：
 
 ```python
 import os
-print(os.environ.get('TENCENTCLOUD_SECRETID'))
-print(os.environ.get('TENCENTCLOUD_SECRETKEY'))
-print(os.environ.get('TENCENTCLOUD_SESSIONTOKEN'))
+print(os.environ.get('TENCENTCLOUD_SECRET_ID'))
+print(os.environ.get('TENCENTCLOUD_SECRET_KEY'))
+print(os.environ.get('TENCENTCLOUD_TOKEN'))
 ```
 
 ## 触发器利用
