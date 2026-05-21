@@ -11,10 +11,12 @@ metadata:
 
 > **红队必须理解猎手的思维方式才能不被猎到**
 
-## ⛔ 深入参考
+## 深入参考（按需加载）
 
-- Sigma/YARA 规则分析与绕过 → [references/detection-rules-bypass.md](references/detection-rules-bypass.md)
-- 主流 EDR 检测逻辑分析 → [references/edr-detection-logic.md](references/edr-detection-logic.md)
+以下 reference 体量较大，不要在只需要通用猎杀方法论时预读；只有任务明确涉及规则拆解、EDR 逻辑或规避验证时再打开对应文件。
+
+- 需要分析 Sigma/YARA 规则、规则绕过或检测条件拆解 → [references/detection-rules-bypass.md](references/detection-rules-bypass.md)
+- 需要分析主流 EDR 检测逻辑、遥测来源或行为链路 → [references/edr-detection-logic.md](references/edr-detection-logic.md)
 
 ---
 
