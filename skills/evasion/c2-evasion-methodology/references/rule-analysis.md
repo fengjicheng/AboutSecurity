@@ -133,7 +133,7 @@ xxd beacon.exe | grep "48 81 ec a8 01"
 
 ## Complete Rule Analysis Template
 
-```markdown
+````markdown
 ## Rule Analysis: [rule_name]
 
 **Author**: [from meta]
@@ -176,7 +176,7 @@ xxd beacon.exe | grep "48 81 ec a8 01"
 ```bash
 [command to verify pattern is gone]
 ```
-```
+````
 
 ## Important Rules
 
