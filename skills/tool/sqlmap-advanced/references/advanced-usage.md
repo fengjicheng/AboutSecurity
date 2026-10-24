@@ -68,6 +68,6 @@ sqlmap -u 'URL' --user-agent 'Mozilla/5.0' --batch
 # 保持会话
 sqlmap -u 'URL' --cookie 'PHPSESSID=xxx' --batch
 
-# 跟随重定向
-sqlmap -u 'URL' --follow-redirect --batch
+# 重定向：sqlmap 默认跟随重定向；如需忽略重定向用 --ignore-redirects
+sqlmap -u 'URL' --ignore-redirects --batch
 ```

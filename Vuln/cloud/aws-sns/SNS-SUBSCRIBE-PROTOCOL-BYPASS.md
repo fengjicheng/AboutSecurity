@@ -3,6 +3,7 @@ id: SNS-SUBSCRIBE-PROTOCOL-BYPASS
 title: SNS 订阅条件绕过 — HTTPS 协议 Endpoint 构造
 product: aws-sns
 vendor: Amazon
+version_affected: "N/A"
 severity: HIGH
 tags: [authorization-bypass, sns, aws, subscription-hijack]
 fingerprint: ["sns", "aws", "Subscribe", "StringLike", "Endpoint"]
@@ -11,6 +12,10 @@ fingerprint: ["sns", "aws", "Subscribe", "StringLike", "Endpoint"]
 ## 漏洞描述
 
 AWS SNS Topic Policy 使用 `StringLike` 条件限制订阅 Endpoint（如 `*@company.com`）时，不同协议对 Endpoint 的解释不同。email 协议的 Endpoint 是邮箱地址，而 HTTPS 协议的 Endpoint 是 URL。攻击者可以构造包含 `@company.com` 的 URL 来满足条件，将 SNS 消息重定向到攻击者控制的 webhook。
+
+## 影响版本
+
+不适用（设计缺陷）：与版本无关，取决于 SNS Topic Policy 的条件配置。
 
 ## 前置条件
 

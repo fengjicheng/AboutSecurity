@@ -3,7 +3,7 @@ id: DIFY-RSC-DESER-RCE
 title: "Dify 控制台 React Server Components 反序列化 RCE（CVE-2025-55182）"
 product: dify
 vendor: LangGenius
-version_affected: "React Server Components 19.0.0 ~ 19.2.0 (Next.js affected versions per GHSA-9qr9-h5gf-34mp)"
+version_affected: "< 1.11.1（自托管 dify-web 镜像）"
 severity: CRITICAL
 tags: [rce, deserialization, nextjs, react, prototype-pollution, unauthenticated]
 fingerprint: ["Dify", "Next.js"]
@@ -21,9 +21,9 @@ React Server Components 19.0.0、19.1.0、19.1.1、19.2.0（包括 react-server-
 
 ## 影响版本
 
-- React Server Components：19.0.0、19.1.0、19.1.1、19.2.0
+- Dify 自托管版本 < 1.11.1（`langgenius/dify-web` 镜像打包了受影响的 Next.js/RSC）
+- 底层受影响组件：React Server Components 19.0.0、19.1.0、19.1.1、19.2.0
 - Next.js 受影响版本（参考 GHSA-9qr9-h5gf-34mp）
-- 使用了受影响 Next.js 版本的 Dify 实例
 
 ## 利用步骤
 

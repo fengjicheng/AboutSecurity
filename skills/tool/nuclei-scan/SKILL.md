@@ -166,6 +166,6 @@ nuclei -u http://target -t cves/ -timeout 10
 # 只输出发现的漏洞（静默模式）
 nuclei -u http://target -t cves/ -silent
 
-# 输出到文件（JSON 格式便于分析）
-nuclei -u http://target -t cves/ -json -o results.json
+# 输出到文件（JSONL 格式便于分析；v3 使用 -jsonl/-j，旧的 -json 已移除）
+nuclei -u http://target -t cves/ -jsonl -o results.jsonl
 ```

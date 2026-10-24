@@ -547,10 +547,18 @@ fingerprint: ["Nacos"]                 # 指纹关键词数组，用于产品识
 | `title` | ✅ | string | 中文标题，格式：`产品名+漏洞类型+（CVE编号）` |
 | `product` | ✅ | string | 产品名小写，与二级目录名一致 |
 | `vendor` | ✅ | string | 厂商/组织名 |
-| `version_affected` | ✅ | string | 影响版本范围，如 `"<1.4.1"`、`"<=5.18.2"`、`"2.0.0-2.3.5"` |
+| `version_affected` | ✅ | string | 影响版本范围，如 `"<1.4.1"`、`"<=5.18.2"`、`"2.0.0-2.3.5"`；无版本区间的设计缺陷填 `"N/A"`（见下方豁免说明） |
 | `severity` | ✅ | enum | `CRITICAL` / `HIGH` / `MEDIUM` / `LOW`（必须大写） |
 | `tags` | ✅ | array | 漏洞特征标签：`rce`、`auth_bypass`、`sqli`、`ssrf`、`deserialization`、`无需认证`、`需要认证` 等 |
 | `fingerprint` | 推荐 | array | 产品指纹关键词，用于自动匹配（如 HTTP 响应中的特征字符串） |
+
+> **豁免：无版本区间的设计缺陷**
+>
+> 云服务配置缺陷、协议设计问题、框架默认行为等非 CVE 类条目，若确实不存在版本范围：
+>
+> - `version_affected` **仍须填写**，值统一为 `"N/A"`，不得省略（保持字段齐全，便于机器校验）；
+> - 正文「影响版本」章节写“不适用（设计缺陷）”，并在「前置条件」中说明受影响的配置前提；
+> - 若同一问题只影响特定版本/服务，则应写真实版本区间，不得滥用 `N/A`。
 
 ### severity 选择标准
 
@@ -675,7 +683,7 @@ User-Agent: Nacos-Server
 
 - [ ] 文件放在正确的分类目录下（`Vuln/<category>/<product>/`）
 - [ ] 文件名为漏洞 ID 大写（`CVE-2021-29441.md`）或 `产品-漏洞类型` 格式
-- [ ] YAML 前言包含所有必填字段（id、title、product、vendor、version_affected、severity、tags）
+- [ ] YAML 前言包含所有必填字段（id、title、product、vendor、version_affected、severity、tags）；无版本区间的设计缺陷 `version_affected` 填 `N/A`
 - [ ] `severity` 为大写枚举值（CRITICAL/HIGH/MEDIUM/LOW）
 - [ ] `product` 与二级目录名一致
 - [ ] 正文包含：漏洞描述、影响版本、前置条件、利用步骤、Payload

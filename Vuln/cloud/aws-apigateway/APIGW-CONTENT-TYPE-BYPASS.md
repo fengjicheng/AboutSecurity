@@ -3,6 +3,7 @@ id: APIGW-CONTENT-TYPE-BYPASS
 title: API Gateway 请求验证绕过 — Content-Type 欺骗
 product: aws-apigateway
 vendor: Amazon
+version_affected: "N/A"
 severity: HIGH
 tags: [validation-bypass, api-gateway, aws, content-type]
 fingerprint: ["execute-api", "amazonaws.com", "API Gateway", "Invalid request body"]
@@ -11,6 +12,10 @@ fingerprint: ["execute-api", "amazonaws.com", "API Gateway", "Invalid request bo
 ## 漏洞描述
 
 AWS API Gateway 的 Request Validator（请求模型验证）仅在 `Content-Type: application/json` 时执行 JSON Schema 校验。将 Content-Type 改为 `text/plain` 后，API Gateway 跳过 Schema 验证，但 Lambda 函数仍然通过 `json.loads(event["body"])` 正常解析 JSON 请求体。攻击者可以注入被 JSON Schema 禁止的字段。
+
+## 影响版本
+
+不适用（设计缺陷）：与版本无关，取决于 API Gateway Request Validator 的配置。
 
 ## 前置条件
 

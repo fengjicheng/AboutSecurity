@@ -3,6 +3,7 @@ id: S3-PATH-TRAVERSAL-OSPATH
 title: S3 路径穿越 — Python os.path.join 绝对路径绕过
 product: aws-s3
 vendor: Amazon
+version_affected: "N/A"
 severity: HIGH
 tags: [path-traversal, s3, aws, python, rce-adjacent]
 fingerprint: ["s3.amazonaws.com", "AmazonS3", "os.path.join", "template"]
@@ -11,6 +12,10 @@ fingerprint: ["s3.amazonaws.com", "AmazonS3", "os.path.join", "template"]
 ## 漏洞描述
 
 当 Lambda 函数使用 Python `os.path.join()` 拼接 S3 Key 路径时，如果用户输入以 `/` 开头（绝对路径），`os.path.join` 会丢弃前面所有路径前缀，导致攻击者可以读取 S3 Bucket 中的任意 Key。常见的 `..` 过滤无法阻止此攻击。
+
+## 影响版本
+
+不适用（设计缺陷）：与版本无关，取决于 Lambda 代码对 S3 Key 的拼接方式。
 
 ## 前置条件
 

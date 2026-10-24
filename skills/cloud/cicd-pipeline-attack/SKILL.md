@@ -42,7 +42,7 @@ CI/CD 系统是现代软件工程的核心基础设施——它们拥有代码�
 **快速识别技巧：**
 - 克隆仓库后搜索配置文件：查找 `Jenkinsfile`、`.github/workflows`、`.gitlab-ci.yml`、`.circleci`、`atlantis.yaml`
 - 检查 Webhook 配置：Webhook URL 暴露 CI/CD 服务类型和内网地址
-- 枚举 CI/CD 服务端口：Jenkins 默认 8080，Atlantis 默认 4141，GitLab Runner 8093
+- 枚举 CI/CD 服务端口：Jenkins 默认 8080，Atlantis 默认 4141；GitLab Runner 为主动轮询，默认不监听入站端口（仅开启 metrics 时监听 9252）
 
 ## Phase 1: VCS 攻击面
 
@@ -170,7 +170,7 @@ CI/CD Runner 通常拥有云平台凭据用于部署。这些凭据是从 CI/CD 
 | OIDC Token（GitHub → AWS/GCP/Azure） | `id-token: write` 权限 | 请求 OIDC Token → AssumeRoleWithWebIdentity |
 | AWS 静态 AK/SK | 环境变量或 Secrets | 参考 `cloud-aksk-exploit` 技能 |
 | GCP Service Account JSON | 文件或环境变量 | 参考 `gcp-pentesting` 技能 |
-| Azure Service Principal | 环境变量 | 参考 `aws-pentesting` 技能中的 Azure 相关内容 |
+| Azure Service Principal | 环境变量 | 参考 `azure-pentesting` / `azure-ad-attack` 技能（SP 登录与 ARM/Graph 枚举） |
 | Terraform Cloud Runner 凭据 | `tfc-aws-*`/`tfc-gcp-*` 文件 | 直接使用 CLI 操作云资源 |
 | Kubernetes kubeconfig | `~/.kube/config` 或挂载的 SA Token | 集群接管 |
 | Docker Registry Token | `~/.docker/config.json` | 推送恶意镜像 |

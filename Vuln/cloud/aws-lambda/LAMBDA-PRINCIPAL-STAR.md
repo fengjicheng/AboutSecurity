@@ -3,6 +3,7 @@ id: LAMBDA-PRINCIPAL-STAR
 title: Lambda 资源策略 Principal:* 未授权调用
 product: aws-lambda
 vendor: Amazon
+version_affected: "N/A"
 severity: HIGH
 tags: [authorization-bypass, lambda, aws, 无需认证, cross-account]
 fingerprint: ["lambda", "aws", "InvokeFunction", "Principal"]
@@ -11,6 +12,10 @@ fingerprint: ["lambda", "aws", "InvokeFunction", "Principal"]
 ## 漏洞描述
 
 Lambda 函数的 Resource-based Policy 中设置 `"Principal": "*"` 允许任何 AWS 身份（包括跨账户）直接调用该函数，完全绕过 API Gateway 的所有安全控制（请求验证、WAF、API Key、CORS）。
+
+## 影响版本
+
+不适用（设计缺陷）：与版本无关，取决于 Lambda 资源策略配置。
 
 ## 前置条件
 

@@ -50,7 +50,7 @@ curl -sk -H "Authorization: Bearer $SA_TOKEN" \
 | 10250 | Kubelet | 命令执行 |
 | 10255 | Kubelet (只读) | 信息泄露 |
 | 2379 | etcd | 全量数据（含 Secrets） |
-| 8080 | API Server (不安全) | 完全控制 |
+| 8080 | API Server (不安全，仅 ≤1.23 遗留) | 完全控制（1.24 起该端口已移除） |
 
 ## Phase 2: 攻击决策树
 

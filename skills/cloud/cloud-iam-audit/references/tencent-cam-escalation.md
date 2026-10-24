@@ -236,7 +236,7 @@ print(resp.to_json_string())
 ## 高价值数据搜索
 
 ```bash
-# COS 存储桶列表（tccli 不支持 GetService，使用 coscli 或 SDK）
+# COS 存储桶列表（推荐 coscli / SDK；tccli 对 COS 支持有限）
 coscli ls
 # 或 Python SDK:
 # from qcloud_cos import CosConfig, CosS3Client

@@ -3,6 +3,7 @@ id: S3-ACCOUNT-ID-ENUM
 title: S3 Bucket Account ID 侧信道枚举 (s3:ResourceAccount)
 product: aws-s3
 vendor: Amazon
+version_affected: "N/A"
 severity: MEDIUM
 tags: [information-disclosure, side-channel, s3, aws, 无需目标凭据]
 fingerprint: ["s3.amazonaws.com", "AmazonS3", "x-amz-"]
@@ -11,6 +12,10 @@ fingerprint: ["s3.amazonaws.com", "AmazonS3", "x-amz-"]
 ## 漏洞描述
 
 AWS S3 Bucket 的所属 Account ID（12 位）可通过 `s3:ResourceAccount` 条件键进行侧信道枚举。攻击者使用自己的 AWS 账户创建 IAM Role + Session Policy，利用 `StringLike` 通配符逐位猜测目标 Bucket 所属 Account ID。成功匹配返回正常响应（NoSuchKey/200），不匹配返回 AccessDenied。
+
+## 影响版本
+
+不适用（设计缺陷）：与版本无关，取决于 S3 Bucket 策略与 IAM 配置。
 
 ## 前置条件
 

@@ -106,7 +106,7 @@ http://metadata.tencentyun.com/latest/user-data
 └─ 腾讯云 → 配置 tccli → 枚举 COS/CVM/SCF/CAM
     ├─ tccli configure（交互式）或设置环境变量
     ├─ tccli sts GetCallerIdentity（验证身份）
-    ├─ coscli ls 或 Python SDK（列出存储桶，tccli 不支持 GetService）
+    ├─ coscli ls 或 Python SDK（列出存储桶，推荐；tccli 对 COS 支持有限）
     ├─ tccli cvm DescribeInstances（列出实例）
     └─ → 转入 cloud-iam-audit 技能进行提权评估
 详细命令 → [references/credential-extraction.md](references/credential-extraction.md)
